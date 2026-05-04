@@ -1,6 +1,7 @@
 from app.cli import parse_args
 from app.utils.helpers import is_valid_url
 from app.utils.logger import info, success, error, warning
+from app.scanner.headers import check_headers
 
 def main():
     args = parse_args()
@@ -26,7 +27,7 @@ def main():
         success("[*] Escaneo SQLi activado")
 
     if args.headers:
-        success("[*] Escaneo de headers activado")
+        check_headers(args.url)
         
 if __name__ == "__main__":
     main()
