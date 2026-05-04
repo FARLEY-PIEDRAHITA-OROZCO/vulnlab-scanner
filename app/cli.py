@@ -29,4 +29,10 @@ def parse_args():
         help="Revisar headers de seguridad"
     )
 
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Escanear todas las vulnerabilidades (XSS, SQLi y Headers)"
+    )
+
     return parser.parse_args()
