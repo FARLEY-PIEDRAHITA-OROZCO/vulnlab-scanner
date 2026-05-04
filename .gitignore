@@ -1,0 +1,37 @@
+# Entorno virtual
+venv/
+.env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Configuración de editores
+.vscode/
+.idea/
+
+# Archivos temporales
+*.tmp
+*.swp
+
+# Coverage / testing
+.coverage
+htmlcov/
+
+# Archivos sensibles
+.env
+secrets.json
+config.yaml
+
+# Builds
+dist/
+build/
