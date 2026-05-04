@@ -1,6 +1,6 @@
 from app.cli import parse_args
 from app.utils.helpers import is_valid_url
-from app.utils.logger import info, success, error
+from app.utils.logger import info, success, error, warning
 
 def main():
     args = parse_args()
@@ -8,6 +8,9 @@ def main():
     if not is_valid_url(args.url):
         error("La URL debe comenzar con http:// o https://")
         return
+    
+    if not (args.xss or args.sqli or args.headers):
+        warning("No seleccionaste ningún escaneo. Usa --all o especifica uno.")
 
     if args.all:
         args.xss = True
