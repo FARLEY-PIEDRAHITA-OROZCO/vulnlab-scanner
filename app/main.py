@@ -1,7 +1,12 @@
 from app.cli import parse_args
+from app.utils.helpers import is_valid_url
 
 def main():
     args = parse_args()
+
+    if not is_valid_url(args.url):
+        print("[ERROR] La URL debe comenzar con http:// o https://")
+        return
 
     if args.all:
         args.xss = True
