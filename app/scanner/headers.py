@@ -75,7 +75,7 @@ class HeadersScanner(BaseScanner):
                         self.info(f"✓ {header_name} presente y correcto")
             
         except Exception as e:
-            self.info(f"Error al obtener headers: {str(e)}")
+            info(f"Error al obtener headers: {str(e)}")
         
         return self.get_results()
         
