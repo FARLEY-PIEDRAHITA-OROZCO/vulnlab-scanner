@@ -96,6 +96,14 @@ class BaseScanner(ABC):
         """Limpia los resultados anteriores."""
         self.results = []
     
+    def display_scan_start(self):
+        """Muestra mensaje de inicio de escaneo."""
+        info(f"[{self.name}] Iniciando escaneo en: {self.target_url}")
+        if self.dry_run:
+            info("Modo DRY-RUN: No se enviarán ataques reales")
+        if self.use_progress:
+            info("Barras de progreso habilitadas")
+    
     def progress_iter(self, items, desc="Procesando"):
         """Retorna un iterador con barra de progreso si está disponible.
         
