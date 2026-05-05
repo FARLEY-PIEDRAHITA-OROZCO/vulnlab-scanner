@@ -9,6 +9,12 @@ from datetime import datetime
 from app.config import Config
 from app.utils.logger import info, vulnerability
 
+try:
+    from tqdm import tqdm
+    TQDM_AVAILABLE = True
+except ImportError:
+    TQDM_AVAILABLE = False
+
 
 class BaseScanner(ABC):
     """Clase base abstracta para todos los escáneres de vulnerabilidades.
@@ -34,6 +40,7 @@ class BaseScanner(ABC):
         self.session = session
         self.results = []
         self.dry_run = dry_run
+        self.use_progress = TQDM_AVAILABLE and not dry_run
     
     @abstractmethod
     def scan(self) -> list:
@@ -89,8 +96,16 @@ class BaseScanner(ABC):
         """Limpia los resultados anteriores."""
         self.results = []
     
-    def display_scan_start(self):
-        """Muestra mensaje de inicio de escaneo."""
-        info(f"[{self.name}] Iniciando escaneo en: {self.target_url}")
-        if self.dry_run:
-            info("Modo DRY-RUN: No se enviarán ataques reales")
+    def progress_iter(self, items, desc="Procesando"):
+        """Retorna un iterador con barra de progreso si está disponible.
+        
+        Args:
+            items: Lista de elementos a iterar.
+            desc: Descripción de la barra.
+            
+        Returns:
+            Iterador (tqdm o normal).
+        """
+        if self.use_progress:
+            return tqdm(items, desc=f"[{self.name}] {desc}", unit="item")
+        return items
