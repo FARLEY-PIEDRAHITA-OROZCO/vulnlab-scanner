@@ -2,19 +2,29 @@
 
 ## 1. En Alcance (In-Scope)
 
-### Fase Actual (MVP - Producto Mínimo Viable)
-- Escaneo de XSS (Reflected, Stored, DOM-based)
-- Escaneo de SQL Injection (Error-based, Boolean-based)
-- Validación de HTTP Security Headers
-- Gestión de sesiones con login automático (usuario/contraseña)
-- Generación de reportes JSON y HTML
-- Interfaz CLI con flags de configuración
-- Aviso legal obligatorio antes de escanear
+### Fase Actual (Fase 4.3 - En Progreso)
+- ✅ Escaneo de XSS (Reflected, Stored, DOM-based)
+- ✅ Escaneo de SQL Injection (Error-based, Boolean-based)
+- ✅ Validación de HTTP Security Headers
+- ✅ Gestión de sesiones con login automático
+- ✅ **Escaneo de Broken Access Control (A01)** - Completado
+  - Detección IDOR (Insecure Direct Object References)
+  - Detección escalación privilegios
+  - Detección Forceful Browsing
+- ✅ **Escaneo de Authentication Failures (A07)** - Completado
+  - Detección credenciales débiles/por defecto
+  - Detección fuerza bruta suave
+  - Verificación gestión sesiones (HttpOnly, Secure)
+- 🔄 **Escaneo de Vulnerable Components (A06)** - En implementación
+  - Detección tecnologías desactualizadas (jQuery, Bootstrap, etc.)
+  - Detección CDNs vulnerables
+  - Verificación headers (X-Powered-By, Server)
 
-### Futuro (Post-MVP)
-- Escaneo de Broken Access Control
-- Escaneo de Authentication Failures
-- Escaneo de Vulnerable Components
+### Futuro (Post-Fase 4)
+- Escaneo de Cryptographic Failures (A02)
+- Escaneo de Injection (A03) - ampliar SQLi
+- Escaneo de Security Misconfiguration (A05)
+- Escaneo de Identification/Authentication Failures (A07) - ampliar
 - Modo interactivo (opcional)
 
 ## 2. Fuera de Alcance (Out-of-Scope)
