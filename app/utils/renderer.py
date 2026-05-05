@@ -15,3 +15,18 @@ def render_headers(result):
 
     for item in result["results"]["misconfigured"]:
         warning(f"{item['header']} mal configurado ({item['value']})")
+
+def render_xss(result):
+    info(f"Resultados XSS para {result['target']}")
+
+    if "message" in result:
+        warning(result["message"])
+        return
+
+    for vuln in result["results"]["vulnerable"]:
+        warning(
+            f"Posible XSS en parámetro '{vuln['parameter']}' con payload {vuln['payload']}"
+        )
+
+    if not result["results"]["vulnerable"]:
+        success("No se detectaron vulnerabilidades XSS reflejadas")

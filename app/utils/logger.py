@@ -13,3 +13,6 @@ def warning(message):
 
 def error(message):
     print(Fore.RED + "[ERROR] " + message)
+
+def vulnerability(message):
+    print(Fore.MAGENTA + "[VULN] " + message)
