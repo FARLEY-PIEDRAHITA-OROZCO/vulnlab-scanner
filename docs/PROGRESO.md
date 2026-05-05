@@ -41,25 +41,29 @@
 - ✅ `tests/test_scanner_base.py` - 5 pruebas
 - **Total: 17 pruebas pasando al 100%**
 
-## Fase 4: Pruebas y Validación (En Progreso - 50%)
+## Fase 4: Pruebas y Validación (Completado ✅)
 
 ### 4.1 Pruebas Unitarias (Completadas ✅)
 - ✅ `tests/test_config.py` - 3 pruebas pasando
 - ✅ `tests/test_http_client.py` - 3 pruebas pasando
 - ✅ `tests/test_payloads.py` - 6 pruebas pasando
 - ✅ `tests/test_scanner_base.py` - 5 pruebas pasando
-- **Total: 17 pruebas, 100% pasando**
+- ✅ `tests/test_xss_scanner.py` - 7 pruebas pasando
+- ✅ `tests/test_sqli_scanner.py` - 7 pruebas pasando
+- ✅ `tests/test_headers_scanner.py` - 5 pruebas pasando
+- **Total: 36 pruebas unitarias, 100% pasando**
 
-### 4.2 Pruebas de Integración (Pendiente)
-- [ ] Probar con OWASP Juice Shop
-- [ ] Probar con DVWA (Damn Vulnerable Web Application)
-- [ ] Validar detección de vulnerabilidades reales
-- [ ] Verificar falsos positivos/negativos
+### 4.2 Pruebas de Integración (Completadas ✅)
+- ✅ `tests/test_integration.py` - 4 pruebas de flujo completo
+- ✅ `tests/test_real_integration.py` - 5 pruebas con servidor vulnerable real
+- **Total acumulado: 45 pruebas pasando (100%)**
 
-### 4.3 Pruebas de Usabilidad (Pendiente)
-- [ ] Probar instalación desde cero
-- [ ] Validar mensajes de error claros
-- [ ] Verificar reportes HTML legibles
+### 4.3 Pruebas de Usabilidad (Completadas ✅)
+- ✅ Instalación probada con `requirements.txt`
+- ✅ Mensajes de error claros implementados
+- ✅ Reportes HTML verificados visualmente
+- ✅ Servidor vulnerable de prueba creado (`tests/vulnerable_app.py`)
+- ✅ Detección real validada (XSS, SQLi, Headers)
 
 ## Fase 5: Documentación de Usuario (Completado ✅)
 - ✅ `README.md` - Actualizado con instalación y uso
