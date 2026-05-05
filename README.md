@@ -1,8 +1,15 @@
 # VulnLab Scanner
 
-Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP, diseñada para automatizar pruebas de seguridad de manera modular, fácil de instalar y usar.
+Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 10, diseñada para automatizar pruebas de seguridad de manera modular, fácil de instalar y usar.
 
-## Características
+## Estado Actual del Proyecto
+
+**Versión**: 1.0.0 (Fase 3 Completada)  
+**Cobertura OWASP**: 3/10 (XSS, SQLi, Headers)  
+**Pruebas**: 43 pruebas unitarias + integración (100% pasando)  
+**Licencia**: MIT (Open Source)
+
+## Características Implementadas ✅
 
 - ✅ **XSS Scanner**: Detección de Cross-Site Scripting (Reflected, Stored, DOM-based)
 - ✅ **SQLi Scanner**: Detección de SQL Injection (Error-based, Boolean-based)
@@ -12,6 +19,29 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP, dise
 - ✅ **Modo DRY-RUN**: Simulación sin ataques reales
 - ✅ **Rate Limiting**: Control de velocidad para no saturar servidores
 - ✅ **Aviso Legal**: Validación de permisos antes de escanear
+- ✅ **Arquitectura Modular**: Fácil extensión con nuevos escáneres
+
+## Roadmap de Desarrollo (Fases 4-6)
+
+### Fase 4: Nuevos Escáneres OWASP (Semanas 2-5)
+- [ ] **A01 - Broken Access Control**: IDOR, escalación de privilegios
+- [ ] **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
+- [ ] **A06 - Vulnerable Components**: Detección de librerías (SCA)
+- [ ] Mejorar detección XSS (Stored vía POST, DOM-based)
+- [ ] Mejorar detección SQLi (Time-based Blind, múltiples DB)
+
+### Fase 5: Mejoras Técnicas (Semanas 6-9)
+- [ ] Barras de progreso (tqdm)
+- [ ] Multithreading para escaneo paralelo
+- [ ] Mejorar reportes (gráficos, PDF)
+- [ ] Interfaz web básica (FastAPI/Flask)
+
+### Fase 6: Empaquetado y Distribución (Semana 10)
+- [ ] Publicar en PyPI (`pip install vulnlab-scanner`)
+- [ ] Configurar CI/CD con GitHub Actions
+- [ ] Generar comunidad inicial
+
+**Objetivo**: Llegar a **8/10 en funcionalidad profesional** (actualmente 4/10)
 
 ## Requisitos
 
@@ -20,30 +50,28 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP, dise
 
 ## Instalación
 
-1. **Clonar el repositorio** (o descargar el código):
+### Opción 1: Instalación Manual
 ```bash
+# 1. Clonar el repositorio
 git clone https://github.com/tu-usuario/vulnlab-scanner.git
 cd vulnlab-scanner
-```
 
-2. **Crear entorno virtual** (recomendado):
-```bash
+# 2. Crear entorno virtual
 python -m venv .venv
+
+# 3. Activar entorno virtual
+# Windows:
+.\.venv\Scripts\activate
+# Linux/Mac:
+source .venv/bin/activate
+
+# 4. Instalar dependencias
+pip install -r requirements.txt
 ```
 
-3. **Activar entorno virtual**:
-   - **Windows**:
-   ```bash
-   .\.venv\Scripts\activate
-   ```
-   - **Linux/Mac**:
-   ```bash
-   source .venv/bin/activate
-   ```
-
-4. **Instalar dependencias**:
+### Opción 2: Script Automático
 ```bash
-pip install -r requirements.txt
+python install.py
 ```
 
 ## Configuración
@@ -78,7 +106,6 @@ python -m app.main -u http://ejemplo.com --all
 ```
 
 ### Opciones disponibles
-
 ```
 Uso: python -m app.main [OPCIONES]
 
@@ -150,7 +177,7 @@ vulnlab-scanner/
 │       ├── reporter.py         # Generación de reportes
 │       ├── payloads.py         # Payloads centralizados
 │       └── disclaimer.py       # Aviso legal
-├── tests/                      # Pruebas unitarias
+├── tests/                      # Pruebas unitarias (43 pruebas)
 ├── reports/                    # Reportes generados
 ├── DOCS/                       # Documentación del proyecto
 ├── .env                        # Variables de entorno
@@ -179,8 +206,10 @@ La documentación completa está en el directorio `DOCS/`:
 - `DOCS/REQUISITOS.md` - Requisitos del sistema
 - `DOCS/ALCANCE.md` - Alcance del proyecto
 - `DOCS/ARQUITECTURA.md` - Arquitectura técnica
+- `DOCS/ESTANDARES_CODIGO.md` - Estándares de código
 - `DOCS/GUIA_USUARIO.md` - Guía de usuario
 - `DOCS/ROADMAP.md` - Futuras mejoras
+- `DOCS/PROGRESO.md` - Estado actual de desarrollo
 
 ## Pruebas
 
@@ -189,26 +218,28 @@ Para ejecutar las pruebas unitarias:
 pytest tests/ -v
 ```
 
-## Estado del Proyecto
-
-**Fase actual**: Fase 3 - Desarrollo (Completado)
-- ✅ Arquitectura modular implementada
-- ✅ Escáneres OWASP básicos funcionando
-- ✅ Pruebas unitarias (17 pruebas, 100% pasando)
-- ✅ Documentación completa
-
-## Roadmap
-
-- [ ] Soporte para formularios POST
-- [ ] Mejorar detección XSS Stored y DOM-based
-- [ ] Escáner de Broken Access Control
-- [ ] Escáner de Authentication Failures
-- [ ] Integración con CI/CD
-
-## Licencia
-
-[Especificar licencia aquí]
+**Cobertura actual**: 43 pruebas (100% pasando)
 
 ## Contribuciones
 
-Las contribuciones son bienvenidas. Por favor lee `DOCS/ESTANDARES_CODIGO.md` antes de contribuir.
+Las contribuciones son bienvenidas. Por favor lee:
+- `DOCS/ESTANDARES_CODIGO.md` antes de contribuir
+- Seguir convenciones de commits: `tipo(ámbito): descripción`
+- Ejecutar pruebas antes de cada commit
+
+## Licencia
+
+MIT License - Open Source
+
+## Estado de Desarrollo
+
+| Fase | Descripción | Estado |
+|------|----------------|--------|
+| Fase 1 | Análisis de Requisitos | ✅ Completada |
+| Fase 2 | Diseño de Arquitectura | ✅ Completada |
+| Fase 3 | Desarrollo (MVP) | ✅ Completada |
+| Fase 4 | Nuevos Escáneres OWASP | 🔄 En progreso |
+| Fase 5 | Mejoras Técnicas | ❌ Pendiente |
+| Fase 6 | Empaquetado y Distribución | ❌ Pendiente |
+
+**Siguiente hito**: Implementar A01 - Broken Access Control
