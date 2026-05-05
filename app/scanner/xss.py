@@ -108,26 +108,35 @@ class XSSScanner(BaseScanner):
         """Ejecuta el escaneo de vulnerabilidades XSS.
         
         Returns:
-            Lista de diccionarios con resultados del escaneo.
+            Lista de resultados del escaneo.
         """
         self.display_scan_start()
         self.clear_results()
         
-        parsed = urlparse(self.target_url)
-        params = parse_qs(parsed.query)
+        params = self._get_url_params()
+        payloads = self.get_payloads()
         
-        # Si no hay parámetros, no hay XSS reflejado que probar
         if not params:
-            info("No hay parámetros en la URL para probar XSS reflejado")
-        else:
-            info(f"Encontrados {len(params)} parámetros para probar")
-            
-            for param in params:
-                info(f"Probando parámetro: {param}")
-                
-                for payload in self.payloads:
-                    if payload["type"] == "reflected":
-                        self._check_reflected_xss(self.target_url, param, payload)
+            self.info("No se encontraron parámetros GET para probar")
+            return self.get_results()
         
-        success(f"Escaneo XSS completado. Vulnerabilidades encontradas: {len(self.results)}")
+        total_tests = len(params) * len(payloads)
+        self.info(f"Probando {len(params)} parámetros con {len(payloads)} payloads ({total_tests} pruebas)")
+        
+        for param in self.progress_iter(params, "Probando parámetros"):
+            for payload in self.progress_iter(payloads, "Inyectando payloads", leave=False):
+                try:
+                    test_url = self._inject_payload(param, payload)
+                    response = self.session.get(test_url)
+                    
+                    if payload in response.text:
+                        self.add_result(
+                            "XSS Reflected",
+                            "HIGH",
+                            f"Vulnerabilidad XSS detectada en parámetro: {param}",
+                            f"Payload: {payload}"
+                        )
+                except Exception as e:
+                    self.info(f"Error probando {param}: {str(e)}")
+        
         return self.get_results()
