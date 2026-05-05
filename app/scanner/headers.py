@@ -13,6 +13,16 @@ SECURITY_HEADERS = {
 def check_headers(url):
     info("Analizando los encabezados de seguridad.")
 
+    result = {
+        "target": url,
+        "scanner": "headers",
+        "results": {
+            "secure": [],
+            "missing": [],
+            "misconfigured": []
+        }
+    }
+
     try:
         response = requests.get(
             url,
@@ -21,20 +31,36 @@ def check_headers(url):
         )
     except requests.RequestException as e:
         error(f"Error al realizar la solicitud: {e}")
-        return
+        return result
     
     headers = response.headers
 
     for header, expected_values in SECURITY_HEADERS.items():
+        
         if header not in headers:
-            warning(f"El encabezado '{header}' no está presente.")
+            result["results"]["missing"].append({
+                "header": header,
+                "message": "Header no presente"
+            })
         else:
             value = headers[header]
 
             if expected_values:
                 if value.upper() in expected_values:
-                    success(f"{header} correctamente configurado ({value})")
+                    result["results"]["secure"].append({
+                        "header": header,
+                        "value": value
+                    })
                 else:
-                    warning(f"{header} valor inseguro: {value}")
+                    result["results"]["misconfigured"].append({
+                        "header": header,
+                        "value": value,
+                        "message": "Valor inseguro"
+                    })
             else:
-                success(f"{header} presente")
+                result["results"]["secure"].append({
+                    "header": header,
+                    "value": value
+                })
+                
+    return result
