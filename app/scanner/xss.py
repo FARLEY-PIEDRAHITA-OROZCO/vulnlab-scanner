@@ -40,7 +40,17 @@ class XSSScanner(BaseScanner):
         """
         return XSS_PAYLOADS
     
-    def _inject_payload(self, url: str, param: str, payload: str) -> str:
+    def _get_url_params(self) -> list:
+        """Extrae los nombres de los parámetros de la URL.
+        
+        Returns:
+            Lista de nombres de parámetros.
+        """
+        parsed = urlparse(self.target_url)
+        params = parse_qs(parsed.query)
+        return list(params.keys())
+    
+    def _inject_payload(self, param: str, payload: str) -> str:
         """Inyecta un payload en un parámetro de la URL.
         
         Args:
