@@ -38,46 +38,17 @@ class HeadersScanner(BaseScanner):
         return HEADERS_CHECKS
     
     def scan(self) -> list:
-        """Ejecuta la revisión de headers de seguridad.
+        """Ejecuta la validación de HTTP Security Headers.
         
         Returns:
-            Lista de resultados de la revisión.
+            Lista de diccionarios con resultados del escaneo.
         """
         self.display_scan_start()
         self.clear_results()
         
-        try:
-            response = self.session.get(self.target_url)
-            headers = dict(response.headers)
-            
-            checks = self.get_payloads()
-            
-            for check in self.progress_iter(checks, "Verificando headers"):
-                header_name = check["header"]
-                expected = check.get("expected")
-                severity = check.get("severity", "MEDIUM")
-                
-                if header_name not in headers:
-                    self.add_result(
-                        f"Missing Header: {header_name}",
-                        severity,
-                        f"El encabezado {header_name} no está presente",
-                        "Header faltante"
-                    )
-                elif expected and expected not in headers[header_name]:
-                    self.add_result(
-                        f"Weak Header: {header_name}",
-                        severity,
-                        f"El encabezado {header_name} tiene un valor débil",
-                        f"Valor actual: {headers[header_name]}"
-                    )
-                else:
-                        self.info(f"✓ {header_name} presente y correcto")
-            
-        except Exception as e:
-            info(f"Error al obtener headers: {str(e)}")
-        
-        return self.get_results()
+        if self.dry_run:
+            info("[DRY-RUN] Solo simularía validación de headers")
+            return self.get_results()
         
         try:
             info(f"Obteniendo headers de: {self.target_url}")
