@@ -21,30 +21,25 @@ from datetime import datetime
 import concurrent.futures
 
 
-def main():
-    """Función principal que orquesta el escaneo."""
-    args = parse_args()
+def run_scan(args):
+    """Ejecuta el escaneo basado en los argumentos parseados.
     
-    # Mostrar disclaimer y salir si se solicita
-    if args.disclaimer:
-        from app.utils.disclaimer import show_disclaimer
-        show_disclaimer()
-        return
-    
-    # Validar URL objetivo
-    if not is_valid_url(args.url):
-        error("La URL debe comenzar con http:// o https://")
-        return
-    
-    # Verificar requisitos legales
-    if not check_legal_requirements(args.accept_disclaimer):
-        return
-    
-    # Mostrar configuración
+    Args:
+        args: Objeto con argumentos de línea de comandos.
+    """
     info("=" * 60)
     info("VulnLab Scanner - Iniciando escaneo")
     info("=" * 60)
-    Config.display()
+    
+    # Validar URL
+    if not args.disclaimer and not is_valid_url(args.url):
+        error(f"URL inválida: {args.url}")
+        return
+    
+    # Mostrar aviso legal si no se omitió
+    if not args.no_disclaimer:
+        if not check_legal_requirements(args.url):
+            return
     
     # Determinar qué escáneres ejecutar
     if args.all:
@@ -55,113 +50,99 @@ def main():
         args.auth = True
         args.vuln_components = True
     
-    if not (args.xss or args.sqli or args.headers):
-        warning("No seleccionaste ningún escaneo. Usa --all o especifica uno.")
-        return
+    # Crear sesión
+    session = ScannerSession()
     
-    # Inicializar sesión
-    info(f"[+] Objetivo: {args.url}")
-    session = ScannerSession(rate_limit=args.rate_limit)
-    
-    # Realizar login si se proporcionan credenciales
+    # Si se proporcionan credenciales, intentar login
     if args.login_url and args.username and args.password:
-        if not session.login(
-            args.login_url, 
-            args.username, 
-            args.password,
-            args.login_username_field,
-            args.login_password_field
-        ):
-            error("Fallo en la autenticación. Continuando sin sesión...")
+        info(f"Intentando login en: {args.login_url}")
+        if session.login(args.login_url, args.username, args.password):
+            success("Login exitoso!")
+        else:
+            warning("Login falló. Continuando sin autenticación.")
     
     # Información del escaneo
     scan_info = {
         "target_url": args.url,
         "start_time": datetime.now().isoformat(),
-        "scanners_used": [],
-        "authenticated": session.is_authenticated
+        "scanners_used": []
     }
     
     all_results = []
     
-    try:
-        # Ejecutar escáneres en paralelo si hay más de uno
-        scanners_to_run = []
-        if args.xss:
-            scanners_to_run.append(("XSSScanner", XSSScanner, args.url, session, args.dry_run))
-        if args.sqli:
-            scanners_to_run.append(("SQLiScanner", SQLiScanner, args.url, session, args.dry_run))
-        if args.headers:
-            scanners_to_run.append(("HeadersScanner", HeadersScanner, args.url, session, args.dry_run))
-        if args.access_control:
-            scanners_to_run.append(("AccessControlScanner", AccessControlScanner, args.url, session, args.dry_run))
-        if args.auth:
-            scanners_to_run.append(("AuthScanner", AuthScanner, args.url, session, args.dry_run))
-        if args.vuln_components:
-            scanners_to_run.append(("ComponentsScanner", ComponentsScanner, args.url, session, args.dry_run))
-        
-        if len(scanners_to_run) > 1:
-            # Ejecución paralela
-            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-                future_to_scanner = {
-                    executor.submit(scanner_class, url, sess, dry): name
-                    for name, scanner_class, url, sess, dry in scanners_to_run
-                }
-                for future in concurrent.futures.as_completed(future_to_scanner):
-                    scanner_name = future_to_scanner[future]
-                    try:
-                        results = future.result().scan()
-                        all_results.extend(results)
-                        scan_info["scanners_used"].append(scanner_name)
-                    except Exception as e:
-                        error(f"Error en {scanner_name}: {str(e)}")
-        else:
-            # Ejecución secuencial (original)
-            for name, scanner_class, url, sess, dry in scanners_to_run:
-                scanner = scanner_class(url, sess, dry)
-                results = scanner.scan()
-                all_results.extend(results)
-                scan_info["scanners_used"].append(name)
-        
-        # Actualizar información del escaneo
-        scan_info["end_time"] = datetime.now().isoformat()
-        
-        # Generar reportes
-        if not args.dry_run and all_results:
-            info("=" * 60)
-            info("Generando reportes...")
-            info("=" * 60)
-            
-            saved_files = save_report(
-                all_results, 
-                scan_info,
-                report_format=args.report_format,
-                output_dir=args.report_output
-            )
-            
-            for filepath in saved_files:
-                success(f"Reporte guardado en: {filepath}")
-        elif args.dry_run:
-            info("Modo DRY-RUN: No se generan reportes")
-        else:
-            info("No se encontraron vulnerabilidades para reportar")
-        
-        # Resumen final
-        from app.utils.reporter import generate_summary
-        summary = generate_summary(all_results)
-        
+    # Ejecutar escáneres en paralelo si hay más de uno
+    scanners_to_run = []
+    if args.xss:
+        scanners_to_run.append(("XSSScanner", XSSScanner, args.url, session, args.dry_run))
+    if args.sqli:
+        scanners_to_run.append(("SQLiScanner", SQLiScanner, args.url, session, args.dry_run))
+    if args.headers:
+        scanners_to_run.append(("HeadersScanner", HeadersScanner, args.url, session, args.dry_run))
+    if args.access_control:
+        scanners_to_run.append(("AccessControlScanner", AccessControlScanner, args.url, session, args.dry_run))
+    if args.auth:
+        scanners_to_run.append(("AuthScanner", AuthScanner, args.url, session, args.dry_run))
+    if args.vuln_components:
+        scanners_to_run.append(("ComponentsScanner", ComponentsScanner, args.url, session, args.dry_run))
+    
+    if len(scanners_to_run) > 1:
+        # Ejecución paralela
+        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+            future_to_scanner = {
+                executor.submit(scanner_class, url, sess, dry): name
+                for name, scanner_class, url, sess, dry in scanners_to_run
+            }
+            for future in concurrent.futures.as_completed(future_to_scanner):
+                scanner_name = future_to_scanner[future]
+                try:
+                    results = future.result().scan()
+                    all_results.extend(results)
+                    scan_info["scanners_used"].append(scanner_name)
+                except Exception as e:
+                    error(f"Error en {scanner_name}: {str(e)}")
+    else:
+        # Ejecución secuencial (original)
+        for name, scanner_class, url, sess, dry in scanners_to_run:
+            scanner = scanner_class(url, sess, dry)
+            results = scanner.scan()
+            all_results.extend(results)
+            scan_info["scanners_used"].append(name)
+    
+    # Actualizar información del escaneo
+    scan_info["end_time"] = datetime.now().isoformat()
+    
+    # Generar reportes
+    if not args.dry_run and not args.no_report:
         info("=" * 60)
-        info("RESUMEN DEL ESCANEO")
+        info("Generando reportes...")
         info("=" * 60)
-        info(f"Total vulnerabilidades: {summary['total_vulnerabilities']}")
-        info(f"  - Críticas: {summary['critical']}")
-        info(f"  - Altas: {summary['high']}")
-        info(f"  - Medias: {summary['medium']}")
-        info(f"  - Bajas: {summary['low']}")
         
-    finally:
-        # Cerrar sesión
-        session.close()
+        saved_files = save_report(
+            all_results,
+            scan_info,
+            report_format=args.report,
+            output_dir=args.output_dir
+        )
+        
+        for filepath in saved_files:
+            success(f"Reporte guardado en: {filepath}")
+    
+    # Mostrar resumen
+    success("=" * 60)
+    success(f"Escaneo completado. Vulnerabilidades encontradas: {len(all_results)}")
+    success("=" * 60)
+
+
+def main():
+    """Punto de entrada principal (para ejecución directa)."""
+    args = parse_args()
+    
+    # Si no se proporciona URL y no es --disclaimer, mostrar ayuda
+    if not args.url and not args.disclaimer:
+        print("Error: Se requiere una URL (-u/--url) o --disclaimer")
+        return
+    
+    run_scan(args)
 
 
 if __name__ == "__main__":
