@@ -50,7 +50,7 @@ class XSSScanner(BaseScanner):
         params = parse_qs(parsed.query)
         return list(params.keys())
     
-    def _inject_payload(self, param: str, payload: str) -> str:
+    def _inject_payload(self, url: str, param: str, payload: str) -> str:
         """Inyecta un payload en un parámetro de la URL.
         
         Args:
