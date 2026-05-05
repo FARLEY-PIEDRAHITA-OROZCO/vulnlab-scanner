@@ -43,6 +43,12 @@ def parse_args():
     )
 
     parser.add_argument(
+        "-A", "--access-control",
+        action="store_true",
+        help="Escanear Broken Access Control (A01 - OWASP)"
+    )
+
+    parser.add_argument(
         "-a", "--all",
         action="store_true",
         help="Escanear todas las vulnerabilidades disponibles"

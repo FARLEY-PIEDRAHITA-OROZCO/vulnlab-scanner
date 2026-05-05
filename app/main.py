@@ -14,6 +14,7 @@ from app.utils.reporter import save_report
 from app.scanner.xss import XSSScanner
 from app.scanner.sqli import SQLiScanner
 from app.scanner.headers import HeadersScanner
+from app.scanner.access_control import AccessControlScanner
 from datetime import datetime
 
 
@@ -47,6 +48,7 @@ def main():
         args.xss = True
         args.sqli = True
         args.headers = True
+        args.access_control = True
     
     if not (args.xss or args.sqli or args.headers):
         warning("No seleccionaste ningún escaneo. Usa --all o especifica uno.")
@@ -98,6 +100,13 @@ def main():
             results = scanner.scan()
             all_results.extend(results)
             scan_info["scanners_used"].append("HeadersScanner")
+        
+        # Ejecutar escáner de Access Control
+        if args.access_control:
+            scanner = AccessControlScanner(args.url, session, args.dry_run)
+            results = scanner.scan()
+            all_results.extend(results)
+            scan_info["scanners_used"].append("AccessControlScanner")
         
         # Actualizar información del escaneo
         scan_info["end_time"] = datetime.now().isoformat()
