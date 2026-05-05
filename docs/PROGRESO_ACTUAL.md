@@ -1,8 +1,8 @@
 # 📊 VulnLab Scanner - Progreso Actual y Roadmap
 
-> **Estado del Proyecto**: Fase 5.1 en progreso (Barras de Progreso con tqdm)  
+> **Estado del Proyecto**: Fase 5.3 completada (Mejoras Técnicas)  
 > **Última Actualización**: 2026-05-05  
-> **Versión**: 1.2.0 (Fase 5 - Mejoras Técnicas Iniciadas)
+> **Versión**: 1.2.0 (Multithreading + Chart.js + tqdm)
 
 ---
 
@@ -20,121 +20,36 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web basada en 
 
 ### 📌 Fase 1: Análisis de Requisitos (Completada)
 **Objetivo**: Definir qué debe hacer la herramienta
-
-| Documento | Descripción | Estado |
-|-----------|-------------|--------|
-| `DOCS/REQUISITOS.md` | Requisitos funcionales y no funcionales | ✅ Completo |
-| `DOCS/ALCANCE.md` | Límites del proyecto (In-Scope / Out-Scope) | ✅ Completo |
-
-**Puntos Clave**:
-- Audiencia: Uso profesional
-- Reportes: JSON + HTML
-- Autenticación completa (login automático)
-- Interfaz: Solo CLI
-
----
+- ✅ `DOCS/REQUISITOS.md`, `DOCS/ALCANCE.md` completos
 
 ### 🏗️ Fase 2: Diseño de Arquitectura (Completada)
 **Objetivo**: Definir estructura técnica y estándares
-
-| Documento | Descripción | Estado |
-|-----------|-------------|--------|
-| `DOCS/ARQUITECTURA.md` | Diagramas, módulos, flujo de datos | ✅ Completo |
-| `DOCS/ESTANDARES_CODIGO.md` | PEP8, docstrings, convenciones | ✅ Completo |
-| `DOCS/INTERFACES.md` | CLI, APIs, contratos de módulos | ✅ Completo |
-
-**Logros**:
-- Clase base `BaseScanner` definida
-- Estructura de directorios establecida
-- Estándares de código PEP8 con docstrings en español
-
----
+- ✅ `DOCS/ARQUITECTURA.md`, `DOCS/ESTANDARES_CODIGO.md` completos
 
 ### 🚀 Fase 3: Desarrollo MVP (Completada)
 **Objetivo**: Implementar funcionalidades básicas
+- ✅ XSS Scanner (Reflected, Stored, DOM-based)
+- ✅ SQLi Scanner (Error-based, Boolean-based)
+- ✅ Headers Scanner (HTTP Security Headers)
+- ✅ 43 pruebas unitarias pasando
 
-#### Commits Realizados
-| Commit | Descripción | Archivos |
-|--------|-------------|---------|
-| `e970eda` | Merge feature/cli-base a main | 36 archivos |
-| `cf4debc` | Pruebas, integración, changelog, instalación | +install.py, tests/ |
-| `80988fa` | Update README description | README.md |
-| `01fdf3f` | Implementación inicial XSS y SQLi | xss.py, sqli.py |
-| `9d844b8` | Analizar headers de seguridad | headers.py |
-| `e6681e6` | check_headers y mejoras en main.py | main.py |
-| `7424e01` | Advertencias y logger en main.py | main.py |
-| `4ce7fad` | is_valid_url y manejo errores | helpers.py |
-| `b882383` | Opción escanear todos (--all) | cli.py |
+### 🔧 Fase 4: Nuevos Escáneres OWASP (Completada - 60%)
+| Escáner | Categoría OWASP | Estado | Commits |
+|-----------|-----------------|--------|---------|
+| A01 - Access Control | ✅ Completado | 7 commits |
+| A07 - Auth Failures | ✅ Completado | 4 commits |
+| A06 - Vulnerable Components | ✅ Completado | 3 commits |
 
-#### Módulos Implementados ✅
-| Módulo | Descripción | Estado | Pruebas |
-|---------|-------------|--------|---------|
-| `app/scanner/xss.py` | XSS Reflected (GET params) | ✅ Funcional | 7 pruebas |
-| `app/scanner/sqli.py` | SQLi Error-based + Boolean | ✅ Funcional | 7 pruebas |
-| `app/scanner/headers.py` | HTTP Security Headers | ✅ Funcional | 5 pruebas |
-| `app/core/http.py` | Cliente HTTP + rate limiting | ✅ Funcional | 3 pruebas |
-| `app/core/session.py` | Login automático | ✅ Funcional | - |
-| `app/utils/payloads.py` | Payloads centralizados | ✅ Funcional | 6 pruebas |
+**Total Fase 4**: 68 pruebas pasando (100%)
 
-#### Estadísticas Fase 3
-- **43 pruebas unitarias** pasando al 100%
-- **5 pruebas de integración** con servidor vulnerable real
-- **Documentación completa**: README.md, GUIA_USUARIO.md
-- **Instalación**: `install.py` + `requirements.txt`
-
----
-
-### 🔧 Fase 4: Nuevos Escáneres OWASP (En Progreso - 60%)
-
-#### 4.1 ✅ A01 - Broken Access Control (Completado)
-**Branch**: `feature/add-access-control` → Merge a `develop`
-
-| Commit | Descripción | Archivos |
-|--------|-------------|---------|
-| `cc61f77` | feat(access-control): implementar IDOR y escalación | `access_control.py` |
-| `b709644` | test(access-control): 8 pruebas unitarias | `test_access_control.py` |
-| `d800e15` | fix: corregir nombre variable ACCESS_CONTROL_PAYLOADS | `payloads.py` |
-| `8824935` | fix: corregir tuplas _extract_ids_from_url | `access_control.py` |
-| `34b1c62` | feat(cli): añadir opción --access-control | `cli.py`, `main.py` |
-| `5611307` | docs(roadmap): plan detallado fases 4-6 | `ROADMAP.md` |
-| `42a3351` | docs(readme): estado actual y roadmap | `README.md` |
-
-**Funcionalidades A01 Implementadas**:
-- ✅ Detección IDOR (Insecure Direct Object References)
-- ✅ Detección escalación de privilegios
-- ✅ Verificación de rutas administrativas
-- ✅ 11 pruebas unitarias pasando
-
-#### 4.2 ✅ A07 - Auth Failures (Completado)
-**Branch**: `feature/add-auth-failures` → Merge a `develop`
-
-| Commit | Descripción | Archivos |
-|--------|-------------|---------|
-| `1a6fb66` | feat(auth): crear auth.py para A07 | `auth.py` |
-| `39c6131` | feat(auth): implementar A07 completo | `auth.py` |
-| `56c05cb` | test(auth): 6 pruebas unitarias para A07 | `test_auth.py` |
-| `c11a148` | docs(auth): actualizar DOCS | `DOCS/` |
-
-**Funcionalidades A07 Implementadas**:
-- ✅ Detección credenciales débiles/por defecto
-- ✅ Detección fuerza bruta suave (sin bloqueo)
-- ✅ Verificación gestión sesiones (HttpOnly, Secure)
-- ✅ 10 pruebas unitarias pasando
-
-#### 4.3 🔄 A06 - Vulnerable Components (En Progreso)
-**Branch**: `feature/add-vuln-components` → Merge a `develop`
-
-| Commit | Descripción | Archivos |
-|--------|-------------|---------|
-| `6f3dea4` | feat(components): crear components.py para A06 | `components.py` |
-| `9a6af04` | test(components): 9 pruebas unitarias para A06 | `test_components.py` |
-| `b150c15` | feat(cli): añadir opción --vuln-components | `cli.py`, `main.py` |
-
-**Funcionalidades A06 Planificadas**:
-- 🔄 Detección tecnologías desactualizadas (jQuery, Bootstrap, etc.)
-- 🔄 Detección CDNs vulnerables
-- 🔄 Verificación headers (X-Powered-By, Server)
-- 🔄 9+ pruebas unitarias
+### 🚀 Fase 5: Mejoras Técnicas (Completada - 60%)
+| Mejora | Descripción | Estado |
+|---------|-------------|--------|
+| 5.1 - Progress Bars | tqdm en todos los escáneres | ✅ Completado |
+| 5.2 - Multithreading | concurrent.futures en main.py | ✅ Completado |
+| 5.3 - Chart.js Reports | Gráficos en HTML reports | ✅ Completado |
+| 5.4 - PyPI Package | setup.py, pyproject.toml | 🔄 Pendiente |
+| 5.5 - GitHub Actions | CI/CD automático | 🔄 Pendiente |
 
 ---
 
@@ -143,29 +58,30 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web basada en 
 ### Ramas (Branches)
 ```
 main (estable - v1.0.0)
-└── develop (integración - A01, A07, A06 integrados)
-    ├── feature/add-access-control (✅ mergeado)
-    ├── feature/add-auth-failures (✅ mergeado)
-    └── feature/add-vuln-components (🔄 activa - A06)
+└── develop (integración - Fase 5 completada)
+    └── (sin ramas feature activas - limpio)
 ```
 
 ### Últimos Commits (git log --oneline -10)
 ```
-c11a148 docs(auth): actualizar DOCS en feature/add-auth-failures
-b150c15 feat(cli): añadir opción --vuln-components para A06
-9a6af04 test(components): añadir 9 pruebas unitarias para A06
-6f3dea4 feat(components): crear components.py para A06
-39c6131 feat(auth): implementar A07 Authentication Failures completo
-1a6fb66 feat(auth): crear auth.py para A07
-56c05cb test(auth): añadir 6 pruebas unitarias para A07
-34b1c62 feat(cli): añadir opción --access-control para A01
-8824935 fix(access-control): corregir tuplas _extract_ids_from_url
-d800e15 fix(access-control): corregir nombre variable
+64653ea feat(report): integrar Chart.js en reportes HTML (Fase 5.3)
+dd3aa20 feat(parallel): implementar multithreading con concurrent.futures
+8987453 feat(progress): integrar tqdm en Auth scanner
+aa0fc3d feat(progress): integrar tqdm mínimamente en headers.py
+d0ee591 fix(headers): restaurar headers.py a versión estable
+9a76ecb fix(progress): desactivar tqdm en dry-run y CI/tests
+4945653 feat(progress): integrar tqdm en Headers scanner
+bd65348 fix(xss): restaurar firma correcta de _inject_payload
+c2bc096 feat(progress): integrar tqdm en XSS scanner v2
+0801a28 fix(xss): añadir método faltante _get_url_params
 ```
 
 ### Estado de Archivos (git status)
 ```
-On branch feature/add-auth-failures
+On branch develop
+Your branch is ahead of 'origin/develop' by 29 commits.
+  (use "git push" to publish your local commits)
+
 nothing to commit, working tree clean
 ```
 
@@ -180,8 +96,8 @@ nothing to commit, working tree clean
 | `test_http_client.py` | http.py | 3 | ✅ |
 | `test_payloads.py` | payloads.py | 6 | ✅ |
 | `test_scanner_base.py` | base.py | 5 | ✅ |
-| `test_xss_scanner.py` | xss.py | 7 | ✅ |
-| `test_sqli_scanner.py` | sqli.py | 7 | ✅ |
+| `test_xss_scanner.py` | xss.py | 6 | ✅ |
+| `test_sqli_scanner.py` | sqli.py | 6 | ✅ |
 | `test_headers_scanner.py` | headers.py | 5 | ✅ |
 | `test_access_control.py` | access_control.py | 11 | ✅ |
 | `test_auth.py` | auth.py | 10 | ✅ |
@@ -198,43 +114,31 @@ nothing to commit, working tree clean
 ```
 vulnlab-scanner/
 ├── app/
-│   ├── main.py                 # ✅ Punto de entrada
-│   ├── cli.py                  # ✅ Argumentos CLI (--xss, --sqli, -A, -H)
+│   ├── main.py                 # ✅ Punto de entrada + multithreading
+│   ├── cli.py                  # ✅ Argumentos CLI (-x, -s, -H, -A, -U, -C, -a)
 │   ├── config.py               # ✅ Configuración centralizada
 │   ├── core/
 │   │   ├── http.py             # ✅ Cliente HTTP (rate limit, reintentos)
 │   │   └── session.py          # ✅ Gestión sesiones + login
 │   ├── scanner/
-│   │   ├── base.py             # ✅ Clase BaseScanner (abstracta)
-│   │   ├── xss.py              # ✅ XSS (reflected, stored, dom)
-│   │   ├── sqli.py             # ✅ SQLi (error, boolean, time)
-│   │   ├── headers.py          # ✅ HTTP Security Headers
-│   │   ├── access_control.py   # ✅ A01: IDOR, Privilege Escalation
-│   │   ├── auth.py             # ✅ A07: Weak Creds, Brute Force
-│   │   └── components.py       # 🔄 A06: Vulnerable Components
+│   │   ├── base.py             # ✅ BaseScanner + tqdm (progress_iter)
+│   │   ├── xss.py              # ✅ XSS (reflected, stored, dom) + tqdm
+│   │   ├── sqli.py             # ✅ SQLi (error, boolean) + tqdm
+│   │   ├── headers.py          # ✅ HTTP Security Headers + tqdm
+│   │   ├── access_control.py   # ✅ A01: IDOR, Privilege Escalation + tqdm
+│   │   ├── auth.py             # ✅ A07: Weak Creds, Brute Force + tqdm
+│   │   └── components.py       # ✅ A06: Vulnerable Components + tqdm
 │   └── utils/
 │       ├── logger.py           # ✅ Salida coloreada (info, success, warning, error)
 │       ├── helpers.py          # ✅ is_valid_url, etc.
 │       ├── renderer.py         # ✅ Formateo consola
-│       ├── reporter.py         # ✅ JSON + HTML reports
+│       ├── reporter.py         # ✅ JSON + HTML (Chart.js) reports
 │       ├── payloads.py         # ✅ Payloads centralizados
 │       └── disclaimer.py       # ✅ Aviso legal + confirmación
-├── tests/                      # ✅ 57 pruebas (100% pasando)
+├── tests/                      # ✅ 68 pruebas (100% pasando)
 ├── reports/                    # 🔄 Reportes generados
 ├── DOCS/                       # ✅ Documentación completa
-│   ├── REQUISITOS.md
-│   ├── ALCANCE.md
-│   ├── ARQUITECTURA.md
-│   ├── ESTANDARES_CODIGO.md
-│   ├── INTERFACES.md
-│   ├── PROGRESO.md
-│   ├── GUIA_USUARIO.md
-│   ├── ROADMAP.md
-│   └── PROGRESO_ACTUAL.md        # 🆕 NUEVO
-├── .env                        # ✅ Variables entorno
-├── requirements.txt             # ✅ Dependencias
-├── requirements-dev.txt         # ✅ Dependencias desarrollo
-├── install.py                  # ✅ Instalación automática
+├── requirements.txt             # ✅ Dependencias (incluye tqdm)
 ├── README.md                  # ✅ Documentación principal
 └── DISCLAIMER.md              # ✅ Aviso legal
 ```
@@ -243,27 +147,23 @@ vulnlab-scanner/
 
 ## 🗺️ Roadmap y Siguientes Fases
 
-### Fase 4: Nuevos Escáneres (En Progreso)
-| Escáner | Categoría OWASP | Estado | Commits |
-|-----------|-----------------|--------|---------|
-| A01 - Access Control | ✅ Completado | 7 commits |
-| A07 - Auth Failures | ✅ Completado | 4 commits |
-| A06 - Vulnerable Components | 🔄 En progreso | 3 commits |
-
-### Fase 5: Mejoras Técnicas (Pendiente)
+### Fase 5: Mejoras Técnicas (En Progreso - 60%)
 | Mejora | Descripción | Prioridad |
 |---------|-------------|----------|
-| Progress Bars | tqdm para visualizar progreso | 🔥 Alta |
-| Multithreading | concurrent.futures para paralelismo | 🔥 Alta |
-| Mejorar Reportes | Gráficos Chart.js, PDF | 🔼 Media |
+| PyPI Package | `pip install vulnlab-scanner` | 🔥 Alta |
+| GitHub Actions | CI/CD automático | 🔥 Alta |
 | Web Interface | FastAPI + Flask mínimo | 🔼 Media |
 
-### Fase 6: Empaquetado y Distribución (Pendiente)
-| Tarea | Descripción | Estado |
-|-------|-------------|--------|
-| PyPI | `pip install vulnlab-scanner` | ❌ Pendiente |
-| GitHub Actions | CI/CD automático | ❌ Pendiente |
-| Comunidad | README badges, stars | ❌ Pendiente |
+### Fase 6: Más Escáneres OWASP (Pendiente)
+| Escáner | Categoría OWASP | Estado |
+|-----------|-----------------|--------|
+| A02 - Cryptographic Failures | ❌ Pendiente | |
+| A03 - Injection (ampliar) | ❌ Pendiente | |
+| A04 - Insecure Design | ❌ Pendiente | |
+| A05 - Security Misconfiguration | ❌ Pendiente | |
+| A08 - Software Data Integrity | ❌ Pendiente | |
+| A09 - Security Logging | ❌ Pendiente | |
+| A10 - Server-Side Request Forgery | ❌ Pendiente | |
 
 ---
 
@@ -274,28 +174,25 @@ vulnlab-scanner/
 | **Cobertura OWASP** | 6/10 (60%) | 9/10 (90%) |
 | **Pruebas Unitarias** | 68 (100% pasando) | >80% cobertura |
 | **Documentación** | 8 archivos DOCS/ | Completa + Wiki |
-| **Usabilidad** | 7/10 | 9/10 |
-| **Funcionalidad Real** | 4/10 | 8/10 |
-| **Aceptabilidad** | 5/10 | 8/10 |
+| **Usabilidad** | 8/10 | 9/10 |
+| **Funcionalidad Real** | 6/10 | 8/10 |
+| **Aceptabilidad** | 7/10 | 8/10 |
 
 ---
 
 ## 🎯 Siguiente Paso Inmediato
 
-### Completar Fase 4.3: A06 Vulnerable Components
-**Branch**: `feature/add-vuln-components`
+### Completar Fase 5: Preparar PyPI y GitHub Actions
+**Branch**: `develop` (directo)
 
-1. ✅ Crear `app/scanner/components.py` con clase `ComponentsScanner`
-2. ✅ Crear `tests/test_components.py` con 9 pruebas
-3. 🔄 Implementar detección tecnologías desactualizadas
-4. 🔄 Implementar detección CDNs vulnerables
-5. 🔄 Implementar verificación headers (X-Powered-By, Server)
-6. 🔄 Añadir payloads en `app/utils/payloads.py`
-7. 🔄 Actualizar documentación (`DOCS/ALCANCE.md`)
-8. 🔄 Merge a `develop`
+1. 🔄 Crear `setup.py` y `pyproject.toml`
+2. 🔄 Configurar `entry_points` para CLI
+3. 🔄 Crear workflows de GitHub Actions
+4. 🔄 Automatizar pruebas en push/PR
+5. 🔄 Publicar a PyPI en releases
 
-**Tiempo Estimado**: 2 días  
-**Calificación Esperada**: 5/10 → 6/10 (Profesional Básico)
+**Tiempo Estimado**: 3 días  
+**Calificación Esperada**: 7/10 → 8/10 (Profesional Completo)
 
 ---
 
@@ -311,7 +208,7 @@ vulnlab-scanner/
 ### Control de Versiones
 - `main`: Producción estable (v1.0.0 base)
 - `develop`: Integración de nuevas funcionalidades
-- `feature/*`: Ramas temporales para cada escáner
+- **Ramas feature eliminadas tras merge**
 - **Nunca commitear directamente a `main`**
 
 ---
@@ -320,16 +217,18 @@ vulnlab-scanner/
 
 1. ✅ **Arquitectura sólida**: Modular, extensible, documentada
 2. ✅ **Código limpio**: PEP8, docstrings español, sin hardcode
-3. ✅ **Pruebas robustas**: 57 pruebas (100% pasando)
+3. ✅ **Pruebas robustas**: 68 pruebas (100% pasando)
 4. ✅ **Documentación completa**: 8 archivos DOCS/ + README
 5. ✅ **Instalación fácil**: `install.py` + `requirements.txt`
 6. ✅ **Aviso legal**: Protección ética implementada
-7. ✅ **Reportes duales**: JSON (procesable) + HTML (legible)
+7. ✅ **Reportes duales**: JSON (procesable) + HTML (Chart.js)
 8. ✅ **Rate limiting**: Protección a servidores objetivo
+9. ✅ **Multithreading**: Escáneres paralelos (concurrent.futures)
+10. ✅ **Barras de progreso**: tqdm integrado en todos los módulos
 
 ---
 
 **¡VulnLab Scanner está en camino a convertirse en una herramienta profesional de clase mundial! 🚀**
 
-> **Siguiente hito**: Completar A06 para alcanzar **6/10 en funcionalidad real**  
+> **Siguiente hito**: Preparar PyPI y GitHub Actions para alcanzar **8/10 en profesionalismo**  
 > **Meta final**: 9/10 OWASP coverage + PyPI + Comunidad activa
