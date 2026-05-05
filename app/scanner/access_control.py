@@ -65,7 +65,7 @@ class AccessControlScanner(BaseScanner):
             for val in values:
                 if val.isdigit():
                     new_val = str(int(val) + 1)
-                    results.append(("param", param, val, new_val))
+                    results.append(("param", val, new_val))
         
         return results
     
