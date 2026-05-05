@@ -69,7 +69,7 @@ class AuthScanner(BaseScanner):
                 ("administrator", "administrator")
             ]
             
-            for username, password in weak_creds:
+            for username, password in self.progress_iter(weak_creds, "Probando credenciales débiles"):
                 login_data = {
                     "username": username,
                     "password": password
