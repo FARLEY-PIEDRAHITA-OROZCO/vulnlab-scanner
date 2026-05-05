@@ -123,12 +123,21 @@ class XSSScanner(BaseScanner):
         self.display_scan_start()
         self.clear_results()
         
-        params = self._get_url_params()
-        payloads = self.get_payloads()
+        parsed = urlparse(self.target_url)
+        params = parse_qs(parsed.query)
         
         if not params:
-            self.info("No se encontraron parámetros GET para probar")
-            return self.get_results()
+            info("No hay parámetros en la URL para probar XSS reflejado")
+        else:
+            info(f"Encontrados {len(params)} parámetros para probar")
+            
+            for param in self.progress_iter(list(params.keys()), "Probando parámetros"):
+                for payload in self.progress_iter(self.payloads, "Inyectando payloads", leave=False):
+                    if payload["type"] == "reflected":
+                        self._check_reflected_xss(self.target_url, param, payload)
+        
+        success(f"Escaneo XSS completado. Vulnerabilidades encontradas: {len(self.results)}")
+        return self.get_results()
         
         total_tests = len(params) * len(payloads)
         self.info(f"Probando {len(params)} parámetros con {len(payloads)} payloads ({total_tests} pruebas)")
