@@ -55,6 +55,12 @@ def parse_args():
     )
 
     parser.add_argument(
+        "-C", "--vuln-components",
+        action="store_true",
+        help="Escanear Vulnerable Components (A06 - OWASP)"
+    )
+
+    parser.add_argument(
         "-a", "--all",
         action="store_true",
         help="Escanear todas las vulnerabilidades disponibles"
