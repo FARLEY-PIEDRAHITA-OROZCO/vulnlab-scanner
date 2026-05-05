@@ -132,7 +132,7 @@ class XSSScanner(BaseScanner):
             info(f"Encontrados {len(params)} parámetros para probar")
             
             for param in self.progress_iter(list(params.keys()), "Probando parámetros"):
-                for payload in self.progress_iter(self.payloads, "Inyectando payloads", leave=False):
+                for payload in self.payloads:
                     if payload["type"] == "reflected":
                         self._check_reflected_xss(self.target_url, param, payload)
         
