@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import Mock, patch
 from app.scanner.access_control import AccessControlScanner
-from app.utils.payloads import ACCES_CONTROL_PAYLOADS
+from app.utils.payloads import ACCESS_CONTROL_PAYLOADS
 
 
 class TestAccessControlScanner(unittest.TestCase):
