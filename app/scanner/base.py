@@ -40,7 +40,9 @@ class BaseScanner(ABC):
         self.session = session
         self.results = []
         self.dry_run = dry_run
-        self.use_progress = TQDM_AVAILABLE and not dry_run
+        # Desactivar tqdm en dry-run o si no hay terminal (CI/tests)
+        import sys
+        self.use_progress = TQDM_AVAILABLE and not dry_run and sys.stdout.isatty()
     
     @abstractmethod
     def scan(self) -> list:
