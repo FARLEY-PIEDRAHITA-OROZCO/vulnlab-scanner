@@ -4,16 +4,22 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.0.0 (Fase 3 Completada)  
-**Cobertura OWASP**: 3/10 (XSS, SQLi, Headers)  
-**Pruebas**: 43 pruebas unitarias + integración (100% pasando)  
+**Versión**: 1.2.0 (Fase 5.3 Completada)  
+**Cobertura OWASP**: 6/10 (60%)  
+**Pruebas**: 68 pasando (100%)  
 **Licencia**: MIT (Open Source)
 
-## Características Implementadas ✅
+## 🚀 Características Implementadas ✅
 
 - ✅ **XSS Scanner**: Detección de Cross-Site Scripting (Reflected, Stored, DOM-based)
 - ✅ **SQLi Scanner**: Detección de SQL Injection (Error-based, Boolean-based)
 - ✅ **Headers Checker**: Validación de HTTP Security Headers
+- ✅ **Broken Access Control (A01)**: IDOR, escalación de privilegios, Forceful Browsing
+- ✅ **Auth Failures (A07)**: Credenciales débiles, fuerza bruta suave, gestión sesiones
+- ✅ **Vulnerable Components (A06)**: Detección tecnologías desactualizadas (jQuery, Bootstrap)
+- ✅ **Multithreading**: Escaneo paralelo con `concurrent.futures`
+- ✅ **Progress Bars**: Barras de progreso con `tqdm`
+- ✅ **Chart.js Reports**: Gráficos de severidad en reportes HTML
 - ✅ **Autenticación**: Soporte para login automático en sitios protegidos
 - ✅ **Reportes**: Generación de reportes en JSON y HTML
 - ✅ **Modo DRY-RUN**: Simulación sin ataques reales
@@ -23,25 +29,23 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Roadmap de Desarrollo (Fases 4-6)
 
-### Fase 4: Nuevos Escáneres OWASP (Semanas 2-5)
-- [ ] **A01 - Broken Access Control**: IDOR, escalación de privilegios
-- [ ] **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
-- [ ] **A06 - Vulnerable Components**: Detección de librerías (SCA)
-- [ ] Mejorar detección XSS (Stored vía POST, DOM-based)
-- [ ] Mejorar detección SQLi (Time-based Blind, múltiples DB)
+### Fase 4: Nuevos Escáneres OWASP (Completada)
+- ✅ **A01 - Broken Access Control**: IDOR, escalación de privilegios
+- ✅ **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
+- ✅ **A06 - Vulnerable Components**: Detección de librerías (SCA)
 
-### Fase 5: Mejoras Técnicas (Semanas 6-9)
-- [ ] Barras de progreso (tqdm)
-- [ ] Multithreading para escaneo paralelo
-- [ ] Mejorar reportes (gráficos, PDF)
-- [ ] Interfaz web básica (FastAPI/Flask)
+### Fase 5: Mejoras Técnicas (Completada - 60%)
+- ✅ Barras de progreso (tqdm)
+- ✅ Multithreading para escaneo paralelo
+- ✅ Mejorar reportes (gráficos Chart.js)
+- 🔄 Interfaz web básica (FastAPI/Flask)
 
-### Fase 6: Empaquetado y Distribución (Semana 10)
-- [ ] Publicar en PyPI (`pip install vulnlab-scanner`)
-- [ ] Configurar CI/CD con GitHub Actions
-- [ ] Generar comunidad inicial
+### Fase 6: Empaquetado y Distribución (Pendiente)
+- 🔄 Publicar en PyPI (`pip install vulnlab-scanner`)
+- 🔄 Configurar CI/CD con GitHub Actions
+- 🔄 Generar comunidad inicial
 
-**Objetivo**: Llegar a **8/10 en funcionalidad profesional** (actualmente 4/10)
+**Objetivo**: Llegar a **8/10 en funcionalidad profesional** (actualmente 6/10)
 
 ## Requisitos
 
