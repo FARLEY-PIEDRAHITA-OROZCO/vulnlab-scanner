@@ -29,7 +29,7 @@ class TestAccessControlScanner(unittest.TestCase):
     def test_get_payloads(self):
         """Verifica que se obtengan los payloads correctos."""
         payloads = self.scanner.get_payloads()
-        self.assertEqual(len(payloads), len(ACCES_CONTROL_PAYLOADS))
+        self.assertEqual(len(payloads), len(ACCESS_CONTROL_PAYLOADS))
     
     def test_extract_ids_from_url_with_path_ids(self):
         """Verifica extracción de IDs numéricos en el path."""
