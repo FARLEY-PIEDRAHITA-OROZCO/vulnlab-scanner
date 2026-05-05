@@ -18,6 +18,7 @@ from app.scanner.access_control import AccessControlScanner
 from app.scanner.auth import AuthScanner
 from app.scanner.components import ComponentsScanner
 from datetime import datetime
+import concurrent.futures
 
 
 def main():
@@ -84,47 +85,43 @@ def main():
     all_results = []
     
     try:
-        # Ejecutar escáner XSS
+        # Ejecutar escáneres en paralelo si hay más de uno
+        scanners_to_run = []
         if args.xss:
-            scanner = XSSScanner(args.url, session, args.dry_run)
-            results = scanner.scan()
-            all_results.extend(results)
-            scan_info["scanners_used"].append("XSSScanner")
-        
-        # Ejecutar escáner SQLi
+            scanners_to_run.append(("XSSScanner", XSSScanner, args.url, session, args.dry_run))
         if args.sqli:
-            scanner = SQLiScanner(args.url, session, args.dry_run)
-            results = scanner.scan()
-            all_results.extend(results)
-            scan_info["scanners_used"].append("SQLiScanner")
-        
-        # Ejecutar escáner de Headers
+            scanners_to_run.append(("SQLiScanner", SQLiScanner, args.url, session, args.dry_run))
         if args.headers:
-            scanner = HeadersScanner(args.url, session, args.dry_run)
-            results = scanner.scan()
-            all_results.extend(results)
-            scan_info["scanners_used"].append("HeadersScanner")
-        
-        # Ejecutar escáner de Access Control
+            scanners_to_run.append(("HeadersScanner", HeadersScanner, args.url, session, args.dry_run))
         if args.access_control:
-            scanner = AccessControlScanner(args.url, session, args.dry_run)
-            results = scanner.scan()
-            all_results.extend(results)
-            scan_info["scanners_used"].append("AccessControlScanner")
-        
-        # Ejecutar escáner de Auth Failures
+            scanners_to_run.append(("AccessControlScanner", AccessControlScanner, args.url, session, args.dry_run))
         if args.auth:
-            scanner = AuthScanner(args.url, session, args.dry_run)
-            results = scanner.scan()
-            all_results.extend(results)
-            scan_info["scanners_used"].append("AuthScanner")
-        
-        # Ejecutar escáner de Vulnerable Components
+            scanners_to_run.append(("AuthScanner", AuthScanner, args.url, session, args.dry_run))
         if args.vuln_components:
-            scanner = ComponentsScanner(args.url, session, args.dry_run)
-            results = scanner.scan()
-            all_results.extend(results)
-            scan_info["scanners_used"].append("ComponentsScanner")
+            scanners_to_run.append(("ComponentsScanner", ComponentsScanner, args.url, session, args.dry_run))
+        
+        if len(scanners_to_run) > 1:
+            # Ejecución paralela
+            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+                future_to_scanner = {
+                    executor.submit(scanner_class, url, sess, dry): name
+                    for name, scanner_class, url, sess, dry in scanners_to_run
+                }
+                for future in concurrent.futures.as_completed(future_to_scanner):
+                    scanner_name = future_to_scanner[future]
+                    try:
+                        results = future.result().scan()
+                        all_results.extend(results)
+                        scan_info["scanners_used"].append(scanner_name)
+                    except Exception as e:
+                        error(f"Error en {scanner_name}: {str(e)}")
+        else:
+            # Ejecución secuencial (original)
+            for name, scanner_class, url, sess, dry in scanners_to_run:
+                scanner = scanner_class(url, sess, dry)
+                results = scanner.scan()
+                all_results.extend(results)
+                scan_info["scanners_used"].append(name)
         
         # Actualizar información del escaneo
         scan_info["end_time"] = datetime.now().isoformat()
