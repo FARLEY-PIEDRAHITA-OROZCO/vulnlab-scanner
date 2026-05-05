@@ -57,7 +57,7 @@ class HeadersScanner(BaseScanner):
             
             info(f"Verificando {len(self.checks)} headers de seguridad")
             
-            for check in self.checks:
+            for check in self.progress_iter(self.checks, "Verificando headers"):
                 header_name = check["header"]
                 recommendation = check["recommendation"]
                 severity = check["severity"]

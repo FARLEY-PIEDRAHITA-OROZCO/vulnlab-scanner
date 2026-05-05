@@ -40,6 +40,16 @@ class XSSScanner(BaseScanner):
         """
         return XSS_PAYLOADS
     
+    def _get_url_params(self) -> list:
+        """Extrae los nombres de los parámetros de la URL.
+        
+        Returns:
+            Lista de nombres de parámetros.
+        """
+        parsed = urlparse(self.target_url)
+        params = parse_qs(parsed.query)
+        return list(params.keys())
+    
     def _inject_payload(self, url: str, param: str, payload: str) -> str:
         """Inyecta un payload en un parámetro de la URL.
         
@@ -108,7 +118,7 @@ class XSSScanner(BaseScanner):
         """Ejecuta el escaneo de vulnerabilidades XSS.
         
         Returns:
-            Lista de diccionarios con resultados del escaneo.
+            Lista de resultados del escaneo.
         """
         self.display_scan_start()
         self.clear_results()
@@ -116,18 +126,36 @@ class XSSScanner(BaseScanner):
         parsed = urlparse(self.target_url)
         params = parse_qs(parsed.query)
         
-        # Si no hay parámetros, no hay XSS reflejado que probar
         if not params:
             info("No hay parámetros en la URL para probar XSS reflejado")
         else:
             info(f"Encontrados {len(params)} parámetros para probar")
             
-            for param in params:
-                info(f"Probando parámetro: {param}")
-                
+            for param in self.progress_iter(list(params.keys()), "Probando parámetros"):
                 for payload in self.payloads:
                     if payload["type"] == "reflected":
                         self._check_reflected_xss(self.target_url, param, payload)
         
         success(f"Escaneo XSS completado. Vulnerabilidades encontradas: {len(self.results)}")
+        return self.get_results()
+        
+        total_tests = len(params) * len(payloads)
+        self.info(f"Probando {len(params)} parámetros con {len(payloads)} payloads ({total_tests} pruebas)")
+        
+        for param in self.progress_iter(params, "Probando parámetros"):
+            for payload in self.progress_iter(payloads, "Inyectando payloads", leave=False):
+                try:
+                    test_url = self._inject_payload(param, payload)
+                    response = self.session.get(test_url)
+                    
+                    if payload in response.text:
+                        self.add_result(
+                            "XSS Reflected",
+                            "HIGH",
+                            f"Vulnerabilidad XSS detectada en parámetro: {param}",
+                            f"Payload: {payload}"
+                        )
+                except Exception as e:
+                    self.info(f"Error probando {param}: {str(e)}")
+        
         return self.get_results()

@@ -81,6 +81,17 @@ AUTH_PAYLOADS = [
     {"type": "default_creds", "value": "admin:admin"},
 ]
 
+COMPONENTS_PAYLOADS = [
+    {"type": "outdated_js", "description": "jQuery 1.x, Angular 1.x, etc."},
+    {"type": "vulnerable_cdn", "description": "Bootstrap, React, etc. outdated"},
+]
+
+ACCESS_CONTROL_PAYLOADS = [
+    {"type": "idor", "description": "Cambio de ID en URL (ej: /user/1 -> /user/2)"},
+    {"type": "privilege_escalation", "description": "Acceso a rutas admin sin permisos"},
+    {"type": "forceful_browsing", "description": "Saltos de flujo (ej: ir a /checkout sin pasar por /cart)"},
+]
+
 ACCESS_CONTROL_PAYLOADS = [
     {"type": "idor", "description": "Cambio de IDs en URL"},
     {"type": "privilege_escalation", "description": "Modificar rol en parámetros"},

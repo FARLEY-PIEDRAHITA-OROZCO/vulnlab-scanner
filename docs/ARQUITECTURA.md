@@ -20,12 +20,13 @@ vulnlab-scanner/
 │   │
 │   ├── scanner/
 │   │   ├── __init__.py
-│   │   ├── base.py             # Clase BaseScanner (abstracta)
+│   │   ├── base.py             # Clase base abstracta (BaseScanner)
 │   │   ├── xss.py              # Escáner XSS
 │   │   ├── sqli.py             # Escáner SQL Injection
 │   │   ├── headers.py          # Validador de HTTP Headers
-│   │   ├── auth.py             # Escáner de fallos de autenticación (futuro)
-│   │   └── access_control.py   # Escáner de control de acceso (futuro)
+ │   │   ├── access_control.py   # ✅ A01: IDOR, Privilege Escalation
+ │   │   ├── auth.py             # ✅ A07: Weak Creds, Brute Force
+ │   │   ├── components.py       # 🔄 A06: Vulnerable Components (en desarrollo)
 │   │
 │   └── utils/
 │       ├── __init__.py
