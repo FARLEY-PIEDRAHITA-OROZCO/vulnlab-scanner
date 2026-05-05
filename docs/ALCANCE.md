@@ -2,7 +2,7 @@
 
 ## 1. En Alcance (In-Scope)
 
-### Fase Actual (Fase 4.3 - En Progreso)
+### Fase Actual (Fase 5.3 - Completada)
 - ✅ Escaneo de XSS (Reflected, Stored, DOM-based)
 - ✅ Escaneo de SQL Injection (Error-based, Boolean-based)
 - ✅ Validación de HTTP Security Headers
@@ -15,10 +15,13 @@
   - Detección credenciales débiles/por defecto
   - Detección fuerza bruta suave
   - Verificación gestión sesiones (HttpOnly, Secure)
-- 🔄 **Escaneo de Vulnerable Components (A06)** - En implementación
+- ✅ **Escaneo de Vulnerable Components (A06)** - Completado
   - Detección tecnologías desactualizadas (jQuery, Bootstrap, etc.)
   - Detección CDNs vulnerables
   - Verificación headers (X-Powered-By, Server)
+- ✅ **Multithreading** con concurrent.futures
+- ✅ **Progress Bars** con tqdm
+- ✅ **Chart.js Reports** en HTML
 
 ### Futuro (Post-Fase 4)
 - Escaneo de Cryptographic Failures (A02)
