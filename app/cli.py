@@ -49,6 +49,12 @@ def parse_args():
     )
 
     parser.add_argument(
+        "-U", "--auth",
+        action="store_true",
+        help="Escanear Authentication Failures (A07 - OWASP)"
+    )
+
+    parser.add_argument(
         "-a", "--all",
         action="store_true",
         help="Escanear todas las vulnerabilidades disponibles"
