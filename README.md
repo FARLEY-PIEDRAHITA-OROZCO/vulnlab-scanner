@@ -1,6 +1,6 @@
 # VulnLab Scanner
 
-Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 10, diseñada para automatizar pruebas de seguridad de manera modular, fácil de instalar y usar.
+Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP, diseñada para automatizar pruebas de seguridad de manera modular, fácil de instalar y usar.
 
 ## Características
 
