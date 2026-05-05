@@ -1,8 +1,8 @@
 # 📊 VulnLab Scanner - Progreso Actual y Roadmap
 
-> **Estado del Proyecto**: Fase 4.2 en progreso (A07 Authentication Failures)  
+> **Estado del Proyecto**: Fase 5.1 en progreso (Barras de Progreso con tqdm)  
 > **Última Actualización**: 2026-05-05  
-> **Versión**: 1.0.0 (Base Profesional Completada)
+> **Versión**: 1.2.0 (Fase 5 - Mejoras Técnicas Iniciadas)
 
 ---
 
@@ -105,29 +105,36 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web basada en 
 - ✅ Verificación de rutas administrativas
 - ✅ 11 pruebas unitarias pasando
 
-#### 4.2 🔄 A07 - Auth Failures (En Progreso)
-**Branch**: `feature/add-auth-failures` (Activa)
+#### 4.2 ✅ A07 - Auth Failures (Completado)
+**Branch**: `feature/add-auth-failures` → Merge a `develop`
 
 | Commit | Descripción | Archivos |
 |--------|-------------|---------|
+| `1a6fb66` | feat(auth): crear auth.py para A07 | `auth.py` |
+| `39c6131` | feat(auth): implementar A07 completo | `auth.py` |
 | `56c05cb` | test(auth): 6 pruebas unitarias para A07 | `test_auth.py` |
+| `c11a148` | docs(auth): actualizar DOCS | `DOCS/` |
 
-**Funcionalidades A07 Planificadas**:
-- 🔄 Detección credenciales débiles/por defecto
-- 🔄 Detección fuerza bruta suave (sin bloqueo)
-- 🔄 Verificación gestión sesiones (HttpOnly, Secure)
-- 🔄 6+ pruebas unitarias
+**Funcionalidades A07 Implementadas**:
+- ✅ Detección credenciales débiles/por defecto
+- ✅ Detección fuerza bruta suave (sin bloqueo)
+- ✅ Verificación gestión sesiones (HttpOnly, Secure)
+- ✅ 10 pruebas unitarias pasando
 
-**Siguientes Commits Planificados**:
+#### 4.3 🔄 A06 - Vulnerable Components (En Progreso)
+**Branch**: `feature/add-vuln-components` → Merge a `develop`
+
 | Commit | Descripción | Archivos |
 |--------|-------------|---------|
-| 8 | feat(auth): crear auth.py para A07 | `app/scanner/auth.py` |
-| 9 | feat(auth): implementar detección fuerza bruta | `app/scanner/auth.py` |
-| 10 | feat(auth): implementar detección sesiones débiles | `app/scanner/auth.py` |
-| 11 | feat(payloads): añadir payloads de auth | `app/utils/payloads.py` |
-| 12 | test(auth): añadir 6 pruebas para auth | `tests/test_auth.py` |
-| 13 | docs(auth): documentar A07 en DOCS/ | `DOCS/ALCANCE.md` |
-| 14 | Merge feature/add-auth-failures → develop | Integración A07 |
+| `6f3dea4` | feat(components): crear components.py para A06 | `components.py` |
+| `9a6af04` | test(components): 9 pruebas unitarias para A06 | `test_components.py` |
+| `b150c15` | feat(cli): añadir opción --vuln-components | `cli.py`, `main.py` |
+
+**Funcionalidades A06 Planificadas**:
+- 🔄 Detección tecnologías desactualizadas (jQuery, Bootstrap, etc.)
+- 🔄 Detección CDNs vulnerables
+- 🔄 Verificación headers (X-Powered-By, Server)
+- 🔄 9+ pruebas unitarias
 
 ---
 
@@ -136,22 +143,24 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web basada en 
 ### Ramas (Branches)
 ```
 main (estable - v1.0.0)
-└── develop (integración - limpia)
+└── develop (integración - A01, A07, A06 integrados)
     ├── feature/add-access-control (✅ mergeado)
-    └── feature/add-auth-failures (🔄 activa - 1 commit)
+    ├── feature/add-auth-failures (✅ mergeado)
+    └── feature/add-vuln-components (🔄 activa - A06)
 ```
 
 ### Últimos Commits (git log --oneline -10)
 ```
+c11a148 docs(auth): actualizar DOCS en feature/add-auth-failures
+b150c15 feat(cli): añadir opción --vuln-components para A06
+9a6af04 test(components): añadir 9 pruebas unitarias para A06
+6f3dea4 feat(components): crear components.py para A06
+39c6131 feat(auth): implementar A07 Authentication Failures completo
+1a6fb66 feat(auth): crear auth.py para A07
 56c05cb test(auth): añadir 6 pruebas unitarias para A07
 34b1c62 feat(cli): añadir opción --access-control para A01
 8824935 fix(access-control): corregir tuplas _extract_ids_from_url
 d800e15 fix(access-control): corregir nombre variable
-b709644 test(access-control): añadir 8 pruebas unitarias
-cc61f77 feat(access-control): implementar IDOR y escalación
-5611307 docs(roadmap): plan detallado fases 4-6
-42a3351 docs(readme): actualizar README con estado actual
-e970eda Merge feature/cli-base (Fase 3 completada)
 ```
 
 ### Estado de Archivos (git status)
@@ -175,11 +184,12 @@ nothing to commit, working tree clean
 | `test_sqli_scanner.py` | sqli.py | 7 | ✅ |
 | `test_headers_scanner.py` | headers.py | 5 | ✅ |
 | `test_access_control.py` | access_control.py | 11 | ✅ |
-| `test_auth.py` | auth.py | 6 | ✅ |
+| `test_auth.py` | auth.py | 10 | ✅ |
+| `test_components.py` | components.py | 9 | ✅ |
 | `test_integration.py` | Flujo completo | 4 | ✅ |
 | `test_real_integration.py` | Servidor vulnerable | 5 | ✅ |
 
-**Total**: **57 pruebas pasando** (100%)
+**Total**: **68 pruebas pasando** (100%)
 
 ---
 
@@ -200,7 +210,8 @@ vulnlab-scanner/
 │   │   ├── sqli.py             # ✅ SQLi (error, boolean, time)
 │   │   ├── headers.py          # ✅ HTTP Security Headers
 │   │   ├── access_control.py   # ✅ A01: IDOR, Privilege Escalation
-│   │   └── auth.py             # 🔄 A07: Weak Creds, Brute Force
+│   │   ├── auth.py             # ✅ A07: Weak Creds, Brute Force
+│   │   └── components.py       # 🔄 A06: Vulnerable Components
 │   └── utils/
 │       ├── logger.py           # ✅ Salida coloreada (info, success, warning, error)
 │       ├── helpers.py          # ✅ is_valid_url, etc.
@@ -236,8 +247,8 @@ vulnlab-scanner/
 | Escáner | Categoría OWASP | Estado | Commits |
 |-----------|-----------------|--------|---------|
 | A01 - Access Control | ✅ Completado | 7 commits |
-| A07 - Auth Failures | 🔄 En progreso | 1 commit |
-| A06 - Vulnerable Components | ❌ Pendiente | - |
+| A07 - Auth Failures | ✅ Completado | 4 commits |
+| A06 - Vulnerable Components | 🔄 En progreso | 3 commits |
 
 ### Fase 5: Mejoras Técnicas (Pendiente)
 | Mejora | Descripción | Prioridad |
@@ -260,8 +271,8 @@ vulnlab-scanner/
 
 | Métrica | Valor Actual | Meta |
 |---------|---------------|------|
-| **Cobertura OWASP** | 4/10 (40%) | 9/10 (90%) |
-| **Pruebas Unitarias** | 57 (100% pasando) | >80% cobertura |
+| **Cobertura OWASP** | 6/10 (60%) | 9/10 (90%) |
+| **Pruebas Unitarias** | 68 (100% pasando) | >80% cobertura |
 | **Documentación** | 8 archivos DOCS/ | Completa + Wiki |
 | **Usabilidad** | 7/10 | 9/10 |
 | **Funcionalidad Real** | 4/10 | 8/10 |
@@ -271,19 +282,19 @@ vulnlab-scanner/
 
 ## 🎯 Siguiente Paso Inmediato
 
-### Completar Fase 4.2: A07 Auth Failures
-**Branch**: `feature/add-auth-failures`
+### Completar Fase 4.3: A06 Vulnerable Components
+**Branch**: `feature/add-vuln-components`
 
-1. ✅ Crear `app/scanner/auth.py` con clase `AuthScanner`
-2. ✅ Crear `tests/test_auth.py` con 6 pruebas
-3. 🔄 Implementar detección credenciales débiles
-4. 🔄 Implementar detección fuerza bruta suave
-5. 🔄 Implementar verificación gestión sesiones
+1. ✅ Crear `app/scanner/components.py` con clase `ComponentsScanner`
+2. ✅ Crear `tests/test_components.py` con 9 pruebas
+3. 🔄 Implementar detección tecnologías desactualizadas
+4. 🔄 Implementar detección CDNs vulnerables
+5. 🔄 Implementar verificación headers (X-Powered-By, Server)
 6. 🔄 Añadir payloads en `app/utils/payloads.py`
 7. 🔄 Actualizar documentación (`DOCS/ALCANCE.md`)
 8. 🔄 Merge a `develop`
 
-**Tiempo Estimado**: 1 semana  
+**Tiempo Estimado**: 2 días  
 **Calificación Esperada**: 5/10 → 6/10 (Profesional Básico)
 
 ---
@@ -320,5 +331,5 @@ vulnlab-scanner/
 
 **¡VulnLab Scanner está en camino a convertirse en una herramienta profesional de clase mundial! 🚀**
 
-> **Siguiente hito**: Completar A07 y A06 para alcanzar **6/10 en funcionalidad real**  
+> **Siguiente hito**: Completar A06 para alcanzar **6/10 en funcionalidad real**  
 > **Meta final**: 9/10 OWASP coverage + PyPI + Comunidad activa
