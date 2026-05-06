@@ -5,7 +5,7 @@ include CHANGELOG.md
 include .env.example
 recursive-include app *.py
 recursive-include tests *.py
-recursive-include reports *.html
 exclude .gitignore
 exclude *.pyc
 exclude __pycache__
+exclude reports/*
