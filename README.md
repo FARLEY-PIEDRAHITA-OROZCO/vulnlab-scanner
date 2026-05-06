@@ -213,7 +213,7 @@ vulnlab-scanner/
 │       ├── reporter.py         # Generación de reportes
 │       ├── payloads.py         # Payloads centralizados
 │       └── disclaimer.py       # Aviso legal
-├── tests/                      # Pruebas unitarias (95 pruebas)
+├── tests/                      # Pruebas unitarias (114 pruebas)
 ├── reports/                    # Reportes generados (no incluido en paquete)
 ├── .env.example                # Ejemplo de configuración
 ├── requirements.txt
