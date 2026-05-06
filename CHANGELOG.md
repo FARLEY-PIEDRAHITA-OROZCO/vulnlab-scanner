@@ -5,6 +5,25 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.4.2] - 2026-05-06
+
+### Agregado
+- Archivos profesionales: SECURITY.md, CODE_OF_CONDUCT.md, CODEOWNERS
+- Configuración de pre-commit, tox, Makefile, editorconfig
+- Plantillas GitHub (issues, PR) y Dependabot
+- Limpieza de archivos innecesarios (error.txt, install.py, dist/)
+
+### Corregido
+- USER_AGENT actualizado a 1.4.2 en todos los archivos
+- reporter.py usa Config.REPORTS_DIR en lugar de valores hardcodeados
+- Errores de importación corregidos en session.py y access_control.py
+- Inconsistencias de versiones en documentación
+
+### Cambiado
+- Estructura de proyecto profesionalizada
+- .gitignore mejorado con nuevas exclusiones
+- Documentación sincronizada con versión 1.4.2
+
 ## [1.4.1] - 2026-05-06
 
 ### Corregido

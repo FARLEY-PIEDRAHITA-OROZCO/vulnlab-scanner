@@ -40,7 +40,7 @@ Puedes configurar los siguientes parámetros en el archivo `.env`:
 DEFAULT_TIMEOUT=10
 
 # Identidad del scanner
-USER_AGENT=VulnLabScanner/1.4.1
+USER_AGENT=VulnLabScanner/1.4.2
 
 # Modo debug
 DEBUG=False

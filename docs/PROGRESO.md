@@ -1,7 +1,7 @@
 # Progreso de Desarrollo - VulnLab Scanner
 
 ## Estado Actual
-**Versión**: 1.4.1  
+**Versión**: 1.4.2  
 **Fase**: 6 - Empaquetado y Distribución (90% completada)  
 **Última actualización**: 2026-05-05  
 **Cobertura OWASP**: 7/10 (70%) + XSS extra (+ A03, A05)  

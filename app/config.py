@@ -20,7 +20,7 @@ class Config:
     # Configuración de HTTP
     RATE_LIMIT = float(os.getenv("RATE_LIMIT", "0.5"))  # Segundos entre peticiones
     HTTP_TIMEOUT = int(os.getenv("DEFAULT_TIMEOUT", "10"))
-    USER_AGENT = os.getenv("USER_AGENT", "VulnLabScanner/1.4.1")
+    USER_AGENT = os.getenv("USER_AGENT", "VulnLabScanner/1.4.2")
     MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
     
     # Configuración de Autenticación

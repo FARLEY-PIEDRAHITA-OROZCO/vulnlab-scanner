@@ -4,7 +4,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.4.1 (Fase 6 en progreso)  
+**Versión**: 1.4.2 (Fase 6 en progreso)  
 **Cobertura OWASP Top 10 (2021)**: 8/10 (80%) + XSS extra  
 **Pruebas**: 109 passed, 5 skipped  
 **Licencia**: MIT (Open Source)
@@ -123,7 +123,7 @@ VERBOSE=False
 # Configuración de HTTP
 RATE_LIMIT=0.5
 DEFAULT_TIMEOUT=10
-USER_AGENT=VulnLabScanner/1.4.1
+USER_AGENT=VulnLabScanner/1.4.2
 MAX_RETRIES=3
 
 # Configuración de Autenticación

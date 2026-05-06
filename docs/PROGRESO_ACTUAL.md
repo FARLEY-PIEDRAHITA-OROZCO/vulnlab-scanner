@@ -2,7 +2,7 @@
 
 > **Estado del Proyecto**: Fase 5.3 completada (Mejoras Técnicas)  
 > **Última Actualización**: 2026-05-05  
-> **Versión**: 1.4.1 (Fase 6 - Refactorización y Correcciones)
+> **Versión**: 1.4.2 (Fase 6 - Refactorización y Correcciones)
 
 ---
 
