@@ -6,7 +6,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 **Versión**: 1.4.0 (Fase 6 en progreso)  
 **Cobertura OWASP Top 10 (2021)**: 7/10 (70%) + XSS extra  
-**Pruebas**: 105 pasando (100%)  
+**Pruebas**: 114 pasando (100%)  
 **Licencia**: MIT (Open Source)
 
 [![CI](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml)
@@ -44,6 +44,8 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - ✅ **A06 - Vulnerable Components**: Detección de librerías (SCA)
 - ✅ **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
 - ✅ **A10 - SSRF**: Parámetros de URL, IPs internas, esquemas peligrosos
+- ✅ **A03 - SQL Injection**: Error-based, Boolean-based
+- ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
 
 ### Fase 5: Mejoras Técnicas (80% completada)
 - ✅ Barras de progreso (tqdm)
@@ -67,6 +69,8 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - 🔄 **A08 - Software Integrity Failures** (opcional, complejo)
 
 **Objetivo actual**: Llegar a **8/10 en funcionalidad profesional** (actualmente 7/10 OWASP + XSS)
+
+**¡Documentación actualizada al día!** ✅
 
 ## Requisitos
 
