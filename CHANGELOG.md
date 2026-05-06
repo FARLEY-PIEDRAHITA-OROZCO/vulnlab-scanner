@@ -8,32 +8,39 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 ## [1.4.2] - 2026-05-06
 
 ### Agregado
-- Archivos profesionales: SECURITY.md, CODE_OF_CONDUCT.md, CODEOWNERS
-- Configuración de pre-commit, tox, Makefile, editorconfig
-- Plantillas GitHub (issues, PR) y Dependabot
-- Limpieza de archivos innecesarios (error.txt, install.py, dist/)
+- Archivos profesionales: `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CODEOWNERS`
+- Configuración de desarrollo: `.pre-commit-config.yaml`, `tox.ini`, `Makefile`, `.editorconfig`
+- Plantillas GitHub: issue templates (bug, feature, security), PR template, `dependabot.yml`, `FUNDING.yml`
+- `tests/__init__.py` para reconocimiento como paquete Python
+- Badges profesionales en README (black, bandit)
+- `requirements-dev.txt` con dependencias de desarrollo
 
 ### Corregido
-- USER_AGENT actualizado a 1.4.2 en todos los archivos
-- reporter.py usa Config.REPORTS_DIR en lugar de valores hardcodeados
-- Errores de importación corregidos en session.py y access_control.py
-- Inconsistencias de versiones en documentación
+- USER_AGENT actualizado a 1.4.2 en `config.py`, `.env.example`, `README.md` y documentación
+- `reporter.py` usa `Config.REPORTS_DIR` en lugar de valores hardcodeados
+- Errores de importación corregidos en `session.py` y `access_control.py` (F821)
+- Inconsistencias de versiones en documentación (`PROGRESO.md`, `PROGRESO_ACTUAL.md`, `ROADMAP.md`)
+- `README.md` actualizado con estructura completa y todos los escáneres OWASP
 
 ### Cambiado
-- Estructura de proyecto profesionalizada
-- .gitignore mejorado con nuevas exclusiones
-- Documentación sincronizada con versión 1.4.2
+- Estructura de proyecto profesionalizada con archivos de estándar
+- `.gitignore` mejorado con nuevas exclusiones (`.env.local`, `.tox/`, etc.)
+- Documentación sincronizada completamente con versión 1.4.2
+- `CHANGELOG.md` reorganizado con entradas claras para 1.4.2, 1.4.1, 1.4.0
+
+### Eliminado
+- Archivos innecesarios: `error.txt`, `install.py`, `dist/`, `build/`, `vulnlab_scanner.egg-info/`
 
 ## [1.4.1] - 2026-05-06
 
 ### Corregido
-- USER_AGENT actualizado a 1.4.1 en config.py, .env.example y README.md
-- reporter.py ahora usa Config.REPORTS_DIR en lugar de valor hardcodeado
-- Inconsistencias de versiones en docs/PROGRESO.md y docs/PROGRESO_ACTUAL.md
-- Creado tests/__init__.py para reconocimiento como paquete Python
+- USER_AGENT actualizado a 1.4.1 en `config.py`, `.env.example` y `README.md`
+- `reporter.py` ahora usa `Config.REPORTS_DIR` en lugar de valor hardcodeado
+- Inconsistencias de versiones en `docs/PROGRESO.md` y `docs/PROGRESO_ACTUAL.md`
+- Creado `tests/__init__.py` para reconocimiento como paquete Python
 
 ### Cambiado
-- save_json_report() y save_html_report() usan Config.REPORTS_DIR por defecto
+- `save_json_report()` y `save_html_report()` usan `Config.REPORTS_DIR` por defecto
 
 ## [1.4.0] - 2026-05-05
 
@@ -42,16 +49,16 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - 9 pruebas unitarias para SSRFScanner (`tests/test_ssrf.py`)
 - Argumento CLI `-R` / `--ssrf` para escanear A10
 - Integración de SSRFScanner en `main.py` y `cli.py`
-- Payloads SSRF_PAYLOADS en `app/utils/payloads.py`
+- Payloads `SSRF_PAYLOADS` en `app/utils/payloads.py`
 - Actualización de cobertura OWASP: 7/10 (70%) + XSS extra
 - 114 pruebas pasando (100%)
 
 ### Cambiado
-- README.md actualizado con A10, cobertura 7/10, 114 pruebas
+- `README.md` actualizado con A10, cobertura 7/10, 114 pruebas
 - CLI: `--all` incluye ahora escáner A10
-- DOCS/PROGRESO.md sincronizado con 7/10 OWASP
-- DOCS/ROADMAP.md actualizado con A02 y A10 completados
-- CHANGELOG.md sincronizado con últimas versiones
+- `docs/PROGRESO.md` sincronizado con 7/10 OWASP
+- `docs/ROADMAP.md` actualizado con A02 y A10 completados
+- `CHANGELOG.md` sincronizado con últimas versiones
 
 ## [1.3.0] - 2026-05-05
 
@@ -64,7 +71,7 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - 105 pruebas pasando (100%)
 
 ### Cambiado
-- README.md actualizado con A02, cobertura 6/10, 105 pruebas
+- `README.md` actualizado con A02, cobertura 6/10, 105 pruebas
 - CLI actualizado: `--all` incluye ahora escáner A02
 
 ## [1.2.0] - 2026-05-05
@@ -73,7 +80,7 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - Escáner A01 - Broken Access Control (IDOR, Privilege Escalation)
 - Escáner A07 - Authentication Failures (Weak Creds, Brute Force)
 - Escáner A06 - Vulnerable Components (jQuery, Bootstrap detection)
-- Multithreading con `concurrent.futures` en main.py
+- Multithreading con `concurrent.futures` en `main.py`
 - Barras de progreso con `tqdm` en todos los escáneres
 - Gráficos Chart.js en reportes HTML
 - Preparación para PyPI (`setup.py`, `pyproject.toml`, `MANIFEST.in`)
@@ -95,7 +102,7 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - `MANIFEST.in` excluye correctamente directorio `reports/`
 
 ### Cambiado
-- README.md actualizado a v1.2.0 con Fase 5.3 y cobertura OWASP corregida
+- `README.md` actualizado a v1.2.0 con Fase 5.3 y cobertura OWASP corregida
 - Estructura de proyecto actualizada (nuevos escáneres A01, A06, A07)
 - Enlaces de badges corregidos al usuario correcto de GitHub
 - Documentación sincronizada con estado real del proyecto
@@ -114,7 +121,7 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - Aviso legal obligatorio antes de escanear
 - Soporte para entornos no interactivos (`--accept-disclaimer`)
 - 40 pruebas unitarias y de integración (100% pasando)
-- Documentación completa en español (DOCS/, README.md, GUIA_USUARIO.md)
+- Documentación completa en español (`docs/`, `README.md`, `GUIA_USUARIO.md`)
 - Configuración centralizada vía archivo `.env`
 - Payloads centralizados en `utils/payloads.py`
 - Cliente HTTP con reintentos y manejo de errores
