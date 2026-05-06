@@ -2,8 +2,8 @@
 
 Este módulo implementa detección de:
 - IDOR (Insecure Direct Object References)
-- Escalación de privilegios
-- Saltos de autenticación (Forceful Browsing)
+- Privilege Escalation (escalación de privilegios)
+- Forceful Browsing (saltos de autenticación)
 """
 
 from app.scanner.base import BaseScanner
@@ -16,7 +16,7 @@ import re
 class AccessControlScanner(BaseScanner):
     """Escáner de Broken Access Control.
     
-    Detecta fallos en el control de acceso que permiten
+    Detecta fallos en el control de acceso que permitan
     a usuarios acceder a recursos no autorizados mediante
     manipulación de URLs, IDs o saltos de flujo.
     """
@@ -48,7 +48,7 @@ class AccessControlScanner(BaseScanner):
             url: URL a analizar.
             
         Returns:
-            Lista de tuplas (posición, valor_original, valor_modificado).
+            Lista de tuplas (posición, valor_original, valor_prueba).
         """
         results = []
         parsed = urlparse(url)
@@ -69,17 +69,17 @@ class AccessControlScanner(BaseScanner):
         
         return results
     
-    def _test_idor(self, url: str, id_type: str, original_val: str, test_val: str) -> bool:
-        """Prueba IDOR modificando IDs en la URL.
+    def _inject_id(self, url: str, original_val: str, test_val: str, id_type: str) -> str:
+        """Inyeta un ID de prueba en la URL.
         
         Args:
-            url: URL objetivo.
-            id_type: 'path' o 'param'.
+            url: URL original.
             original_val: Valor original del ID.
             test_val: Valor a probar.
+            id_type: 'path' o 'param'.
             
         Returns:
-            True si se detecta IDOR, False en caso contrario.
+            URL con el ID modificado.
         """
         parsed = urlparse(url)
         
@@ -98,9 +98,25 @@ class AccessControlScanner(BaseScanner):
                 parsed.params, new_query, parsed.fragment
             ))
         
+        return test_url
+    
+    def _test_idor(self, url: str, id_type: str, original_val: str, test_val: str) -> bool:
+        """Prueba IDOR modificando IDs en la URL.
+        
+        Args:
+            url: URL objetivo.
+            id_type: 'path' o 'param'.
+            original_val: Valor original del ID.
+            test_val: Valor a probar.
+            
+        Returns:
+            True si se detecta IDOR, False en caso contrario.
+        """
         if self.dry_run:
             info(f"[DRY-RUN] Probaría IDOR con ID: {original_val} -> {test_val}")
             return False
+        
+        test_url = self._inject_id(url, original_val, test_val, id_type)
         
         try:
             response = self.session.get(test_url)
@@ -118,7 +134,7 @@ class AccessControlScanner(BaseScanner):
                     )
                     return True
                     
-        except Exception as e:
+        except requests.exceptions.RequestException as e:
             warning(f"Error al probar IDOR: {str(e)}")
         
         return False
@@ -132,7 +148,8 @@ class AccessControlScanner(BaseScanner):
         Returns:
             True si se detecta escalación, False en caso contrario.
         """
-        admin_paths = ["/admin", "/administrator", "/admin/users", "/dashboard/admin"]
+        from app.config import Config
+        admin_paths = Config.DEFAULT_ADMIN_PATHS
         
         if self.dry_run:
             info(f"[DRY-RUN] Probaría rutas administrativas en {url}")
@@ -141,22 +158,23 @@ class AccessControlScanner(BaseScanner):
         parsed = urlparse(url)
         base_url = f"{parsed.scheme}://{parsed.netloc}"
         
-        for path in admin_paths:
+        for path in self.progress_iter(admin_paths, "Probando rutas administrativas"):
             test_url = base_url + path
             try:
                 response = self.session.get(test_url)
                 
                 # Si accede sin redirección a login
-                if response.status_code == 200 and "login" not in response.url.lower():
-                    self.add_result(
-                        vuln_name="Privilege Escalation",
-                        severity="CRITICAL",
-                        description=f"Acceso no autorizado a ruta administrativa: {path}",
-                        evidence=f"URL: {test_url} - Status: {response.status_code}"
-                    )
-                    return True
+                if response.status_code == 200:
+                    if "login" not in response.url.lower():
+                        self.add_result(
+                            vuln_name="Privilege Escalation",
+                            severity="CRITICAL",
+                            description=f"Acceso no autorizado a ruta administrativa: {path}",
+                            evidence=f"URL: {test_url} - Status: {response.status_code}"
+                        )
+                        return True
                     
-            except Exception as e:
+            except requests.exceptions.RequestException as e:
                 warning(f"Error al probar escalación: {str(e)}")
         
         return False
@@ -178,7 +196,7 @@ class AccessControlScanner(BaseScanner):
         
         if ids:
             info(f"Encontrados {len(ids)} IDs para probar IDOR")
-            for id_type, original_val, test_val in ids[:5]:  # Limitar a 5 pruebas
+            for id_type, original_val, test_val in self.progress_iter(ids[:5], "Probando IDOR"):  # Limitar a 5 pruebas
                 self._test_idor(self.target_url, id_type, original_val, test_val)
         else:
             info("No se encontraron IDs numéricos para probar IDOR")
