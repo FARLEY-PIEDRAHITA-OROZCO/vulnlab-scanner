@@ -4,7 +4,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.2.0 (Fase 5.3 Completada)  
+**Versión**: 1.2.0 (Fase 6 en progreso)  
 **Cobertura OWASP**: 6/10 (60%)  
 **Pruebas**: 95 pasando (100%)  
 **Licencia**: MIT (Open Source)
@@ -45,9 +45,10 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - ✅ Mejorar reportes (gráficos Chart.js)
 - 🔄 Interfaz web básica (FastAPI/Flask)
 
-### Fase 6: Empaquetado y Distribución (Pendiente)
+### Fase 6: Empaquetado y Distribución (En progreso)
+- ✅ Empaquetado con `setup.py` y `pyproject.toml`
+- ✅ Configuración de CI/CD con GitHub Actions
 - 🔄 Publicar en PyPI (`pip install vulnlab-scanner`)
-- 🔄 Configurar CI/CD con GitHub Actions
 - 🔄 Generar comunidad inicial
 
 **Objetivo**: Llegar a **8/10 en funcionalidad profesional** (actualmente 6/10)
