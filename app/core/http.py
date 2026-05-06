@@ -7,7 +7,7 @@ con manejo de errores, rate limiting y reintentos.
 import time
 import requests
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 from app.config import Config
 from app.utils.logger import error, warning, info
 
