@@ -86,6 +86,22 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - Enlaces de badges corregidos al usuario correcto de GitHub
 - Documentación sincronizada con estado real del proyecto
 
+### Corregido
+- Logger simplificado (eliminadas importaciones obsoletas)
+- Excepción desnuda corregida en `auth.py`
+- Import obsoleto en `http.py` (requests.packages.urllib3 → urllib3)
+- Código muerto eliminado en `xss.py`
+- `.env` añadido a `.gitignore`
+- Importación de `Config` corregida (ahora es clase en lugar de variables sueltas)
+- Mocks de pruebas corregidos en `test_auth.py`
+- `MANIFEST.in` excluye correctamente directorio `reports/`
+
+### Cambiado
+- README.md actualizado a v1.2.0 con Fase 5.3 y cobertura OWASP corregida
+- Estructura de proyecto actualizada (nuevos escáneres A01, A06, A07)
+- Enlaces de badges corregidos al usuario correcto de GitHub
+- Documentación sincronizada con estado real del proyecto
+
 ## [1.0.0] - 2026-05-05
 
 ### Agregado
