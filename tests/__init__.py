@@ -1,1 +1,1 @@
-"""Módulo de pruebas para VulnLab Scanner."""
+"""Test suite for VulnLab Scanner"""

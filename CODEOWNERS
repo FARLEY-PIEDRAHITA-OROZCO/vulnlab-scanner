@@ -1,0 +1,28 @@
+# Code Owners for VulnLab Scanner
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners (fallback)
+* @FARLEY-PIEDRAHITA-OROZCO
+
+# Core application code
+/app/ @FARLEY-PIEDRAHITA-OROZCO
+/app/scanner/ @FARLEY-PIEDRAHITA-OROZCO
+/app/utils/ @FARLEY-PIEDRAHITA-OROZCO
+/app/core/ @FARLEY-PIEDRAHITA-OROZCO
+
+# Configuration and build
+/pyproject.toml @FARLEY-PIEDRAHITA-OROZCO
+/setup.py @FARLEY-PIEDRAHITA-OROZCO
+/MANIFEST.in @FARLEY-PIEDRAHITA-OROZCO
+/.github/ @FARLEY-PIEDRAHITA-OROZCO
+
+# Documentation
+/*.md @FARLEY-PIEDRAHITA-OROZCO
+/docs/ @FARLEY-PIEDRAHITA-OROZCO
+
+# Tests (require review but less strict)
+/tests/ @FARLEY-PIEDRAHITA-OROZCO
+
+# Security-sensitive files
+/SECURITY.md @FARLEY-PIEDRAHITA-OROZCO
+/.env.example @FARLEY-PIEDRAHITA-OROZCO
