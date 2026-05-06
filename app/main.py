@@ -17,6 +17,7 @@ from app.scanner.headers import HeadersScanner
 from app.scanner.access_control import AccessControlScanner
 from app.scanner.auth import AuthScanner
 from app.scanner.components import ComponentsScanner
+from app.scanner.crypto import CryptoScanner
 from datetime import datetime
 import concurrent.futures
 
@@ -49,6 +50,7 @@ def run_scan(args):
         args.access_control = True
         args.auth = True
         args.vuln_components = True
+        args.crypto = True
     
     # Crear sesión
     session = ScannerSession()
@@ -84,6 +86,8 @@ def run_scan(args):
         scanners_to_run.append(("AuthScanner", AuthScanner, args.url, session, args.dry_run))
     if args.vuln_components:
         scanners_to_run.append(("ComponentsScanner", ComponentsScanner, args.url, session, args.dry_run))
+    if args.crypto:
+        scanners_to_run.append(("CryptoScanner", CryptoScanner, args.url, session, args.dry_run))
     
     if len(scanners_to_run) > 1:
         # Ejecución paralela

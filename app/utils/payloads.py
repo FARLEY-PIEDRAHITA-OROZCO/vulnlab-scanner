@@ -96,3 +96,11 @@ ACCESS_CONTROL_PAYLOADS = [
     {"type": "idor", "description": "Cambio de IDs en URL"},
     {"type": "privilege_escalation", "description": "Modificar rol en parámetros"},
 ]
+
+# Payloads para A02 - Cryptographic Failures
+CRYPTO_PAYLOADS = [
+    {"type": "https_missing", "description": "El sitio no usa HTTPS"},
+    {"type": "cookie_secure_missing", "description": "Cookies sin flag Secure"},
+    {"type": "sensitive_in_url", "description": "Credenciales o tokens en la URL"},
+    {"type": "weak_tls", "description": "Uso de TLS obsoleto (SSLv3, TLS 1.0/1.1)"},
+]

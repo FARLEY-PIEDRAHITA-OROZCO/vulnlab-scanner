@@ -5,6 +5,20 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.3.0] - 2026-05-05
+
+### Agregado
+- Escáner A02 - Cryptographic Failures (Missing HTTPS, Cookies without Secure, Sensitive Data in URL)
+- 10 pruebas unitarias para CryptoScanner (`tests/test_crypto.py`)
+- Argumento CLI `-K` / `--crypto` para escanear A02
+- Integración de CryptoScanner en `main.py` y `cli.py`
+- Actualización de cobertura OWASP: 6/10 (60%) + XSS extra
+- 105 pruebas pasando (100%)
+
+### Cambiado
+- README.md actualizado con A02, cobertura 6/10, 105 pruebas
+- CLI actualizado: `--all` incluye ahora escáner A02
+
 ## [1.2.0] - 2026-05-05
 
 ### Agregado

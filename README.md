@@ -5,8 +5,8 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 ## Estado Actual del Proyecto
 
 **Versión**: 1.2.0 (Fase 6 en progreso)  
-**Cobertura OWASP Top 10 (2021)**: 5/10 (50%) + XSS extra  
-**Pruebas**: 95 pasando (100%)  
+**Cobertura OWASP Top 10 (2021)**: 6/10 (60%) + XSS extra  
+**Pruebas**: 105 pasando (100%)  
 **Licencia**: MIT (Open Source)
 
 [![CI](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml)
@@ -18,6 +18,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ### Escáneres OWASP
 - ✅ **A01 - Broken Access Control**: IDOR, escalación de privilegios, Forceful Browsing
+- ✅ **A02 - Cryptographic Failures**: HTTPS faltante, cookies sin Secure, credenciales en URL
 - ✅ **A03 - SQL Injection**: Error-based, Boolean-based
 - ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
 - ✅ **A06 - Vulnerable Components**: Detección de librerías desactualizadas (jQuery, Bootstrap)
@@ -57,7 +58,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - 🔄 Generar comunidad inicial
 
 ### Próximos Escáneres OWASP (para llegar a 8/10)
-- 🔄 **A02 - Cryptographic Failures**: Detectar HTTPS faltante, TLS obsoleto, cookies sin Secure
+- ✅ **A02 - Cryptographic Failures**: Detectar HTTPS faltante, TLS obsoleto, cookies sin Secure
 - 🔄 **A10 - SSRF**: Probar parámetros de URL (`?url=`, `?redirect=`)
 - 🔄 **A08 - Software Integrity Failures** (opcional, complejo)
 
