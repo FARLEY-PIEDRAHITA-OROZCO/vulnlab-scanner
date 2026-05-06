@@ -5,6 +5,22 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.4.0] - 2026-05-05
+
+### Agregado
+- Escáner A10 - SSRF (Server-Side Request Forgery)
+- 9 pruebas unitarias para SSRFScanner (`tests/test_ssrf.py`)
+- Argumento CLI `-R` / `--ssrf` para escanear A10
+- Integración de SSRFScanner en `main.py` y `cli.py`
+- Payloads SSRF_PAYLOADS en `app/utils/payloads.py`
+- Actualización de cobertura OWASP: 7/10 (70%) + XSS extra
+- 114 pruebas pasando (100%)
+
+### Cambiado
+- README.md actualizado con A10, cobertura 7/10, 114 pruebas
+- CLI: `--all` incluye ahora escáner A10
+- DOCS/PROGRESO.md sincronizado con 7/10 OWASP
+
 ## [1.3.0] - 2026-05-05
 
 ### Agregado
