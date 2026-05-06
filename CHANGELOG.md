@@ -20,6 +20,8 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - README.md actualizado con A10, cobertura 7/10, 114 pruebas
 - CLI: `--all` incluye ahora escáner A10
 - DOCS/PROGRESO.md sincronizado con 7/10 OWASP
+- DOCS/ROADMAP.md actualizado con A02 y A10 completados
+- CHANGELOG.md sincronizado con últimas versiones
 
 ## [1.3.0] - 2026-05-05
 
@@ -28,12 +30,28 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - 10 pruebas unitarias para CryptoScanner (`tests/test_crypto.py`)
 - Argumento CLI `-K` / `--crypto` para escanear A02
 - Integración de CryptoScanner en `main.py` y `cli.py`
-- Actualización de cobertura OWASP: 6/10 (60%) + XSS extra
-- 105 pruebas pasando (100%)
+  - Actualización de cobertura OWASP: 7/10 (70%) + XSS extra
+  - 114 pruebas pasando (100%)
 
 ### Cambiado
 - README.md actualizado con A02, cobertura 6/10, 105 pruebas
 - CLI actualizado: `--all` incluye ahora escáner A02
+
+## [1.4.0] - 2026-05-05
+
+### Agregado
+- Escáner A10 - SSRF (Server-Side Request Forgery)
+- 9 pruebas unitarias para SSRFScanner (`tests/test_ssrf.py`)
+- Argumento CLI `-R` / `--ssrf` para escanear A10
+- Integración de SSRFScanner en `main.py` y `cli.py`
+- Payloads SSRF_PAYLOADS en `app/utils/payloads.py`
+- Actualización de cobertura OWASP: 7/10 (70%) + XSS extra
+- 114 pruebas pasando (100%)
+
+### Cambiado
+- README.md actualizado con A10, cobertura 7/10, 114 pruebas
+- CLI: `--all` incluye ahora escáner A10
+- DOCS/PROGRESO.md sincronizado con 7/10 OWASP
 
 ## [1.2.0] - 2026-05-05
 

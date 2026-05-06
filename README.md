@@ -4,7 +4,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.2.0 (Fase 6 en progreso)  
+**Versión**: 1.4.0 (Fase 6 en progreso)  
 **Cobertura OWASP Top 10 (2021)**: 7/10 (70%) + XSS extra  
 **Pruebas**: 105 pasando (100%)  
 **Licencia**: MIT (Open Source)
@@ -40,14 +40,18 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ### Fase 4: Nuevos Escáneres OWASP (Completada)
 - ✅ **A01 - Broken Access Control**: IDOR, escalación de privilegios
-- ✅ **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
+- ✅ **A02 - Cryptographic Failures**: HTTPS faltante, cookies sin Secure, credenciales en URL
 - ✅ **A06 - Vulnerable Components**: Detección de librerías (SCA)
+- ✅ **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
+- ✅ **A10 - SSRF**: Parámetros de URL, IPs internas, esquemas peligrosos
 
-### Fase 5: Mejoras Técnicas (60% completada)
+### Fase 5: Mejoras Técnicas (80% completada)
 - ✅ Barras de progreso (tqdm)
 - ✅ Multithreading para escaneo paralelo
 - ✅ Mejorar reportes (gráficos Chart.js)
 - ✅ Valores configurables en `app/config.py`
+- ✅ A02 - Cryptographic Failures implementado (10 pruebas)
+- ✅ A10 - SSRF implementado (9 pruebas)
 - 🔄 Interfaz web básica (FastAPI/Flask)
 
 ### Fase 6: Empaquetado y Distribución (80% completada)
@@ -112,7 +116,7 @@ VERBOSE=False
 # Configuración de HTTP
 RATE_LIMIT=0.5
 DEFAULT_TIMEOUT=10
-USER_AGENT=VulnLabScanner/1.2.0
+USER_AGENT=VulnLabScanner/1.4.0
 MAX_RETRIES=3
 
 # Configuración de Autenticación
@@ -254,7 +258,7 @@ Para ejecutar las pruebas unitarias:
 pytest tests/ -v
 ```
 
-**Cobertura actual**: 95 pruebas (100% pasando)
+**Cobertura actual**: 114 pruebas (100% pasando)
 
 ## Contribuciones
 
@@ -275,7 +279,8 @@ MIT License - Open Source
 | Fase 2 | Diseño de Arquitectura | ✅ Completada |
 | Fase 3 | Desarrollo (MVP) | ✅ Completada |
 | Fase 4 | Nuevos Escáneres OWASP | ✅ Completada |
-| Fase 5 | Mejoras Técnicas | 🔄 En progreso (60%) |
+| Fase 5 | Mejoras Técnicas | 🔄 En progreso (80%) |
+| Fase 6 | Empaquetado y Distribución | 🔄 En progreso (90%) |
 | Fase 6 | Empaquetado y Distribución | 🔄 En progreso (80%) |
 
-**Siguiente hito**: Publicar en PyPI y luego implementar A02 (Cryptographic Failures)
+**Siguiente hito**: Publicar en PyPI (configurar PYPI_API_TOKEN) - ¡Ya implementados A02 y A10!
