@@ -4,6 +4,7 @@ Soporta login automático con credenciales y mantiene la sesión
 activa durante todo el escaneo.
 """
 
+import requests
 from app.core.http import HTTPClient
 from app.config import Config
 from app.utils.logger import info, success, error, warning

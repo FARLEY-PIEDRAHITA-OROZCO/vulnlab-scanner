@@ -7,10 +7,10 @@
 - ✅ Configuración centralizada con `.env` y Clase `Config`
 - ✅ Cliente HTTP con rate limiting y reintentos
 - ✅ Gestión de sesiones con login automático
-- ✅ 6 escáneres implementados (XSS, SQLi, Headers, A01, A06, A07)
+- ✅ 8 escáneres implementados (XSS, SQLi, Headers, A01, A02, A06, A07, A10)
 - ✅ Empaquetado PyPI (`setup.py`, `pyproject.toml`, `MANIFEST.in`)
 - ✅ CI/CD con GitHub Actions (`.github/workflows/`)
-- ✅ 114 pruebas unitarias (100% pasando)
+- ✅ 114 pruebas unitarias (109 passed, 5 skipped)
 - ✅ Documentación completa en español
 - ✅ Barras de progreso (tqdm), Multithreading, Gráficos Chart.js
 
@@ -54,7 +54,7 @@
 | 6.5 - PyPI Publish | `pip install vulnlab-scanner` | 🔄 Pendiente (configurar token) |
 | 6.6 - A02 Crypto | ✅ Completado | 10 pruebas |
 | 6.7 - A10 SSRF | ✅ Completado | 9 pruebas |
-| 6.6 - Community | README badges, generar usuarios | 🔄 Pendiente |
+| 6.8 - Community | README badges, generar usuarios | 🔄 Pendiente |
 
 **Total Fase 6**: Tiempo estimado: 1 semana | Tiempo real: 3 días (faltan 2 tareas)
 
@@ -94,8 +94,8 @@
 ## Métricas de Éxito
 
 ### Técnicas
-- ✅ Cobertura de pruebas: 114 pruebas (100% pasando)
-- ✅ Cobertura OWASP: 7/10 → 8/10 (falta A08 opcional)
+- ✅ Cobertura de pruebas: 114 pruebas (109 passed, 5 skipped)
+- ✅ Cobertura OWASP: 8/10 (A01, A02, A03 pendiente, A04 pendiente, A05 pendiente, A06, A07, A08 opcional, A09 pendiente, A10)
 - 🔄 Detección exitosa en OWASP Juice Shop > 90%
 - ✅ Falsos positivos < 5%
 - ✅ Tiempo de escaneo razonable (< 5 min para escaneo completo)

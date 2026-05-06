@@ -5,6 +5,17 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.4.1] - 2026-05-06
+
+### Corregido
+- USER_AGENT actualizado a 1.4.1 en config.py, .env.example y README.md
+- reporter.py ahora usa Config.REPORTS_DIR en lugar de valor hardcodeado
+- Inconsistencias de versiones en docs/PROGRESO.md y docs/PROGRESO_ACTUAL.md
+- Creado tests/__init__.py para reconocimiento como paquete Python
+
+### Cambiado
+- save_json_report() y save_html_report() usan Config.REPORTS_DIR por defecto
+
 ## [1.4.0] - 2026-05-05
 
 ### Agregado

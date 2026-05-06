@@ -9,6 +9,8 @@ import json
 from datetime import datetime
 from urllib.parse import urlparse
 
+from app.config import Config
+
 
 def generate_summary(results: list) -> dict:
     """Genera un resumen estadístico de los resultados.
@@ -41,16 +43,18 @@ def generate_summary(results: list) -> dict:
     return summary
 
 
-def save_json_report(data: dict, output_dir: str = "reports") -> str:
+def save_json_report(data: dict, output_dir: str = None) -> str:
     """Guarda el reporte en formato JSON.
     
     Args:
         data: Diccionario con los datos del reporte.
-        output_dir: Directorio de salida.
+        output_dir: Directorio de salida (usa Config.REPORTS_DIR por defecto).
         
     Returns:
         Ruta del archivo guardado.
     """
+    if output_dir is None:
+        output_dir = Config.REPORTS_DIR
     os.makedirs(output_dir, exist_ok=True)
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -66,16 +70,18 @@ def save_json_report(data: dict, output_dir: str = "reports") -> str:
     return filepath
 
 
-def save_html_report(data: dict, output_dir: str = "reports") -> str:
+def save_html_report(data: dict, output_dir: str = None) -> str:
     """Guarda el reporte en formato HTML básico.
     
     Args:
         data: Diccionario con los datos del reporte.
-        output_dir: Directorio de salida.
+        output_dir: Directorio de salida (usa Config.REPORTS_DIR por defecto).
         
     Returns:
         Ruta del archivo guardado.
     """
+    if output_dir is None:
+        output_dir = Config.REPORTS_DIR
     os.makedirs(output_dir, exist_ok=True)
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

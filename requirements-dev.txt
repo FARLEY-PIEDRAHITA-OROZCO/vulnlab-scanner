@@ -1,15 +1,22 @@
-# Dependencias para desarrollo y pruebas
--r requirements.txt
+# Development dependencies for VulnLab Scanner
+# Install with: pip install -r requirements-dev.txt
 
-# Testing
-pytest==9.0.3
-pytest-cov==6.1.1
+# Core testing
+pytest>=8.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.12.0
+pytest-asyncio>=0.21.0
 
-# Linting y formateo
-flake8==7.0.0
-black==25.1.0
-isort==5.13.2
+# Linting and formatting
+flake8>=6.0.0
+black>=23.0.0
+isort>=5.12.0
 
-# Security checks
-bandit==1.8.3
-safety==3.2.0
+# Security scanning
+bandit>=1.7.0
+
+# Type checking (optional)
+mypy>=1.0.0
+
+# Documentation (optional)
+sphinx>=7.0.0

@@ -4,15 +4,17 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.4.0 (Fase 6 en progreso)  
-**Cobertura OWASP Top 10 (2021)**: 7/10 (70%) + XSS extra  
-**Pruebas**: 114 pasando (100%)  
+**Versión**: 1.4.1 (Fase 6 en progreso)  
+**Cobertura OWASP Top 10 (2021)**: 8/10 (80%) + XSS extra  
+**Pruebas**: 109 passed, 5 skipped  
 **Licencia**: MIT (Open Source)
 
 [![CI](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/vulnlab-scanner.svg)](https://pypi.org/project/vulnlab-scanner/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/pycqa/bandit)
 
 ## 🚀 Características Implementadas ✅
 
@@ -23,6 +25,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
 - ✅ **A06 - Vulnerable Components**: Detección de librerías desactualizadas (jQuery, Bootstrap)
 - ✅ **A07 - Auth Failures**: Credenciales débiles, fuerza bruta suave, gestión de sesiones
+- ✅ **A10 - SSRF**: Parámetros de URL, IPs internas, esquemas peligrosos
 - ✅ **XSS Scanner**: Reflected, Stored, DOM-based (extra, no es categoría Axx)
 
 ### Mejoras Técnicas
@@ -41,11 +44,11 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 ### Fase 4: Nuevos Escáneres OWASP (Completada)
 - ✅ **A01 - Broken Access Control**: IDOR, escalación de privilegios
 - ✅ **A02 - Cryptographic Failures**: HTTPS faltante, cookies sin Secure, credenciales en URL
+- ✅ **A03 - SQL Injection**: Error-based, Boolean-based
+- ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
 - ✅ **A06 - Vulnerable Components**: Detección de librerías (SCA)
 - ✅ **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
 - ✅ **A10 - SSRF**: Parámetros de URL, IPs internas, esquemas peligrosos
-- ✅ **A03 - SQL Injection**: Error-based, Boolean-based
-- ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
 
 ### Fase 5: Mejoras Técnicas (80% completada)
 - ✅ Barras de progreso (tqdm)
@@ -120,7 +123,7 @@ VERBOSE=False
 # Configuración de HTTP
 RATE_LIMIT=0.5
 DEFAULT_TIMEOUT=10
-USER_AGENT=VulnLabScanner/1.4.0
+USER_AGENT=VulnLabScanner/1.4.1
 MAX_RETRIES=3
 
 # Configuración de Autenticación

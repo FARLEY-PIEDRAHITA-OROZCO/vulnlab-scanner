@@ -6,11 +6,12 @@ Este módulo implementa detección de:
 - Forceful Browsing (saltos de autenticación)
 """
 
+import re
+import requests
 from app.scanner.base import BaseScanner
 from app.utils.payloads import ACCESS_CONTROL_PAYLOADS
 from app.utils.logger import info, warning, success
 from urllib.parse import urlparse, urlunparse, parse_qs
-import re
 
 
 class AccessControlScanner(BaseScanner):

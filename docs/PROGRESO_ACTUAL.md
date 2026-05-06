@@ -2,7 +2,7 @@
 
 > **Estado del Proyecto**: Fase 5.3 completada (Mejoras Técnicas)  
 > **Última Actualización**: 2026-05-05  
-> **Versión**: 1.2.0 (Multithreading + Chart.js + tqdm)
+> **Versión**: 1.4.1 (Fase 6 - Refactorización y Correcciones)
 
 ---
 
@@ -57,7 +57,7 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web basada en 
 
 ### Ramas (Branches)
 ```
-main (estable - v1.0.0)
+main (estable - v1.4.1)
 └── develop (integración - Fase 5 completada)
     └── (sin ramas feature activas - limpio)
 ```
@@ -206,7 +206,7 @@ vulnlab-scanner/
 - **Ejecutar `pytest tests/ -v` antes de cada commit**
 
 ### Control de Versiones
-- `main`: Producción estable (v1.0.0 base)
+- `main`: Producción estable (v1.4.1)
 - `develop`: Integración de nuevas funcionalidades
 - **Ramas feature eliminadas tras merge**
 - **Nunca commitear directamente a `main`**
