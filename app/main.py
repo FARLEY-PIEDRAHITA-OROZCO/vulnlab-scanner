@@ -18,6 +18,7 @@ from app.scanner.access_control import AccessControlScanner
 from app.scanner.auth import AuthScanner
 from app.scanner.components import ComponentsScanner
 from app.scanner.crypto import CryptoScanner
+from app.scanner.ssrf import SSRFScanner
 from datetime import datetime
 import concurrent.futures
 
@@ -88,6 +89,8 @@ def run_scan(args):
         scanners_to_run.append(("ComponentsScanner", ComponentsScanner, args.url, session, args.dry_run))
     if args.crypto:
         scanners_to_run.append(("CryptoScanner", CryptoScanner, args.url, session, args.dry_run))
+    if args.ssrf:
+        scanners_to_run.append(("SSRFScanner", SSRFScanner, args.url, session, args.dry_run))
     
     if len(scanners_to_run) > 1:
         # Ejecución paralela

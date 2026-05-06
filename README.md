@@ -5,7 +5,7 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 ## Estado Actual del Proyecto
 
 **Versión**: 1.2.0 (Fase 6 en progreso)  
-**Cobertura OWASP Top 10 (2021)**: 6/10 (60%) + XSS extra  
+**Cobertura OWASP Top 10 (2021)**: 7/10 (70%) + XSS extra  
 **Pruebas**: 105 pasando (100%)  
 **Licencia**: MIT (Open Source)
 
@@ -59,10 +59,10 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ### Próximos Escáneres OWASP (para llegar a 8/10)
 - ✅ **A02 - Cryptographic Failures**: Detectar HTTPS faltante, TLS obsoleto, cookies sin Secure
-- 🔄 **A10 - SSRF**: Probar parámetros de URL (`?url=`, `?redirect=`)
+- ✅ **A10 - SSRF**: Probar parámetros de URL (`?url=`, `?redirect=`)
 - 🔄 **A08 - Software Integrity Failures** (opcional, complejo)
 
-**Objetivo actual**: Llegar a **8/10 en funcionalidad profesional** (actualmente 5/10 OWASP + XSS)
+**Objetivo actual**: Llegar a **8/10 en funcionalidad profesional** (actualmente 7/10 OWASP + XSS)
 
 ## Requisitos
 

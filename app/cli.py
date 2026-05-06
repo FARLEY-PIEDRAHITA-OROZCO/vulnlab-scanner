@@ -67,6 +67,12 @@ def parse_args():
     )
 
     parser.add_argument(
+        "-R", "--ssrf",
+        action="store_true",
+        help="Escanear SSRF (A10 - OWASP)"
+    )
+
+    parser.add_argument(
         "-a", "--all",
         action="store_true",
         help="Escanear todas las vulnerabilidades disponibles"

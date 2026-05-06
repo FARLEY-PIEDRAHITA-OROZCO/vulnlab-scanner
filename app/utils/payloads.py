@@ -104,3 +104,13 @@ CRYPTO_PAYLOADS = [
     {"type": "sensitive_in_url", "description": "Credenciales o tokens en la URL"},
     {"type": "weak_tls", "description": "Uso de TLS obsoleto (SSLv3, TLS 1.0/1.1)"},
 ]
+
+# Payloads para A10 - SSRF (Server-Side Request Forgery)
+SSRF_PAYLOADS = [
+    {"type": "url_param", "param": "url", "test_value": "http://169.254.169.254/latest/meta-data/"},
+    {"type": "url_param", "param": "redirect", "test_value": "http://localhost/"},
+    {"type": "url_param", "param": "path", "test_value": "file:///etc/passwd"},
+    {"type": "url_param", "param": "next", "test_value": "http://127.0.0.1/"},
+    {"type": "dangerous_scheme", "scheme": "file://", "description": "Acceso a sistema de archivos"},
+    {"type": "dangerous_scheme", "scheme": "dict://", "description": "Protocolo dict peligroso"},
+]
