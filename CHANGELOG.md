@@ -5,6 +5,31 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.2.0] - 2026-05-05
+
+### Agregado
+- Escáner A01 - Broken Access Control (IDOR, Privilege Escalation)
+- Escáner A07 - Authentication Failures (Weak Creds, Brute Force)
+- Escáner A06 - Vulnerable Components (jQuery, Bootstrap detection)
+- Multithreading con `concurrent.futures` en main.py
+- Barras de progreso con `tqdm` en todos los escáneres
+- Gráficos Chart.js en reportes HTML
+- Preparación para PyPI (`setup.py`, `pyproject.toml`)
+- GitHub Actions CI/CD (`.github/workflows/ci.yml`)
+- Comando `vulnlab-scan` disponible tras instalación
+- 68 pruebas pasando (100%)
+
+### Corregido
+- Logger simplificado (eliminadas importaciones obsoletas)
+- Excepción desnuda corregida en `auth.py`
+- Import obsoleto en `http.py` (requests.packages.urllib3 → urllib3)
+- Código muerto eliminado en `xss.py`
+- `.env` añadido a `.gitignore`
+
+### Cambiado
+- README.md actualizado a v1.2.0 con Fase 5.3
+- Documentación unificada en `DOCS/PROGRESO_ACTUAL.md`
+
 ## [1.0.0] - 2026-05-05
 
 ### Agregado
