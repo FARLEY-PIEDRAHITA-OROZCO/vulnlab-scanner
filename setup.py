@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="vulnlab-scanner",
-    version="1.4.2",
+    version="1.4.3",
     author="VulnLab Team",
     author_email="contact@vulnlab.com",
     description="Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 10",

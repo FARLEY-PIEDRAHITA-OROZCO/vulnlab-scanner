@@ -5,6 +5,28 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.4.3] - 2026-05-06
+
+### Agregado
+- Documentación completa y profunda actualizada al 100%
+- 8 archivos en `docs/` totalmente actualizados
+- README.md con estructura completa y badges profesionales
+- CHANGELOG.md reorganizado con historial claro
+- Requisitos detallados: 30 funcionales + 20 no funcionales
+- Alcance actualizado con estados reales de cada fase
+- Arquitectura técnica completa con diagramas de árbol
+- Estándares de código con ejemplos y herramientas
+- Guía de usuario con ejemplos y solución de problemas
+- Interfaces y contratos con todas las APIs
+- Roadmap actualizado con métricas y cronograma
+- Progreso detallado con hitos alcanzados
+- Guía de contribución actualizada
+
+### Cambiado
+- Versión actualizada a 1.4.3 en todos los archivos
+- USER_AGENT unificado a 1.4.3
+- Documentación 100% sincronizada con estado real
+
 ## [1.4.2] - 2026-05-06
 
 ### Agregado
