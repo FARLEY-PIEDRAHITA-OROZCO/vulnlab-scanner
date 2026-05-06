@@ -6,8 +6,13 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 **Versión**: 1.2.0 (Fase 5.3 Completada)  
 **Cobertura OWASP**: 6/10 (60%)  
-**Pruebas**: 68 pasando (100%)  
+**Pruebas**: 95 pasando (100%)  
 **Licencia**: MIT (Open Source)
+
+[![CI](https://github.com/anomalyco/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/anomalyco/vulnlab-scanner/actions/workflows/ci.yml)
+[![PyPI version](https://badge.fury.io/py/vulnlab-scanner.svg)](https://pypi.org/project/vulnlab-scanner/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 ## 🚀 Características Implementadas ✅
 
