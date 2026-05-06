@@ -125,6 +125,7 @@ class TestAuthScanner(unittest.TestCase):
         mock_post_response = Mock()
         mock_post_response.status_code = 200
         mock_post_response.url = "http://test.com/dashboard"
+        mock_post_response.text = ""
         mock_post_response.cookies = []
         self.mock_session.post.return_value = mock_post_response
         

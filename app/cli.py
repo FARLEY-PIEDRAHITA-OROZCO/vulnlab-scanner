@@ -84,47 +84,29 @@ def parse_args():
         help="Contraseña para autenticación"
     )
     
-    auth_group.add_argument(
-        "--login-username-field",
-        default="username",
-        help="Nombre del campo de usuario en el formulario (default: username)"
-    )
-    
-    auth_group.add_argument(
-        "--login-password-field",
-        default="password",
-        help="Nombre del campo de contraseña en el formulario (default: password)"
-    )
-
     # Opciones de reporte
     report_group = parser.add_argument_group('Reportes')
     
     report_group.add_argument(
-        "--report-format",
+        "--report",
         choices=["json", "html", "ambos"],
         default="ambos",
-        help="Formato del reporte (default: ambos)"
+        help="Formato del reporte (json, html, ambos)"
     )
     
     report_group.add_argument(
-        "--report-output",
-        default="./reports",
-        help="Directorio de salida para reportes (default: ./reports)"
+        "--output-dir",
+        default="reports",
+        help="Directorio de salida para reportes (default: reports/)"
     )
-
-    # Opciones adicionales
-    parser.add_argument(
-        "--dry-run",
+    
+    report_group.add_argument(
+        "--no-report",
         action="store_true",
-        help="Solo simular escaneo sin enviar ataques reales"
+        help="No generar reportes"
     )
     
-    parser.add_argument(
-        "--rate-limit",
-        type=float,
-        help="Segundos entre peticiones (default: 0.5)"
-    )
-    
+    # Otras opciones
     parser.add_argument(
         "--disclaimer",
         action="store_true",
@@ -132,9 +114,15 @@ def parse_args():
     )
     
     parser.add_argument(
-        "--accept-disclaimer",
+        "--no-disclaimer",
         action="store_true",
-        help="Aceptar aviso legal (para entornos no interactivos)"
+        help="Omitir aviso legal (no recomendado)"
+    )
+    
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Simular escaneo sin atacar (no envía ataques reales)"
     )
     
     parser.add_argument(
@@ -142,11 +130,23 @@ def parse_args():
         action="store_true",
         help="Modo verbose (más detalles)"
     )
+    
+    return parser.parse_args()
 
-    args = parser.parse_args()
+
+def main():
+    """Punto de entrada para CLI (usado por entry_points)."""
+    args = parse_args()
     
-    # Validar que se proporcione URL a menos que sea --disclaimer
-    if not args.disclaimer and not args.url:
-        parser.error("the following arguments are required: -u/--url (or use --disclaimer)")
+    # Si no se proporciona URL y no es --disclaimer, mostrar ayuda
+    if not args.url and not args.disclaimer:
+        print("Error: Se requiere una URL (-u/--url) o --disclaimer")
+        return
     
-    return args
+    # Importar aquí para evitar circular imports
+    from app.main import run_scan
+    run_scan(args)
+
+
+if __name__ == "__main__":
+    main()

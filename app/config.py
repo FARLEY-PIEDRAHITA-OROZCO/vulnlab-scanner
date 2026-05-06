@@ -1,48 +1,46 @@
-"""Módulo de configuración centralizada para VulnLab Scanner.
-
-Carga variables de entorno desde .env y define valores por defecto
-para toda la aplicación.
-"""
+"""Configuración centralizada para VulnLab Scanner."""
 
 import os
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
 
 class Config:
-    """Clase de configuración con valores por defecto y variables de entorno."""
+    """Clase de configuración centralizada.
     
-    # Rate limiting (segundos entre peticiones)
-    RATE_LIMIT = float(os.getenv("RATE_LIMIT", "0.5"))
+    Los valores se leen de variables de entorno con valores por defecto.
+    """
     
-    # Timeout para peticiones HTTP (segundos) - usa DEFAULT_TIMEOUT del .env
+    # Configuración General
+    DEBUG = os.getenv("DEBUG", "False") == "True"
+    VERBOSE = os.getenv("VERBOSE", "False") == "True"
+    
+    # Configuración de HTTP
+    RATE_LIMIT = float(os.getenv("RATE_LIMIT", "0.5"))  # Segundos entre peticiones
     HTTP_TIMEOUT = int(os.getenv("DEFAULT_TIMEOUT", "10"))
-    
-    # Directorio de salida de reportes
-    REPORTS_DIR = os.getenv("REPORTS_DIR", "./reports")
-    
-    # Formato de reporte por defecto
-    REPORT_FORMAT = os.getenv("REPORT_FORMAT", "ambos")
-    
-    # User-Agent para las peticiones - usa USER_AGENT del .env
-    USER_AGENT = os.getenv(
-        "USER_AGENT", 
-        "VulnLabScanner/1.0"
-    )
-    
-    # Número máximo de reintentos
+    USER_AGENT = os.getenv("USER_AGENT", "VulnLabScanner/1.2.0")
     MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
     
-    # Modo debug/verbose - usa DEBUG del .env
-    VERBOSE = os.getenv("DEBUG", "False").lower() == "true"
+    # Configuración de Autenticación
+    DEFAULT_LOGIN_PATHS = os.getenv(
+        "DEFAULT_LOGIN_PATHS", 
+        "/login,/signin,/auth,/login.php"
+    ).split(",")
     
-    @classmethod
-    def display(cls):
-        """Muestra la configuración actual (sin mostrar credenciales)."""
-        from app.utils.logger import info
-        info(f"Rate limit: {cls.RATE_LIMIT}s")
-        info(f"HTTP timeout: {cls.HTTP_TIMEOUT}s")
-        info(f"Reports dir: {cls.REPORTS_DIR}")
-        info(f"Report format: {cls.REPORT_FORMAT}")
-        info(f"User agent: {cls.USER_AGENT}")
+    # Configuración de Access Control
+    DEFAULT_ADMIN_PATHS = os.getenv(
+        "DEFAULT_ADMIN_PATHS",
+        "/admin,/administrator,/admin/users,/dashboard/admin"
+    ).split(",")
+    
+    # Configuración de Escáneres
+    DEFAULT_BRUTE_FORCE_ATTEMPTS = int(os.getenv("DEFAULT_BRUTE_FORCE_ATTEMPTS", "3"))
+    DEFAULT_BRUTE_FORCE_PASSWORDS = os.getenv(
+        "DEFAULT_BRUTE_FORCE_PASSWORDS",
+        "123456,password,admin123,qwerty,letmein"
+    ).split(",")
+    
+    # Directorios
+    REPORTS_DIR = os.getenv("REPORTS_DIR", "reports")

@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+include CONTRIBUTING.md
+include CHANGELOG.md
+include .env.example
+recursive-include app *.py
+recursive-include tests *.py
+exclude .gitignore
+exclude *.pyc
+exclude __pycache__
+exclude reports/*

@@ -1,38 +1,41 @@
-# Entorno virtual
-venv/
-.env/
-
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+MANIFEST
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Environment variables
+.env
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # Logs
 *.log
 
-# Archivos del sistema
-.DS_Store
+# OS
 Thumbs.db
+.DS_Store
 
-# Configuración de editores
-.vscode/
-.idea/
-
-# Archivos temporales
-*.tmp
-*.swp
-
-# Coverage / testing
+# Test
+.pytest_cache/
 .coverage
 htmlcov/
 
-# Archivos sensibles
-.env
-secrets.json
-config.yaml
-
-# Builds
-dist/
-build/
-reports/
+# Temp
+*.tmp
+*.bak

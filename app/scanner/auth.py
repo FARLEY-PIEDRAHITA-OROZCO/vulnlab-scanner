@@ -6,12 +6,14 @@ Este módulo implementa detección de:
 - Session Management Issues (sesiones débiles)
 """
 
+import requests
 from app.scanner.base import BaseScanner
 from app.utils.payloads import AUTH_PAYLOADS
 from app.utils.logger import info, warning, success
 from urllib.parse import urlparse
 import re
 import time
+from app.config import Config
 
 
 class AuthScanner(BaseScanner):
@@ -31,8 +33,8 @@ class AuthScanner(BaseScanner):
         """
         super().__init__(target_url, session, dry_run)
         self.payloads = self.get_payloads()
-        self.login_paths = ["/login", "/signin", "/auth", "/login.php"]
-    
+        self.login_paths = Config.DEFAULT_LOGIN_PATHS
+        
     def get_payloads(self) -> list:
         """Retorna la lista de payloads para Auth Failures.
         
@@ -61,20 +63,16 @@ class AuthScanner(BaseScanner):
             login_page = self.session.get(login_url)
             
             # Payloads de credenciales por defecto
-            weak_creds = [
-                ("admin", "admin"),
-                ("admin", "password"),
-                ("test", "test"),
-                ("user", "user"),
-                ("administrator", "administrator")
-            ]
+            weak_creds = []
+            for username in ["admin", "admin", "test", "user", "administrator"]:
+                for password in Config.DEFAULT_BRUTE_FORCE_PASSWORDS[:1]:  # Solo una por usuario
+                    weak_creds.append((username, password))
             
             for username, password in self.progress_iter(weak_creds, "Probando credenciales débiles"):
                 login_data = {
                     "username": username,
                     "password": password
                 }
-                
                 response = self.session.post(login_url, data=login_data)
                 
                 # Verificar si el login fue exitoso
@@ -91,7 +89,7 @@ class AuthScanner(BaseScanner):
             info("No se encontraron credenciales por defecto")
             return False
             
-        except Exception as e:
+        except requests.exceptions.RequestException as e:
             warning(f"Error al probar credenciales débiles: {str(e)}")
             return False
     
@@ -114,9 +112,9 @@ class AuthScanner(BaseScanner):
             # Hacer 3 intentos con credenciales incorrectas
             failed_attempts = 0
             
-            for i in range(3):
+            for password in self.progress_iter(Config.DEFAULT_BRUTE_FORCE_PASSWORDS, "Probando fuerza bruta"):
                 login_data = {
-                    "username": f"test_user_{i}",
+                    "username": f"test_user_{password}",
                     "password": "wrong_password"
                 }
                 
@@ -129,8 +127,8 @@ class AuthScanner(BaseScanner):
                         continue
             
             # Si todos los intentos fallaron normalmente (sin bloqueo)
-            # podría indicar falta de protección
-            if failed_attempts == 3:
+            # podríamos indicar falta de protección
+            if failed_attempts == len(Config.DEFAULT_BRUTE_FORCE_PASSWORDS):
                 info("No se detectó protección contra fuerza bruta (3 intentos permitidos)")
                 # No reportamos como vulnerabilidad automáticamente
                 # ya que requiere análisis manual
@@ -138,7 +136,7 @@ class AuthScanner(BaseScanner):
             
             return False
             
-        except Exception as e:
+        except requests.exceptions.RequestException as e:
             warning(f"Error al probar fuerza bruta: {str(e)}")
             return False
     
@@ -149,7 +147,7 @@ class AuthScanner(BaseScanner):
             login_url: URL del formulario de login.
             
         Returns:
-            True si se detectan problemas de sesión.
+            True si se detectan problemas de sesiones.
         """
         if self.dry_run:
             info(f"[DRY-RUN] Probaría gestión de sesiones en {login_url}")
@@ -191,7 +189,7 @@ class AuthScanner(BaseScanner):
             
             return len(self.results) > 0
             
-        except Exception as e:
+        except requests.exceptions.RequestException as e:
             warning(f"Error al verificar sesiones: {str(e)}")
             return False
     

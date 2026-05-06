@@ -139,23 +139,3 @@ class XSSScanner(BaseScanner):
         success(f"Escaneo XSS completado. Vulnerabilidades encontradas: {len(self.results)}")
         return self.get_results()
         
-        total_tests = len(params) * len(payloads)
-        self.info(f"Probando {len(params)} parámetros con {len(payloads)} payloads ({total_tests} pruebas)")
-        
-        for param in self.progress_iter(params, "Probando parámetros"):
-            for payload in self.progress_iter(payloads, "Inyectando payloads", leave=False):
-                try:
-                    test_url = self._inject_payload(param, payload)
-                    response = self.session.get(test_url)
-                    
-                    if payload in response.text:
-                        self.add_result(
-                            "XSS Reflected",
-                            "HIGH",
-                            f"Vulnerabilidad XSS detectada en parámetro: {param}",
-                            f"Payload: {payload}"
-                        )
-                except Exception as e:
-                    self.info(f"Error probando {param}: {str(e)}")
-        
-        return self.get_results()
