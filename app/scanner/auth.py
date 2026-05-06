@@ -6,6 +6,7 @@ Este módulo implementa detección de:
 - Session Management Issues (sesiones débiles)
 """
 
+import requests
 from app.scanner.base import BaseScanner
 from app.utils.payloads import AUTH_PAYLOADS
 from app.utils.logger import info, warning, success
@@ -111,7 +112,7 @@ class AuthScanner(BaseScanner):
             # Hacer 3 intentos con credenciales incorrectas
             failed_attempts = 0
             
-            for password in self.progress_iter(Config.DEFAULT_BRUTE_FORCE_PASSWORDS, "Probando fuerza bruta", leave=False):
+            for password in self.progress_iter(Config.DEFAULT_BRUTE_FORCE_PASSWORDS, "Probando fuerza bruta"):
                 login_data = {
                     "username": f"test_user_{password}",
                     "password": "wrong_password"
