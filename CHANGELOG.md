@@ -14,10 +14,13 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - Multithreading con `concurrent.futures` en main.py
 - Barras de progreso con `tqdm` en todos los escáneres
 - Gráficos Chart.js en reportes HTML
-- Preparación para PyPI (`setup.py`, `pyproject.toml`)
-- GitHub Actions CI/CD (`.github/workflows/ci.yml`)
+- Preparación para PyPI (`setup.py`, `pyproject.toml`, `MANIFEST.in`)
+- GitHub Actions CI/CD (`.github/workflows/ci.yml`, `publish.yml`)
 - Comando `vulnlab-scan` disponible tras instalación
-- 68 pruebas pasando (100%)
+- Configuración centralizada con clase `Config` en `app/config.py`
+- Variables de entorno para rutas de login, credenciales y rutas admin
+- Archivo `.env.example` documentado
+- 95 pruebas pasando (100%)
 
 ### Corregido
 - Logger simplificado (eliminadas importaciones obsoletas)
@@ -25,10 +28,15 @@ y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 - Import obsoleto en `http.py` (requests.packages.urllib3 → urllib3)
 - Código muerto eliminado en `xss.py`
 - `.env` añadido a `.gitignore`
+- Importación de `Config` corregida (ahora es clase en lugar de variables sueltas)
+- Mocks de pruebas corregidos en `test_auth.py`
+- `MANIFEST.in` excluye correctamente directorio `reports/`
 
 ### Cambiado
-- README.md actualizado a v1.2.0 con Fase 5.3
-- Documentación unificada en `DOCS/PROGRESO_ACTUAL.md`
+- README.md actualizado a v1.2.0 con Fase 5.3 y cobertura OWASP corregida
+- Estructura de proyecto actualizada (nuevos escáneres A01, A06, A07)
+- Enlaces de badges corregidos al usuario correcto de GitHub
+- Documentación sincronizada con estado real del proyecto
 
 ## [1.0.0] - 2026-05-05
 

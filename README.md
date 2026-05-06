@@ -5,28 +5,31 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 ## Estado Actual del Proyecto
 
 **Versión**: 1.2.0 (Fase 6 en progreso)  
-**Cobertura OWASP**: 6/10 (60%)  
+**Cobertura OWASP Top 10 (2021)**: 5/10 (50%) + XSS extra  
 **Pruebas**: 95 pasando (100%)  
 **Licencia**: MIT (Open Source)
 
-[![CI](https://github.com/anomalyco/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/anomalyco/vulnlab-scanner/actions/workflows/ci.yml)
+[![CI](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/vulnlab-scanner.svg)](https://pypi.org/project/vulnlab-scanner/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
 ## 🚀 Características Implementadas ✅
 
-- ✅ **XSS Scanner**: Detección de Cross-Site Scripting (Reflected, Stored, DOM-based)
-- ✅ **SQLi Scanner**: Detección de SQL Injection (Error-based, Boolean-based)
-- ✅ **Headers Checker**: Validación de HTTP Security Headers
-- ✅ **Broken Access Control (A01)**: IDOR, escalación de privilegios, Forceful Browsing
-- ✅ **Auth Failures (A07)**: Credenciales débiles, fuerza bruta suave, gestión sesiones
-- ✅ **Vulnerable Components (A06)**: Detección tecnologías desactualizadas (jQuery, Bootstrap)
+### Escáneres OWASP
+- ✅ **A01 - Broken Access Control**: IDOR, escalación de privilegios, Forceful Browsing
+- ✅ **A03 - SQL Injection**: Error-based, Boolean-based
+- ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
+- ✅ **A06 - Vulnerable Components**: Detección de librerías desactualizadas (jQuery, Bootstrap)
+- ✅ **A07 - Auth Failures**: Credenciales débiles, fuerza bruta suave, gestión de sesiones
+- ✅ **XSS Scanner**: Reflected, Stored, DOM-based (extra, no es categoría Axx)
+
+### Mejoras Técnicas
 - ✅ **Multithreading**: Escaneo paralelo con `concurrent.futures`
 - ✅ **Progress Bars**: Barras de progreso con `tqdm`
 - ✅ **Chart.js Reports**: Gráficos de severidad en reportes HTML
 - ✅ **Autenticación**: Soporte para login automático en sitios protegidos
-- ✅ **Reportes**: Generación de reportes en JSON y HTML
+- ✅ **Configuración**: Valores configurables vía `.env` (login paths, credenciales, rutas admin)
 - ✅ **Modo DRY-RUN**: Simulación sin ataques reales
 - ✅ **Rate Limiting**: Control de velocidad para no saturar servidores
 - ✅ **Aviso Legal**: Validación de permisos antes de escanear
@@ -39,19 +42,26 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - ✅ **A07 - Auth Failures**: Fuerza bruta suave, sesiones débiles
 - ✅ **A06 - Vulnerable Components**: Detección de librerías (SCA)
 
-### Fase 5: Mejoras Técnicas (Completada - 60%)
+### Fase 5: Mejoras Técnicas (60% completada)
 - ✅ Barras de progreso (tqdm)
 - ✅ Multithreading para escaneo paralelo
 - ✅ Mejorar reportes (gráficos Chart.js)
+- ✅ Valores configurables en `app/config.py`
 - 🔄 Interfaz web básica (FastAPI/Flask)
 
-### Fase 6: Empaquetado y Distribución (En progreso)
+### Fase 6: Empaquetado y Distribución (80% completada)
 - ✅ Empaquetado con `setup.py` y `pyproject.toml`
-- ✅ Configuración de CI/CD con GitHub Actions
-- 🔄 Publicar en PyPI (`pip install vulnlab-scanner`)
+- ✅ Configuración de CI/CD con GitHub Actions (`.github/workflows/`)
+- ✅ Manifest y `.env.example` documentados
+- 🔄 Publicar en PyPI (`pip install vulnlab-scanner`) - *pendiente configurar `PYPI_API_TOKEN`*
 - 🔄 Generar comunidad inicial
 
-**Objetivo**: Llegar a **8/10 en funcionalidad profesional** (actualmente 6/10)
+### Próximos Escáneres OWASP (para llegar a 8/10)
+- 🔄 **A02 - Cryptographic Failures**: Detectar HTTPS faltante, TLS obsoleto, cookies sin Secure
+- 🔄 **A10 - SSRF**: Probar parámetros de URL (`?url=`, `?redirect=`)
+- 🔄 **A08 - Software Integrity Failures** (opcional, complejo)
+
+**Objetivo actual**: Llegar a **8/10 en funcionalidad profesional** (actualmente 5/10 OWASP + XSS)
 
 ## Requisitos
 
@@ -60,10 +70,15 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Instalación
 
-### Opción 1: Instalación Manual
+### Opción 1: Instalación desde PyPI (cuando esté publicado)
+```bash
+pip install vulnlab-scanner
+```
+
+### Opción 2: Instalación Manual (Desarrollo)
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/vulnlab-scanner.git
+git clone https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner.git
 cd vulnlab-scanner
 
 # 2. Crear entorno virtual
@@ -79,33 +94,36 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Opción 2: Script Automático
+### Opción 3: Script Automático
 ```bash
 python install.py
 ```
 
 ## Configuración
 
-Edita el archivo `.env` para personalizar la configuración:
+Edita el archivo `.env` para personalizar la configuración (puedes copiar de `.env.example`):
 
 ```env
-# Tiempo máximo de espera en requests (segundos)
-DEFAULT_TIMEOUT=10
-
-# Identidad del scanner
-USER_AGENT=VulnLabScanner/1.0
-
-# Modo debug
+# Configuración General
 DEBUG=False
+VERBOSE=False
 
-# Segundos entre peticiones (rate limiting)
+# Configuración de HTTP
 RATE_LIMIT=0.5
+DEFAULT_TIMEOUT=10
+USER_AGENT=VulnLabScanner/1.2.0
+MAX_RETRIES=3
 
-# Directorio de salida de reportes
-REPORTS_DIR=./reports
+# Configuración de Autenticación
+DEFAULT_LOGIN_PATHS=/login,/signin,/auth,/login.php
+DEFAULT_BRUTE_FORCE_ATTEMPTS=3
+DEFAULT_BRUTE_FORCE_PASSWORDS=123456,password,admin123,qwerty,letmein
 
-# Formato de reporte por defecto: json, html, ambos
-REPORT_FORMAT=ambos
+# Configuración de Access Control
+DEFAULT_ADMIN_PATHS=/admin,/administrator,/admin/users,/dashboard/admin
+
+# Directorios
+REPORTS_DIR=reports
 ```
 
 ## Uso
@@ -171,7 +189,7 @@ vulnlab-scanner/
 ├── app/
 │   ├── main.py                 # Punto de entrada
 │   ├── cli.py                  # Argumentos CLI
-│   ├── config.py               # Configuración centralizada
+│   ├── config.py               # Configuración centralizada (Clase Config)
 │   ├── core/
 │   │   ├── http.py             # Cliente HTTP
 │   │   └── session.py          # Gestión de sesiones
@@ -179,7 +197,10 @@ vulnlab-scanner/
 │   │   ├── base.py             # Clase base abstracta
 │   │   ├── xss.py              # Escáner XSS
 │   │   ├── sqli.py             # Escáner SQLi
-│   │   └── headers.py          # Validador de headers
+│   │   ├── headers.py          # Validador de headers
+│   │   ├── access_control.py   # Escáner A01 (Access Control)
+│   │   ├── auth.py             # Escáner A07 (Auth Failures)
+│   │   └── components.py       # Escáner A06 (Vulnerable Components)
 │   └── utils/
 │       ├── logger.py           # Salida coloreada
 │       ├── helpers.py          # Funciones auxiliares
@@ -187,13 +208,17 @@ vulnlab-scanner/
 │       ├── reporter.py         # Generación de reportes
 │       ├── payloads.py         # Payloads centralizados
 │       └── disclaimer.py       # Aviso legal
-├── tests/                      # Pruebas unitarias (43 pruebas)
-├── reports/                    # Reportes generados
-├── DOCS/                       # Documentación del proyecto
-├── .env                        # Variables de entorno
+├── tests/                      # Pruebas unitarias (95 pruebas)
+├── reports/                    # Reportes generados (no incluido en paquete)
+├── .env.example                # Ejemplo de configuración
 ├── requirements.txt
+├── setup.py
+├── pyproject.toml
+├── MANIFEST.in
 ├── README.md
-└── DISCLAIMER.md              # Aviso legal completo
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 
 ## Aviso Legal
@@ -212,7 +237,7 @@ python -m app.main --disclaimer
 
 ## Documentación
 
-La documentación completa está en el directorio `DOCS/`:
+La documentación completa está en el directorio `DOCS/` (si existe):
 - `DOCS/REQUISITOS.md` - Requisitos del sistema
 - `DOCS/ALCANCE.md` - Alcance del proyecto
 - `DOCS/ARQUITECTURA.md` - Arquitectura técnica
@@ -228,13 +253,13 @@ Para ejecutar las pruebas unitarias:
 pytest tests/ -v
 ```
 
-**Cobertura actual**: 43 pruebas (100% pasando)
+**Cobertura actual**: 95 pruebas (100% pasando)
 
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Por favor lee:
 - `DOCS/ESTANDARES_CODIGO.md` antes de contribuir
-- Seguir convenciones de commits: `tipo(ámbito): descripción`
+- Seguir convenciones de commits: `tipo(ámbito): descripción en español`
 - Ejecutar pruebas antes de cada commit
 
 ## Licencia
@@ -248,8 +273,8 @@ MIT License - Open Source
 | Fase 1 | Análisis de Requisitos | ✅ Completada |
 | Fase 2 | Diseño de Arquitectura | ✅ Completada |
 | Fase 3 | Desarrollo (MVP) | ✅ Completada |
-| Fase 4 | Nuevos Escáneres OWASP | 🔄 En progreso |
-| Fase 5 | Mejoras Técnicas | ❌ Pendiente |
-| Fase 6 | Empaquetado y Distribución | ❌ Pendiente |
+| Fase 4 | Nuevos Escáneres OWASP | ✅ Completada |
+| Fase 5 | Mejoras Técnicas | 🔄 En progreso (60%) |
+| Fase 6 | Empaquetado y Distribución | 🔄 En progreso (80%) |
 
-**Siguiente hito**: Implementar A01 - Broken Access Control
+**Siguiente hito**: Publicar en PyPI y luego implementar A02 (Cryptographic Failures)
