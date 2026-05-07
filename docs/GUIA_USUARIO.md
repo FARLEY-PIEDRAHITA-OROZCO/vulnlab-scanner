@@ -1,11 +1,11 @@
-# Guía de Usuario - VulnLab Scanner v1.4.2
+# Guía de Usuario - VulnLab Scanner v1.4.3
 
 ## Introducción
 
 VulnLab Scanner es una herramienta profesional para escaneo automatizado de vulnerabilidades web basada en OWASP Top 10 (2021). Diseñada para pruebas de seguridad éticas, cuenta con una arquitectura modular, configuración flexible y reportes detallados.
 
-**Versión actual**: 1.4.2  
-**Cobertura OWASP**: 8/10 (80%) + XSS extra  
+**Versión actual**: 1.4.3
+**Cobertura OWASP**: 8/10 (80%) + XSS extra
 **Licencia**: MIT (Open Source)
 
 ## Instalación
@@ -353,6 +353,6 @@ python -m app.main --disclaimer
 
 ---
 
-**Última actualización**: 2026-05-06 (v1.4.2)  
-**Autor**: VulnLab Team  
+**Última actualización**: 2026-05-06 (v1.4.2)
+**Autor**: VulnLab Team
 **Licencia**: MIT (Open Source)

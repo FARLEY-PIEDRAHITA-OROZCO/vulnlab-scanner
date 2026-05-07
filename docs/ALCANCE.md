@@ -1,4 +1,4 @@
-# Alcance de VulnLab Scanner v1.4.2
+# Alcance de VulnLab Scanner v1.4.3
 
 ## 1. En Alcance (In-Scope)
 
@@ -28,18 +28,18 @@
 - ✅ **A03 - SQL Injection** (ampliado)
   - Error-based SQLi
   - Boolean-based SQLi
-  - **Pruebas**: 12 unitarias
+  - **Pruebas**: 6 unitarias
 
 - ✅ **A05 - Security Misconfiguration**
   - Validación HTTP Security Headers
   - Detección configuraciones incorrectas
-  - **Pruebas**: 8 unitarias
+  - **Pruebas**: 5 unitarias
 
 - ✅ **A06 - Vulnerable Components**
   - Detección jQuery desactualizado
   - Detección Bootstrap desactualizado
   - Verificación headers (X-Powered-By, Server)
-  - **Pruebas**: 8 unitarias
+  - **Pruebas**: 9 unitarias
 
 - ✅ **A07 - Authentication Failures**
   - Detección credenciales débiles/por defecto
@@ -74,7 +74,7 @@
   - Reflected XSS
   - Stored XSS
   - DOM-based XSS
-  - **Pruebas**: 10 unitarias
+  - **Pruebas**: 6 unitarias
 
 ## 2. Fuera de Alcance (Out-of-Scope)
 
@@ -191,8 +191,8 @@
 
 ---
 
-**Versión del documento**: 1.4.2  
-**Fecha de actualización**: 2026-05-06  
-**Responsable**: @FARLEY-PIEDRAHITA-OROZCO  
-**Estado**: ✅ Completo y actualizado con estado real del proyecto  
+**Versión del documento**: 1.4.3
+**Fecha de actualización**: 2026-05-06
+**Responsable**: @FARLEY-PIEDRAHITA-OROZCO
+**Estado**: ✅ Completo y actualizado a v1.4.3
 **Cobertura OWASP**: 8/10 (80%) + XSS extra

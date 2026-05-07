@@ -1,11 +1,11 @@
-# Requisitos de VulnLab Scanner v1.4.2
+# Requisitos de VulnLab Scanner v1.4.3
 
 ## 1. Introducción
 
 VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web diseñada para automatizar pruebas basadas en el estándar OWASP Top 10 (2021). Enfocada en uso profesional, permite detectar fallos de seguridad comunes de manera modular, fácil de instalar, configurar y usar.
 
-**Versión actual**: 1.4.2  
-**Cobertura OWASP**: 8/10 (80%) + XSS extra  
+**Versión actual**: 1.4.3
+**Cobertura OWASP**: 8/10 (80%) + XSS extra
 **Estado**: Listo para producción y publicación en PyPI
 
 ## 2. Requisitos Funcionales
@@ -132,7 +132,7 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web diseñada 
 
 ---
 
-**Versión del documento**: 1.4.2  
-**Fecha de actualización**: 2026-05-06  
-**Responsable**: @FARLEY-PIEDRAHITA-OROZCO  
-**Estado**: ✅ Completo y actualizado
+**Versión del documento**: 1.4.2
+**Fecha de actualización**: 2026-05-06
+**Responsable**: @FARLEY-PIEDRAHITA-OROZCO
+**Estado**: ✅ Completo y actualizado a v1.4.3

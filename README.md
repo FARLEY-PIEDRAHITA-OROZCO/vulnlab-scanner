@@ -4,10 +4,10 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.4.3 (Fase 6 completada)  
-**Cobertura OWASP Top 10 (2021)**: 8/10 (80%) + XSS extra  
-**Pruebas**: 109 passed, 5 skipped (114 total)  
-**Licencia**: MIT (Open Source)  
+**Versión**: 1.4.3 (Fase 6 completada)
+**Cobertura OWASP Top 10 (2021)**: 8/10 (80%) + XSS extra
+**Pruebas**: 114 passed (100% total)
+**Licencia**: MIT (Open Source)
 **Estado**: Listo para producción y publicación en PyPI
 
 [![CI](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml)
@@ -283,7 +283,7 @@ Para ejecutar las pruebas unitarias:
 pytest tests/ -v
 ```
 
-**Cobertura actual**: 114 pruebas (109 passed, 5 skipped)
+**Cobertura actual**: 114 pruebas (114 passed, 0 skipped)
 
 ## Contribuciones
 

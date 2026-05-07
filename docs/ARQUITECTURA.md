@@ -1,11 +1,11 @@
-# Arquitectura de VulnLab Scanner v1.4.2
+# Arquitectura de VulnLab Scanner v1.4.3
 
 ## 1. Visión General
 
 La arquitectura está diseñada bajo el patrón modular, donde cada tipo de vulnerabilidad OWASP es un módulo independiente que hereda de una clase base común. Esto permite fácil mantenimiento y extensibilidad.
 
-**Versión**: 1.4.2  
-**Arquitectura**: Modular con herencia de clase base  
+**Versión**: 1.4.3
+**Arquitectura**: Modular con herencia de clase base
 **Estado**: Estable, listo para producción
 
 ## 2. Estructura de Directorios (Actualizada)
@@ -13,7 +13,7 @@ La arquitectura está diseñada bajo el patrón modular, donde cada tipo de vuln
 ```
 vulnlab-scanner/
 ├── app/
-│   ├── __init__.py            # Versión 1.4.2
+│   ├── __init__.py            # Versión 1.4.3
 │   ├── main.py               # Punto de entrada principal (orquestador)
 │   ├── cli.py                # Manejo de argumentos CLI (argparse)
 │   ├── config.py             # Configuración centralizada (Clase Config)
@@ -46,15 +46,23 @@ vulnlab-scanner/
 │
 ├── tests/                    # Pruebas unitarias (114 total)
 │   ├── __init__.py
-│   ├── test_xss.py
-│   ├── test_sqli.py
-│   ├── test_headers.py
+│   ├── test_xss_scanner.py
+│   ├── test_sqli_scanner.py
+│   ├── test_headers_scanner.py
 │   ├── test_access_control.py
 │   ├── test_auth.py
 │   ├── test_components.py
 │   ├── test_crypto.py
 │   ├── test_ssrf.py
-│   └── test_config.py
+│   ├── test_config.py
+│   ├── test_cli.py
+│   ├── test_helpers.py
+│   ├── test_http_client.py
+│   ├── test_integration.py
+│   ├── test_main.py
+│   ├── test_payloads.py
+│   ├── test_real_integration.py
+│   └── test_scanner_base.py
 │
 ├── docs/                     # Documentación completa en español
 │   ├── REQUISITOS.md
@@ -111,25 +119,25 @@ from typing import List, Dict, Any
 
 class BaseScanner(ABC):
     """Clase base abstracta para todos los escáneres de vulnerabilidades."""
-    
+
     def __init__(self, target_url: str, session, dry_run: bool = False):
         self.name = self.__class__.__name__
         self.target_url = target_url
         self.session = session
         self.dry_run = dry_run
         self.results = []
-    
+
     @abstractmethod
     def scan(self) -> List[Dict[str, Any]]:
         """Ejecuta el escaneo de vulnerabilidades."""
         pass
-    
+
     @abstractmethod
     def get_payloads(self) -> List[str]:
         """Retorna la lista de payloads para este escáner."""
         pass
-    
-    def add_result(self, vuln_name: str, severity: str, 
+
+    def add_result(self, vuln_name: str, severity: str,
                   description: str, evidence: str) -> None:
         """Añade un resultado del escaneo."""
         self.results.append({
@@ -151,21 +159,21 @@ load_dotenv()
 
 class Config:
     """Configuración centralizada del escáner."""
-    
+
     # HTTP
     DEFAULT_TIMEOUT = int(os.getenv("DEFAULT_TIMEOUT", 10))
     RATE_LIMIT = float(os.getenv("RATE_LIMIT", 0.5))
     USER_AGENT = os.getenv("USER_AGENT", "VulnLabScanner/1.4.2")
     MAX_RETRIES = int(os.getenv("MAX_RETRIES", 3))
-    
+
     # Auth
     DEFAULT_LOGIN_PATHS = os.getenv("DEFAULT_LOGIN_PATHS", "/login,/signin").split(",")
     DEFAULT_BRUTE_FORCE_ATTEMPTS = int(os.getenv("DEFAULT_BRUTE_FORCE_ATTEMPTS", 3))
     DEFAULT_BRUTE_FORCE_PASSWORDS = os.getenv("DEFAULT_BRUTE_FORCE_PASSWORDS", "123456,password").split(",")
-    
+
     # Access Control
     DEFAULT_ADMIN_PATHS = os.getenv("DEFAULT_ADMIN_PATHS", "/admin,/administrator").split(",")
-    
+
     # Directories
     REPORTS_DIR = os.getenv("REPORTS_DIR", "reports")
 ```
@@ -276,7 +284,7 @@ class NewScanner(BaseScanner):
     def scan(self):
         # Implementar lógica de escaneo
         pass
-    
+
     def get_payloads(self):
         return ["payload1", "payload2"]
 ```
@@ -295,7 +303,7 @@ class NewScanner(BaseScanner):
 
 ---
 
-**Versión del documento**: 1.4.2  
-**Fecha de actualización**: 2026-05-06  
-**Responsable**: @FARLEY-PIEDRAHITA-OROZCO  
+**Versión del documento**: 1.4.2
+**Fecha de actualización**: 2026-05-06
+**Responsable**: @FARLEY-PIEDRAHITA-OROZCO
 **Estado**: ✅ Completo y actualizado con arquitectura real

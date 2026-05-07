@@ -1,7 +1,7 @@
 # Progreso Actual Detallado - VulnLab Scanner
 
-> **Versión**: 1.4.2 (Fase 6 - Empaquetado y Distribución - 95% completada)  
-> **Fecha**: 2026-05-06  
+> **Versión**: 1.4.3 (Fase 6 - Empaquetado y Distribución - 95% completada)
+> **Fecha**: 2026-05-06
 > **Estado**: Listo para producción y publicación en PyPI
 
 ---
@@ -12,7 +12,7 @@
 |---------|-------|
 | **Versión Actual** | 1.4.2 |
 | **Cobertura OWASP** | 8/10 (80%) + XSS |
-| **Pruebas** | 114 total (109 passed, 5 skipped) |
+| **Pruebas** | 114 total (114 passed, 0 skipped) |
 | **Escáneres** | 8 OWASP + XSS |
 | **Fase Actual** | 6 - 95% completada |
 | **Licencia** | MIT (Open Source) |
@@ -190,6 +190,6 @@ vulnlab-scanner/
 
 ---
 
-**Última actualización**: 2026-05-06 16:30 UTC  
-**Próxima actualización**: Al publicar en PyPI o implementar A04/A09  
+**Última actualización**: 2026-05-06 16:30 UTC
+**Próxima actualización**: Al publicar en PyPI o implementar A04/A09
 **Contacto**: security@vulnlab.com

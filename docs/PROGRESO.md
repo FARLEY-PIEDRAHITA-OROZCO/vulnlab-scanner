@@ -1,12 +1,12 @@
 # Progreso de Desarrollo - VulnLab Scanner
 
 ## Estado Actual
-**Versión**: 1.4.2  
-**Fase**: 6 - Empaquetado y Distribución (95% completada)  
-**Última actualización**: 2026-05-06  
-**Cobertura OWASP**: 8/10 (80%) + XSS extra (+ A03, A05)  
-**Pruebas**: 114 total (109 passed, 5 skipped)  
-**Escáneres implementados**: 8 (A01, A02, A03, A05, A06, A07, A10 + XSS)  
+**Versión**: 1.4.3
+**Fase**: 6 - Empaquetado y Distribución (95% completada)
+**Última actualización**: 2026-05-06
+**Cobertura OWASP**: 8/10 (80%) + XSS extra (+ A03, A05)
+**Pruebas**: 114 total (114 passed, 0 skipped)
+**Escáneres implementados**: 8 (A01, A02, A03, A05, A06, A07, A10 + XSS)
 **Licencia**: MIT (Open Source)
 
 ## Fases Completadas
@@ -86,8 +86,8 @@
 
 ### Pruebas Unitarias
 - **Total**: 114 pruebas
-- **Pasando**: 109
-- **Omitidas**: 5
+- **Pasando**: 114
+- **Omitidas**: 0
 - **Fallando**: 0
 - **Cobertura**: 100% en módulos implementados
 
@@ -132,7 +132,7 @@
 - Archivos profesionales añadidos (SECURITY.md, CODE_OF_CONDUCT.md, etc.)
 - Configuración de desarrollo completa (.pre-commit, tox, Makefile)
 - Documentación 100% sincronizada
-- 109 tests passed, 5 skipped
+- 114 tests passed, 0 skipped
 
 ### Correcciones
 - Errores de importación corregidos
@@ -142,6 +142,6 @@
 
 ---
 
-**Última actualización**: 2026-05-06  
-**Responsable**: @FARLEY-PIEDRAHITA-OROZCO  
+**Última actualización**: 2026-05-06
+**Responsable**: @FARLEY-PIEDRAHITA-OROZCO
 **Estado**: Listo para publicación en PyPI

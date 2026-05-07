@@ -1,4 +1,4 @@
-# Interfaces y Contratos - VulnLab Scanner v1.4.2
+# Interfaces y Contratos - VulnLab Scanner v1.4.3
 
 ## 1. Interfaz de Línea de Comandos (CLI)
 
@@ -58,7 +58,7 @@ Ejecuta el escaneo y retorna resultados.
 ```python
 def scan(self) -> List[Dict[str, Any]]:
     """Ejecuta el escaneo de vulnerabilidades.
-    
+
     Returns:
         Lista de diccionarios con formato:
         {
@@ -87,7 +87,7 @@ def get_payloads(self) -> List[str]:
 #### `add_result(vuln_name, severity, description, evidence)`
 Añade un resultado del escaneo.
 ```python
-def add_result(self, vuln_name: str, severity: str, 
+def add_result(self, vuln_name: str, severity: str,
               description: str, evidence: str) -> None:
     """Añade un resultado del escaneo a la lista de resultados."""
     self.results.append({
@@ -150,32 +150,32 @@ def add_result(self, vuln_name: str, severity: str,
 ```python
 def save_json_report(data: dict, output_dir: str = None) -> str:
     """Guarda el reporte en formato JSON.
-    
+
     Args:
         data: Diccionario con los datos del reporte.
         output_dir: Directorio de salida (usa Config.REPORTS_DIR por defecto).
-        
+
     Returns:
         Ruta del archivo guardado.
     """
 
 def save_html_report(data: dict, output_dir: str = None) -> str:
     """Guarda el reporte en formato HTML básico.
-    
+
     Args:
         data: Diccionario con los datos del reporte.
         output_dir: Directorio de salida (usa Config.REPORTS_DIR por defecto).
-        
+
     Returns:
         Ruta del archivo guardado.
     """
 
 def generate_summary(results: list) -> dict:
     """Genera un resumen estadístico de los resultados.
-    
+
     Args:
         results: Lista de resultados del escaneo.
-        
+
     Returns:
         Diccionario con el resumen.
     """
@@ -243,49 +243,49 @@ SSRF_PAYLOADS = [
 ```python
 class ScannerSession:
     """Gestión de sesiones con soporte de autenticación."""
-    
+
     def __init__(self, rate_limit: float = None):
         """Inicializa la sesión del escáner.
-        
+
         Args:
             rate_limit: Tiempo entre peticiones (usa Config si es None).
         """
-    
+
     def login(self, login_url: str, username: str, password: str,
               user_field: str = "username", pass_field: str = "password") -> bool:
         """Realiza login automático y mantiene la sesión.
-        
+
         Args:
             login_url: URL de la página de login.
             username: Nombre de usuario.
             password: Contraseña.
             user_field: Nombre del campo de usuario en el formulario.
             pass_field: Nombre del campo de contraseña en el formulario.
-            
+
         Returns:
             True si el login fue exitoso, False en caso contrario.
         """
-    
+
     def get(self, url: str, params: dict = None, **kwargs) -> requests.Response:
         """Realiza petición GET manteniendo la sesión.
-        
+
         Args:
             url: URL objetivo.
             params: Parámetros de consulta.
             **kwargs: Argumentos adicionales.
-            
+
         Returns:
             Objeto Response de requests.
         """
-    
+
     def post(self, url: str, data: dict = None, **kwargs) -> requests.Response:
         """Realiza petición POST manteniendo la sesión.
-        
+
         Args:
             url: URL objetivo.
             data: Datos del formulario.
             **kwargs: Argumentos adicionales.
-            
+
         Returns:
             Objeto Response de requests.
         """
@@ -305,16 +305,16 @@ class ScannerSession:
 ```python
 def info(msg: str) -> None:
     """Imprime mensaje informativo en azul."""
-    
+
 def success(msg: str) -> None:
     """Imprime mensaje de éxito en verde."""
-    
+
 def warning(msg: str) -> None:
     """Imprime advertencia en amarillo."""
-    
+
 def error(msg: str) -> None:
     """Imprime error en rojo."""
-    
+
 def vulnerability(msg: str) -> None:
     """Imprime vulnerabilidad detectada en magenta."""
 ```
@@ -325,21 +325,21 @@ def vulnerability(msg: str) -> None:
 ```python
 class Config:
     """Configuración centralizada del escáner."""
-    
+
     # HTTP
     DEFAULT_TIMEOUT = int(os.getenv("DEFAULT_TIMEOUT", 10))
     RATE_LIMIT = float(os.getenv("RATE_LIMIT", 0.5))
     USER_AGENT = os.getenv("USER_AGENT", "VulnLabScanner/1.4.2")
     MAX_RETRIES = int(os.getenv("MAX_RETRIES", 3))
-    
+
     # Auth
     DEFAULT_LOGIN_PATHS = os.getenv("DEFAULT_LOGIN_PATHS", "/login,/signin").split(",")
     DEFAULT_BRUTE_FORCE_ATTEMPTS = int(os.getenv("DEFAULT_BRUTE_FORCE_ATTEMPTS", 3))
     DEFAULT_BRUTE_FORCE_PASSWORDS = os.getenv("DEFAULT_BRUTE_FORCE_PASSWORDS", "123456,password").split(",")
-    
+
     # Access Control
     DEFAULT_ADMIN_PATHS = os.getenv("DEFAULT_ADMIN_PATHS", "/admin,/administrator").split(",")
-    
+
     # Directories
     REPORTS_DIR = os.getenv("REPORTS_DIR", "reports")
 ```
@@ -369,17 +369,17 @@ import pytest
 
 class TestMiScanner(unittest.TestCase):
     """Pruebas para MiScanner."""
-    
+
     def setUp(self):
         """Configuración antes de cada prueba."""
         self.session = Mock()
         self.scanner = MiScanner("http://example.com", self.session)
-    
+
     def test_initialization(self):
         """Prueba que el escáner se inicializa correctamente."""
         self.assertEqual(self.scanner.target_url, "http://example.com")
         self.assertEqual(self.scanner.name, "MiScanner")
-    
+
     @patch('app.scanner.mi_scanner.requests.get')
     def test_scan_sin_vulnerabilidades(self, mock_get):
         """Prueba escaneo sin detectar vulnerabilidades."""
@@ -387,14 +387,14 @@ class TestMiScanner(unittest.TestCase):
         mock_response.status_code = 200
         mock_response.text = "sin vulnerabilidades"
         mock_get.return_value = mock_response
-        
+
         results = self.scanner.scan()
         self.assertEqual(len(results), 0)
 ```
 
 ---
 
-**Versión del documento**: 1.4.2  
-**Fecha de actualización**: 2026-05-06  
-**Responsable**: @FARLEY-PIEDRAHITA-OROZCO  
+**Versión del documento**: 1.4.3
+**Fecha de actualización**: 2026-05-06
+**Responsable**: @FARLEY-PIEDRAHITA-OROZCO
 **Estado**: ✅ Completo y actualizado con interfaces actuales

@@ -1,4 +1,4 @@
-# Estándares de Código - VulnLab Scanner v1.4.2
+# Estándares de Código - VulnLab Scanner v1.4.3
 
 ## 1. Convenciones Generales
 
@@ -7,7 +7,7 @@
 - **Codificación**: UTF-8
 - **Docstrings**: En español, formato Google Style
 - **Comentarios**: Evitar comentarios innecesarios (el código debe ser autodocumentado)
-- **Nombres**: 
+- **Nombres**:
   - Clases: `PascalCase` (ej. `BaseScanner`)
   - Funciones/métodos: `snake_case` (ej. `get_payloads`)
   - Constantes: `UPPER_SNAKE_CASE` (ej. `MAX_RETRIES`)
@@ -24,7 +24,7 @@ from typing import List, Dict, Any
 
 class BaseScanner(ABC):
     """Clase base abstracta para todos los escáneres de vulnerabilidades.
-    
+
     Attributes:
         name (str): Nombre del escáner.
         target_url (str): URL objetivo a escanear.
@@ -32,10 +32,10 @@ class BaseScanner(ABC):
         results (list): Lista de resultados del escaneo.
         dry_run (bool): Si es True, solo simula sin atacar.
     """
-    
+
     def __init__(self, target_url: str, session, dry_run: bool = False):
         """Inicializa el escáner con la URL objetivo y sesión.
-        
+
         Args:
             target_url: URL de la aplicación a escanear.
             session: Objeto de sesión HTTP para realizar peticiones.
@@ -46,29 +46,29 @@ class BaseScanner(ABC):
         self.session = session
         self.results = []
         self.dry_run = dry_run
-    
+
     @abstractmethod
     def scan(self) -> List[Dict[str, Any]]:
         """Ejecuta el escaneo de vulnerabilidades.
-        
+
         Returns:
             Lista de diccionarios con resultados del escaneo.
         """
         pass
-    
+
     @abstractmethod
     def get_payloads(self) -> List[str]:
         """Retorna la lista de payloads para este escáner.
-        
+
         Returns:
             Lista de strings con los payloads.
         """
         pass
-    
-    def add_result(self, vuln_name: str, severity: str, 
+
+    def add_result(self, vuln_name: str, severity: str,
                   description: str, evidence: str) -> None:
         """Añade un resultado del escaneo a la lista de resultados.
-        
+
         Args:
             vuln_name: Nombre de la vulnerabilidad.
             severity: Severidad (CRITICAL, HIGH, MEDIUM, LOW).
@@ -89,10 +89,10 @@ class BaseScanner(ABC):
 ```python
 class MiScanner(BaseScanner):
     """Breve descripción de lo que hace el escáner.
-    
+
     Descripción más detallada si es necesario, explicando
     qué vulnerabilidades detecta y cómo funciona.
-    
+
     Attributes:
         attr1 (str): Descripción del atributo 1.
         attr2 (int): Descripción del atributo 2.
@@ -103,14 +103,14 @@ class MiScanner(BaseScanner):
 ```python
 def mi_funcion(param1: str, param2: int = 10) -> bool:
     """Breve descripción de lo que hace la función.
-    
+
     Args:
         param1: Descripción del parámetro 1.
         param2: Descripción del parámetro 2 (default: 10).
-        
+
     Returns:
         True si éxito, False en caso contrario.
-        
+
     Raises:
         ValueError: Si param1 está vacío.
     """
@@ -201,17 +201,17 @@ import pytest
 
 class TestMiScanner(unittest.TestCase):
     """Pruebas para MiScanner."""
-    
+
     def setUp(self):
         """Configuración antes de cada prueba."""
         self.session = Mock()
         self.scanner = MiScanner("http://example.com", self.session)
-    
+
     def test_initialization(self):
         """Prueba que el escáner se inicializa correctamente."""
         self.assertEqual(self.scanner.target_url, "http://example.com")
         self.assertEqual(self.scanner.name, "MiScanner")
-    
+
     @patch('app.scanner.mi_scanner.requests.get')
     def test_scan_sin_vulnerabilidades(self, mock_get):
         """Prueba escaneo sin detectar vulnerabilidades."""
@@ -219,7 +219,7 @@ class TestMiScanner(unittest.TestCase):
         mock_response.status_code = 200
         mock_response.text = "sin vulnerabilidades"
         mock_get.return_value = mock_response
-        
+
         results = self.scanner.scan()
         self.assertEqual(len(results), 0)
 ```
@@ -313,7 +313,7 @@ Pruebas en múltiples entornos Python.
 
 ---
 
-**Versión del documento**: 1.4.2  
-**Fecha de actualización**: 2026-05-06  
-**Responsable**: @FARLEY-PIEDRAHITA-OROZCO  
+**Versión del documento**: 1.4.3
+**Fecha de actualización**: 2026-05-06
+**Responsable**: @FARLEY-PIEDRAHITA-OROZCO
 **Estado**: ✅ Completo y actualizado con estándares actuales
