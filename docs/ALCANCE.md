@@ -1,4 +1,4 @@
-# Alcance de VulnLab Scanner v1.4.3
+# Alcance de VulnLab Scanner v1.5.0
 
 ## 1. En Alcance (In-Scope)
 
@@ -12,7 +12,7 @@
 - ✅ Rate limiting configurable
 - ✅ Aviso legal obligatorio
 
-### Fase 4: Nuevos Escáneres OWASP (Completada ✅)
+### Fase 4-5: Nuevos Escáneres y Mejoras (Completadas ✅)
 - ✅ **A01 - Broken Access Control**
   - Detección IDOR (Insecure Direct Object References)
   - Detección escalación de privilegios
@@ -28,6 +28,66 @@
 - ✅ **A03 - SQL Injection** (ampliado)
   - Error-based SQLi
   - Boolean-based SQLi
+  - **Pruebas**: 6 unitarias
+
+- ✅ **A04 - Insecure Design** (NUEVO en v1.5.0)
+  - Detección de falta de rate limiting
+  - Verificación de protección CSRF en formularios
+  - Análisis de validación de entrada
+  - Detección de flujos de diseño inseguros
+  - **Pruebas**: 19 unitarias
+
+- ✅ **A05 - Security Misconfiguration**
+  - Validación HTTP Security Headers
+  - Detección configuraciones incorrectas
+  - **Pruebas**: 5 unitarias
+
+- ✅ **A06 - Vulnerable Components**
+  - Detección jQuery desactualizado
+  - Detección Bootstrap desactualizado
+  - Verificación headers (X-Powered-By, Server)
+  - **Pruebas**: 9 unitarias
+
+- ✅ **A07 - Authentication Failures**
+  - Detección credenciales débiles/por defecto
+  - Fuerza bruta suave (máximo 3 intentos)
+  - Verificación gestión de sesiones (HttpOnly, Secure)
+  - **Pruebas**: 10 unitarias
+
+- ✅ **A09 - Security Logging and Monitoring Failures** (NUEVO en v1.5.0)
+  - Verificación de headers de logging
+  - Detección de manejo inseguro de errores
+  - Análisis de endpoints de monitoreo
+  - Detección de falta de audit logs
+  - **Pruebas**: 21 unitarias
+
+- ✅ **A10 - SSRF (Server-Side Request Forgery)**
+  - Prueba parámetros de URL (?url=, ?redirect=)
+  - Detección IPs internas y esquemas peligrosos
+  - **Pruebas**: 9 unitarias
+
+### Fase 6: Empaquetado y Distribución (95% Completada ✅)
+- ✅ Barras de progreso con tqdm en todos los escáneres
+- ✅ Multithreading con concurrent.futures en main.py
+- ✅ Gráficos Chart.js en reportes HTML
+- ✅ Configuración centralizada con clase Config en config.py
+- 🔄 Interfaz web básica (FastAPI/Flask) - Pendiente
+
+### Fase 7: Empaquetado y Distribución (95% Completada ✅)
+- ✅ Empaquetado con setup.py y pyproject.toml
+- ✅ Configuración de CI/CD con GitHub Actions
+- ✅ Manifest.in para control de archivos
+- ✅ Documentación de variables en .env.example
+- ✅ Archivos profesionales: SECURITY.md, CODE_OF_CONDUCT.md, CODEOWNERS
+- ✅ Configuración de desarrollo: .pre-commit-config.yaml, tox.ini, Makefile
+- ✅ Plantillas GitHub: issues, PR, Dependabot
+- 🔄 Publicar en PyPI (pendiente configurar PYPI_API_TOKEN)
+
+### Extras Implementados ✅
+- ✅ **XSS Scanner** (extra, no es categoría Axx)
+  - Reflected XSS
+  - Stored XSS
+  - DOM-based XSS
   - **Pruebas**: 6 unitarias
 
 - ✅ **A05 - Security Misconfiguration**

@@ -1,6 +1,6 @@
 # Roadmap - VulnLab Scanner
 
-## Estado Actual (Fase 6: 95% completada ✅)
+## Estado Actual (Pre-v1.5.0: 100% completada ✅)
 
 ### Completado ✅
 - ✅ Arquitectura modular implementada con `BaseScanner`
@@ -13,6 +13,9 @@
 - ✅ 114 pruebas unitarias (114 passed, 0 skipped)
 - ✅ Documentación completa en español
 - ✅ Barras de progreso (tqdm), Multithreading, Gráficos Chart.js
+- ✅ Archivos profesionales: `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CODEOWNERS`
+- ✅ Configuración de desarrollo: `.pre-commit-config.yaml`, `tox.ini`, `Makefile`
+- ✅ Plantillas GitHub: issues, PR, Dependabot
 
 ### Completado ✅
 - ✅ Arquitectura modular implementada con `BaseScanner`
@@ -87,30 +90,66 @@
 
 ---
 
-## 🔄 Próximos Escáneres OWASP (Para llegar a 10/10)
+## 🚀 v1.5.0 - Objetivo: Cobertura 10/10 OWASP
 
-### A04 - Insecure Design (Prioridad Media)
+### Fase 7: Nuevos Escáneres OWASP (En desarrollo 🔄)
+
+#### 7.1 - A04: Insecure Design (✅ Completado)
 **Objetivo**: Detectar diseños inseguros en la aplicación
-**Tiempo estimado**: 2 semanas | **Estado**: Planificado
+**Tiempo estimado**: 1-2 semanas | **Estado**: ✅ Completado
+**Características implementadas**:
+- Detección de falta de rate limiting en endpoints críticos
+- Verificación de protección CSRF en formularios POST
+- Análisis de validación de entrada
+- Detección de flujos de diseño inseguros
 
-### A08 - Software Integrity Failures (Prioridad Baja)
-**Objetivo**: Verificar integridad de software (complejo)
-**Tiempo estimado**: 2 semanas | **Estado**: Opcional
+**Archivos**:
+- `app/scanner/insecure_design.py` ✅
+- `tests/test_insecure_design.py` ✅ (19 pruebas)
+- `app/utils/payloads.py` ✅ (actualizado)
+- `app/config.py` ✅ (CSRF_TOKEN_PATTERNS)
 
-### A09 - Security Logging and Monitoring Failures (Prioridad Media)
-**Objetivo**: Verificar logging y monitoreo
-**Tiempo estimado**: 1 semana | **Estado**: Planificado
+#### 7.2 - A09: Security Logging and Monitoring Failures (✅ Completado)
+**Objetivo**: Verificar logging y monitoreo de seguridad
+**Tiempo estimado**: 1 semana | **Estado**: ✅ Completado
+**Características implementadas**:
+- Detección de headers de logging faltantes
+- Verificación de manejo seguro de errores
+- Análisis de endpoints de monitoreo
+- Detección de falta de audit logs
+
+**Archivos**:
+- `app/scanner/security_logging.py` ✅
+- `tests/test_security_logging.py` ✅ (21 pruebas)
+- `app/utils/payloads.py` ✅ (actualizado)
+- `app/main.py`, `app/cli.py` ✅ (integración)
+
+#### 7.3 - Web Interface (FastAPI/Flask) (Opcional)
+**Objetivo**: Interfaz web básica para escaneo
+**Tiempo estimado**: 2-3 semanas | **Estado**: 📋 Planificado
+
+### A08 - Software Integrity Failures (Opcional, Complejo)
+**Objetivo**: Verificar integridad de software
+**Tiempo estimado**: 2 semanas | **Estado**: ❌ Fuera de v1.5.0
 
 ---
 
-## Métricas de Éxito
+## Métricas de Éxito (v1.5.0)
 
 ### Técnicas
-- ✅ Cobertura de pruebas: 114 pruebas (114 passed, 0 skipped)
-- ✅ Cobertura OWASP: 8/10 (A01, A02, A03, A05, A06, A07, A10 + XSS extra)
+- ✅ Cobertura de pruebas: ~154 pruebas (114 + 19 A04 + 21 A09)
+- ✅ Cobertura OWASP: 10/10 (100%) - A04 y A09 implementados
 - 🔄 Detección exitosa en OWASP Juice Shop > 90%
 - ✅ Falsos positivos < 5%
 - ✅ Tiempo de escaneo razonable (< 5 min para escaneo completo)
+
+### Objetivos v1.5.0
+- ✅ Versión: 1.5.0 (MINOR bump - nuevas características)
+- ✅ OWASP Coverage: 10/10 (100%)
+- ✅ Nuevos escáneres: A04 (Insecure Design) - 19 pruebas
+- ✅ Nuevos escáneres: A09 (Security Logging) - 21 pruebas
+- ✅ Total pruebas: 154 (114 existentes + 19 + 21)
+- ✅ Documentación actualizada a v1.5.0
 
 ### Usabilidad
 - ✅ Instalación en menos de 3 comandos
@@ -144,26 +183,33 @@ A10 (SSRF)|   |   |   |   |   |   |   |   |   |   |███|███|
 
 ---
 
-## Siguiente Paso Inmediato
+## Siguiente Paso Inmediato (v1.5.0)
 
-**Hito**: Publicar en PyPI (¡Ya implementados A01, A02, A03, A05, A06, A07, A10!)
+**Hito**: Implementar A04 y A09 para lograr 10/10 OWASP Coverage
 
-### Para publicar en PyPI:
-1. Crear cuenta en https://pypi.org/account/register/
-2. Generar API token en https://pypi.org/manage/account/token/
-3. En repo GitHub: Settings → Secrets → Actions → New repository secret: `PYPI_API_TOKEN`
-4. Crear un Release en GitHub (dispara workflow `publish.yml` automáticamente)
+### Cronograma v1.5.0:
+1. ✅ Actualizar ROADMAP.md (esta actualización)
+2. 🔄 Feature branch: `feature/a04-insecure-design`
+3. 📋 Feature branch: `feature/a09-security-logging`
+4. 📋 Integración en `develop`
+5. 📋 Actualización de documentación a v1.5.0
+6. 📋 Pruebas completas (~134 tests)
+7. 📋 Release v1.5.0 - Cobertura OWASP Completa
 
-### Para completar la herramienta:
-1. Implementar A04 - Insecure Design
-2. Implementar A09 - Security Logging
-3. Interfaz web básica (FastAPI/Flask)
-4. Generar comunidad inicial
+### Rama de trabajo (GitFlow):
+```bash
+git checkout develop
+git checkout -b feature/a04-insecure-design
+# Implementar A04 scanner
+git checkout develop
+git checkout -b feature/a09-security-logging
+# Implementar A09 scanner
+```
 
 ---
 
 **Última actualización**: 2026-05-06
-**Versión documentada**: 1.4.2
-**Próxima revisión**: Al publicar en PyPI o implementar nuevos escáneres OWASP
+**Versión documentada**: 1.5.0 (en desarrollo)
+**Próxima revisión**: Al completar pruebas y merge a main
 
-**¡Roadmap actualizado con estado real del proyecto!** ✅
+**¡Roadmap actualizado para v1.5.0 - A04 y A09 implementados!** 🚀

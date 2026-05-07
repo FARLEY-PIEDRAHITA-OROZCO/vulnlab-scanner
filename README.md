@@ -4,9 +4,9 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## Estado Actual del Proyecto
 
-**Versión**: 1.4.3 (Fase 6 completada)
-**Cobertura OWASP Top 10 (2021)**: 8/10 (80%) + XSS extra
-**Pruebas**: 114 passed (100% total)
+**Versión**: 1.5.0 (Fase 7 completada)
+**Cobertura OWASP Top 10 (2021)**: 10/10 (100%)
+**Pruebas**: 154 passed (100% total)
 **Licencia**: MIT (Open Source)
 **Estado**: Listo para producción y publicación en PyPI
 
@@ -19,13 +19,15 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 
 ## 🚀 Características Implementadas ✅
 
-### Escáneres OWASP (8/10)
+### Escáneres OWASP (10/10)
 - ✅ **A01 - Broken Access Control**: IDOR, escalación de privilegios, Forceful Browsing
 - ✅ **A02 - Cryptographic Failures**: HTTPS faltante, cookies sin Secure, credenciales en URL
 - ✅ **A03 - SQL Injection**: Error-based, Boolean-based
+- ✅ **A04 - Insecure Design**: Rate limiting, CSRF, validación de entrada, flujos inseguros
 - ✅ **A05 - Security Misconfiguration**: Validación de HTTP Security Headers
 - ✅ **A06 - Vulnerable Components**: Detección de librerías desactualizadas (jQuery, Bootstrap)
 - ✅ **A07 - Auth Failures**: Credenciales débiles, fuerza bruta suave, gestión de sesiones
+- ✅ **A09 - Security Logging**: Headers de logging, manejo de errores, monitoreo, audit logs
 - ✅ **A10 - SSRF**: Parámetros de URL, IPs internas, esquemas peligrosos
 - ✅ **XSS Scanner**: Reflected, Stored, DOM-based (extra, no es categoría Axx)
 
@@ -283,7 +285,7 @@ Para ejecutar las pruebas unitarias:
 pytest tests/ -v
 ```
 
-**Cobertura actual**: 114 pruebas (114 passed, 0 skipped)
+**Cobertura actual**: 154 pruebas (154 passed, 0 skipped)
 
 ## Contribuciones
 
