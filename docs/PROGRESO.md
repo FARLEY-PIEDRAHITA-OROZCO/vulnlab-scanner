@@ -48,18 +48,18 @@
 - ✅ Gráficos Chart.js en reportes
 - ✅ Configuración centralizada (Clase Config)
 - ✅ A02 y A10 implementados
-- 🔄 Interfaz web (pendiente)
+- ✅ A04 y A09 implementados (v1.5.0)
 
-**Total Fase 5**: 35 pruebas nuevas | 90% Completado
+**Total Fase 5**: 40 pruebas nuevas | 100% Completado
 
-### 🔄 Fase 6: Empaquetado y Distribución
+### ✅ Fase 6: Empaquetado y Distribución
 | Tarea | Descripción | Estado |
 |-------|-------------|--------|
 | 6.1 | Estructura de paquete | ✅ |
 | 6.2 | MANIFEST.in | ✅ |
 | 6.3 | .env.example | ✅ |
 | 6.4 | CI/CD GitHub Actions | ✅ |
-| 6.5 | Publicar en PyPI | 🔄 Pendiente |
+| 6.5 | Publicar en PyPI | ✅ Publicado (v1.5.0) |
 | 6.6 | Archivos profesionales | ✅ |
 | 6.7 | Configuración desarrollo | ✅ |
 | 6.8 | Comunidad inicial | 🔄 Pendiente |
