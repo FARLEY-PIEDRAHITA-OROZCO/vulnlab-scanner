@@ -115,7 +115,7 @@
 - El código cumple con estándares PEP 8 y está documentado
 
 ### Calidad ✅
-- 114 pruebas unitarias (109 passed, 5 skipped)
+- 114 pruebas unitarias (114 passed, 0 skipped)
 - Cobertura de pruebas del 100% en módulos implementados
 - Falsos positivos < 5%
 - Tiempo de escaneo razonable (< 5 min para escaneo completo)
