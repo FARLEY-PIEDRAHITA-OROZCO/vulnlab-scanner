@@ -1,9 +1,9 @@
 """Setup script para VulnLab Scanner."""
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="vulnlab-scanner",
-    version="1.4.3",
+    version="1.5.0",
     author="VulnLab Team",
     author_email="contact@vulnlab.com",
     description="Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 10",

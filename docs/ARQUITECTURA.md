@@ -1,10 +1,10 @@
-# Arquitectura de VulnLab Scanner v1.4.3
+# Arquitectura de VulnLab Scanner v1.5.0
 
 ## 1. Visión General
 
 La arquitectura está diseñada bajo el patrón modular, donde cada tipo de vulnerabilidad OWASP es un módulo independiente que hereda de una clase base común. Esto permite fácil mantenimiento y extensibilidad.
 
-**Versión**: 1.4.3
+**Versión**: 1.5.0
 **Arquitectura**: Modular con herencia de clase base
 **Estado**: Estable, listo para producción
 
@@ -13,7 +13,7 @@ La arquitectura está diseñada bajo el patrón modular, donde cada tipo de vuln
 ```
 vulnlab-scanner/
 ├── app/
-│   ├── __init__.py            # Versión 1.4.3
+│   ├── __init__.py            # Versión 1.5.0
 │   ├── main.py               # Punto de entrada principal (orquestador)
 │   ├── cli.py                # Manejo de argumentos CLI (argparse)
 │   ├── config.py             # Configuración centralizada (Clase Config)
@@ -33,7 +33,9 @@ vulnlab-scanner/
 │   │   ├── auth.py          # A07: Authentication Failures
 │   │   ├── components.py    # A06: Vulnerable Components
 │   │   ├── crypto.py       # A02: Cryptographic Failures
-│   │   └── ssrf.py         # A10: Server-Side Request Forgery
+│   │   ├── ssrf.py         # A10: Server-Side Request Forgery
+│   │   ├── insecure_design.py # A04: Insecure Design ✅ NUEVO
+│   │   └── security_logging.py # A09: Security Logging ✅ NUEVO
 │   │
 │   └── utils/
 │       ├── __init__.py
@@ -44,16 +46,18 @@ vulnlab-scanner/
 │       ├── payloads.py       # Payloads centralizados
 │       └── disclaimer.py     # Aviso legal y validación de permisos
 │
-├── tests/                    # Pruebas unitarias (114 total)
+├── tests/                    # Pruebas unitarias (154 total) ✅
 │   ├── __init__.py
-│   ├── test_xss_scanner.py
-│   ├── test_sqli_scanner.py
-│   ├── test_headers_scanner.py
-│   ├── test_access_control.py
-│   ├── test_auth.py
-│   ├── test_components.py
-│   ├── test_crypto.py
-│   ├── test_ssrf.py
+│   ├── test_xss_scanner.py        # 6 pruebas
+│   ├── test_sqli_scanner.py      # 6 pruebas
+│   ├── test_headers_scanner.py   # 5 pruebas
+│   ├── test_access_control.py    # 11 pruebas
+│   ├── test_auth.py              # 10 pruebas
+│   ├── test_components.py        # 9 pruebas
+│   ├── test_crypto.py            # 10 pruebas
+│   ├── test_ssrf.py              # 9 pruebas
+│   ├── test_insecure_design.py   # 19 pruebas ✅ NUEVO
+│   ├── test_security_logging.py  # 21 pruebas ✅ NUEVO
 │   ├── test_config.py
 │   ├── test_cli.py
 │   ├── test_helpers.py
@@ -72,13 +76,14 @@ vulnlab-scanner/
 │   ├── GUIA_USUARIO.md
 │   ├── ROADMAP.md
 │   ├── PROGRESO.md
-│   └── PROGRESO_ACTUAL.md
+│   ├── PROGRESO_ACTUAL.md
+│   └── INTERFACES.md
 │
 ├── reports/                  # Reportes generados (no incluido en paquete)
 │
 ├── .github/                 # GitHub config (CI/CD, templates)
 │   ├── workflows/
-│   │   ├── ci.yml          # CI: tests en Python 3.8-3.11
+│   │   ├── ci.yml          # CI: pruebas en Python 3.8-3.11
 │   │   └── publish.yml    # CD: publicación en PyPI
 │   ├── ISSUE_TEMPLATE/
 │   │   ├── bug_report.md
@@ -93,7 +98,7 @@ vulnlab-scanner/
 ├── requirements-dev.txt      # Dependencias de desarrollo
 ├── setup.py                 # Empaquetado tradicional
 ├── pyproject.toml           # Configuración moderna de build
-├── MANIFEST.in              # Control de archivos incluidos
+├── MANIFEST.in              # Control de archivos incluídos
 ├── Makefile                 # Tareas comunes (test, lint, format)
 ├── tox.ini                  # Pruebas multi-entorno
 ├── .pre-commit-config.yaml  # Hooks de pre-commit
