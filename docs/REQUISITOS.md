@@ -108,7 +108,7 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web diseñada 
 - ✅ El código cumple con estándares PEP 8 y está documentado
 
 ### 6.2 Calidad
-- ✅ 114 pruebas unitarias pasando (109 passed, 5 skipped)
+- ✅ 114 pruebas unitarias pasando (114 passed, 0 skipped)
 - ✅ Cobertura de pruebas del 100% en módulos implementados
 - ✅ Falsos positivos < 5%
 - ✅ Tiempo de escaneo razonable (< 5 min para escaneo completo)
@@ -125,7 +125,7 @@ VulnLab Scanner es una herramienta de escaneo de vulnerabilidades web diseñada 
 |---------|----------|--------------|
 | Cobertura OWASP | 8/10 (80%) | ✅ 8/10 + XSS |
 | Pruebas unitarias | >100 | ✅ 114 total |
-| Pruebas pasando | 100% | ✅ 109 passed |
+| Pruebas pasando | 100% | ✅ 114 passed |
 | Falsos positivos | <5% | ✅ <5% |
 | Tiempo instalación | <3 comandos | ✅ 1 comando (pip) |
 | Documentación | Completa | ✅ En español |
