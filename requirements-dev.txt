@@ -16,7 +16,7 @@ isort>=5.12.0
 bandit>=1.7.0
 
 # Type checking (optional)
-mypy>=1.0.0
+mypy>=1.19.1
 
 # Documentation (optional)
 sphinx>=7.0.0
