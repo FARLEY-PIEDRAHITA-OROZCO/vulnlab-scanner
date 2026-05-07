@@ -8,7 +8,8 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 **Cobertura OWASP Top 10 (2021)**: 10/10 (100%)
 **Pruebas**: 154 passed (100% total)
 **Licencia**: MIT (Open Source)
-**Estado**: Listo para producción y publicación en PyPI
+**Estado**: Publicado en PyPI ✅
+**Instalación**: `pip install vulnlab-scanner==1.5.0`
 
 [![CI](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml/badge.svg)](https://github.com/FARLEY-PIEDRAHITA-OROZCO/vulnlab-scanner/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/vulnlab-scanner.svg)](https://pypi.org/project/vulnlab-scanner/)
@@ -68,14 +69,14 @@ Herramienta profesional de escaneo de vulnerabilidades web basada en OWASP Top 1
 - ✅ Gráficos Chart.js en reportes
 - ✅ Configuración centralizada (`Config` class)
 
-### ✅ Fase 6: Empaquetado y Distribución (95% completada)
+### ✅ Fase 6: Empaquetado y Distribución (100% completada)
 - ✅ Empaquetado con `setup.py` y `pyproject.toml`
 - ✅ Configuración de CI/CD (GitHub Actions)
 - ✅ Manifest y `.env.example` documentados
 - ✅ Archivos profesionales: `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CODEOWNERS`
 - ✅ Configuración de desarrollo: `.pre-commit-config.yaml`, `tox.ini`, `Makefile`
 - ✅ Plantillas GitHub: issues, PR, Dependabot
-- 🔄 Publicar en PyPI (`pip install vulnlab-scanner`) - *pendiente configurar `PYPI_API_TOKEN`*
+- ✅ Publicado en PyPI (`pip install vulnlab-scanner==1.5.0`)
 
 ## Requisitos
 
