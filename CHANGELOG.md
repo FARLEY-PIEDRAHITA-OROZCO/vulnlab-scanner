@@ -5,6 +5,76 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto sigue el [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.5.0] - 2026-05-07
+
+### Added
+- Implementación de A04 - Insecure Design Scanner (19 pruebas unitarias)
+  - Detección de falta de rate limiting en endpoints críticos
+  - Verificación de protección CSRF en formularios POST
+  - Análisis de validación de entrada
+  - Detección de flujos de diseño inseguros
+
+- Implementación de A09 - Security Logging and Monitoring Failures (21 pruebas unitarias)
+  - Verificación de headers de logging (X-Request-ID, etc.)
+  - Detección de manejo inseguro de errores
+  - Análisis de endpoints de monitoreo
+  - Detección de falta de audit logs
+
+### Changed
+- Refactoring de `main.py` para reducir complejidad (C901)
+- CLI actualizada: banderas `-I` (A04), `-L` (A09), `--all` incluye todos
+- Documentación actualizada a v1.5.0 (README.md, docs/, ROADMAP.md)
+- Versiones actualizadas: `app/__init__.py`, `pyproject.toml`, `setup.py`, `.env.example`
+
+### Fixed
+- Complejidad ciclomática en `main.py` (función `_prepare_scanners`)
+- Conflicto de banderas CLI (`-D` duplicada)
+- F-strings sin placeholders (F541)
+- Referencias faltantes en `main.py` para security_logging
+
+### Stats
+- **154 pruebas pasando** (114 originales + 19 A04 + 21 A09)
+- **10/10 OWASP Top 10** cobertura (100%)
+- **Refactoring completado** - Código más mantenible
+
+---
+
+## [1.4.3] - 2026-05-06
+
+### Agregado
+- Implementación de A04 - Insecure Design Scanner (19 pruebas unitarias)
+  - Detección de falta de rate limiting en endpoints críticos
+  - Verificación de protección CSRF en formularios POST
+  - Análisis de validación de entrada
+  - Detección de flujos de diseño inseguros
+
+- Implementación de A09 - Security Logging and Monitoring Failures (21 pruebas unitarias)
+  - Verificación de headers de logging (X-Request-ID, etc.)
+  - Detección de manejo inseguro de errores
+  - Análisis de endpoints de monitoreo
+  - Detección de falta de audit logs
+
+- Cobertura OWASP: 10/10 (100%) - Cobertura completa
+
+### Cambiado
+- Refactoring de `main.py` para reducir complejidad ciclomática (C901)
+- CLI actualizada: banderas `-I` (A04), `-L` (A09), `--all` incluye todos
+- Documentación actualizada a v1.5.0 (README.md, docs/, ROADMAP.md)
+- Versiones actualizadas en: `app/__init__.py`, `pyproject.toml`, `setup.py`, `.env.example`
+
+### Corregido
+- Complejidad ciclomática en `main.py` (función `_prepare_scanners`)
+- Conflicto de banderas CLI (eliminado `-D` duplicado)
+- Errores de linting (f-strings sin placeholders, f-strings correctas)
+- Documentación sincronizada con estado real del proyecto
+
+### Estadísticas
+- **154 pruebas pasando** (114 originales + 19 A04 + 21 A09)
+- **10/10 OWASP Top 10** cobertura (100%)
+- **Refactoring completado** - Código más mantenible
+
+---
+
 ## [1.4.3] - 2026-05-06
 
 ### Agregado
