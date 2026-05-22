@@ -19,4 +19,4 @@ bandit>=1.7.0
 mypy>=1.0.0
 
 # Documentation (optional)
-sphinx>=7.0.0
+sphinx>=7.4.7
